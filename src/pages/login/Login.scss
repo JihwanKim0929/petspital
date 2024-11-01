@@ -1,0 +1,69 @@
+.login{
+
+    .background{
+        height: calc(100vh - 70px);
+        min-height: 550px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-image: url("https://images.pexels.com/photos/6235230/pexels-photo-6235230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+        background-size: cover;
+        background-position: bottom;
+        justify-content: center;
+
+        .loginContainer{
+            display: flex;
+            flex-direction: column;
+            border-radius: 1rem;
+            background-color: white;
+            align-items: center;
+            justify-content: center;
+            height: 500px;
+            box-shadow: 5px 5px 21px 1px rgba(0,0,0,0.55);
+            -webkit-box-shadow: 5px 5px 21px 1px rgba(0,0,0,0.55);
+            -moz-box-shadow: 5px 5px 21px 1px rgba(0,0,0,0.55);
+
+            .logo{
+                filter: brightness(0%);
+                width: 4rem;
+                height: 4rem;
+            }
+
+            .title{
+                color: black;
+                font-family: "poppins";
+                font-weight: bold;
+                margin: 0.5rem;
+            }
+
+            .inputContainer{
+                display: flex;
+                flex-direction: column;
+                width: 80%;
+                height: 5.5rem;
+                margin-top: 0.5rem;
+
+                .desc{
+                    color: black;
+                    margin-bottom: 0.5rem;
+                    font-size: 1.1rem;
+                    font-weight: 500;
+                }
+
+                .input{
+                    align-self: center;
+                    width: 100%;
+                }
+            }
+
+            .signUpContainer{
+                display: flex;
+                margin: 0.5rem;
+
+                p{
+                    margin-right: 0.5rem;
+                }
+            }
+        }
+    }
+}

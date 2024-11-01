@@ -1,0 +1,15 @@
+.sidebarCategory {
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    padding-left: 0.7rem;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+}
+.sidebarCategory:hover {
+    background-color: rgb(232, 232, 232);
+    // border-top-right-radius: 0.5rem;
+    // border-bottom-right-radius: 0.5rem;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+}

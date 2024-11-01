@@ -1,0 +1,11 @@
+.aboutPetspital{
+    display: flex;
+    flex-direction: column;
+    // background-image: url("https://images.pexels.com/photos/6235230/pexels-photo-6235230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: calc(100vh - 70px);
+    min-height: 300px;
+}
