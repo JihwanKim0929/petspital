@@ -25,7 +25,7 @@ public class Reservation {
 
     private LocalDateTime createDate;
 
-    private String hospitalName;
+    private String hospitalAddress;
 
     @JsonIgnore
     public ReservationDto getReservationDto() {
@@ -34,7 +34,7 @@ public class Reservation {
                 .pet(pet)
                 .reservationDate(reservationDate)
                 .createDate(createDate)
-                .hospitalName(hospitalName)
+                .hospitalAddress(hospitalAddress)
                 .build();
     }
 }

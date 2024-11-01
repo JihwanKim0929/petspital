@@ -1,14 +1,18 @@
 package com.example.petcare.service;
 
 import com.example.petcare.dto.ReservationDto;
+import com.example.petcare.entity.AnimalHospital;
+import com.example.petcare.entity.Disease;
 import com.example.petcare.entity.Pet;
 import com.example.petcare.entity.Reservation;
+import com.example.petcare.repository.AnimalHospitalRepository;
 import com.example.petcare.repository.PetRepository;
 import com.example.petcare.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +23,8 @@ public class ReservationService {
     ReservationRepository reservationRepository;
     @Autowired
     private PetRepository petRepository;
+    @Autowired
+    private AnimalHospitalRepository animalHospitalRepository;
 
     public ReservationDto getReservation(Long id) {
         Reservation reservation = reservationRepository.findById(id).orElse(null);
@@ -37,6 +43,13 @@ public class ReservationService {
         reservationDto.setPet(pet);
         reservationDto.setCreateDate(LocalDateTime.now());
         Reservation created = reservationRepository.save(reservationDto.getReservation());
+
+        String hospitalAddress = reservationDto.getHospitalAddress();
+        AnimalHospital animalHospital = animalHospitalRepository.findByHospitalAddress(hospitalAddress).orElse(null);
+        if (animalHospital.getPetList().stream().noneMatch(existingPet -> existingPet.getId().equals(pet.getId()))) {
+            animalHospital.getPetList().add(pet);
+            animalHospitalRepository.save(animalHospital);
+        }
         return created.getReservationDto();
     }
 }

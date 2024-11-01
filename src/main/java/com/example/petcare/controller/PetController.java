@@ -1,11 +1,13 @@
 package com.example.petcare.controller;
 
 import com.example.petcare.dto.PetDto;
+import com.example.petcare.service.AnimalHospitalService;
 import com.example.petcare.service.PetService;
 import com.example.petcare.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,8 @@ public class PetController {
     PetService petService;
     @Autowired
     UserService userService;
+    @Autowired
+    private AnimalHospitalService animalHospitalService;
 
     @PostMapping("/user/pet")
     public ResponseEntity<PetDto> createPet(@RequestPart("image") MultipartFile image, @RequestPart("petDto") PetDto petDto) throws IOException {
@@ -58,6 +62,16 @@ public class PetController {
         String username = authentication.getName();
         Long userId = userService.get_user_by_username(username).getId();
         List<PetDto> dtos = petService.get_pet_list(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(dtos);
+    }
+
+    @PreAuthorize("hasRole('ROLE_VET')")
+    @GetMapping("/vet/pet")
+    public ResponseEntity<List<PetDto>> getPets_Vet() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Long userId = userService.get_user_by_username(username).getId();
+        List<PetDto> dtos = animalHospitalService.getPets_vet(userId);
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
     }
 

@@ -3,7 +3,6 @@ package com.example.petcare.dto;
 import com.example.petcare.entity.Pet;
 import com.example.petcare.entity.Reservation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -22,7 +21,7 @@ public class ReservationDto {
 
     private LocalDateTime createDate;
 
-    private String hospitalName;
+    private String hospitalAddress;
 
     @JsonIgnore
     public Reservation getReservation() {
@@ -31,7 +30,7 @@ public class ReservationDto {
                 .pet(pet)
                 .reservationDate(reservationDate)
                 .createDate(createDate)
-                .hospitalName(hospitalName)
+                .hospitalAddress(hospitalAddress)
                 .build();
     }
 }
