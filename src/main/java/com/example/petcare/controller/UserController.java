@@ -26,6 +26,7 @@ public class UserController {
         SiteUserDto createdDto = userService.createUser(image,userDto);
         return ResponseEntity.status(HttpStatus.OK).body(createdDto);
     }
+    
 
     @GetMapping("/user")
     public ResponseEntity<SiteUserDto> getUser() {
