@@ -57,7 +57,7 @@ const DiagnosisResult = () => {
         console.error('Error loading diagnosis records:', error);
       });
     }
-  }, []);
+  }, [diagnosisResult]);
 
   if (error) {
     return <div className='diagnosisResult'>Error: {error}</div>;
