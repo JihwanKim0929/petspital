@@ -9,6 +9,7 @@ import { FaRegHospital } from "react-icons/fa6";
 import { FaUsers } from "react-icons/fa6";
 import { BiUserCircle } from "react-icons/bi";
 import { BiCog } from "react-icons/bi";
+import { MdOutlinePets } from "react-icons/md";
 import SidebarCategory from '../../sidebarCategory/SidebarCategory';
 import { Avatar } from "../../ui/avatar";
 
@@ -23,12 +24,10 @@ const PetOwnerSidebar = () => {
     if (!user) {
       return;
     }
-    
+
     const parsedUser = JSON.parse(user);
-    console.log(parsedUser.username);
     setUsername(parsedUser.username);
-    setUserImageURL(parsedUser.image_url);
-    console.log("User Image URL:" + parsedUser.image_url);
+    setUserImageURL(`http://localhost:8080/image/user/${parsedUser.image_url}`);
   }, []);
 
   return (
@@ -43,6 +42,7 @@ const PetOwnerSidebar = () => {
               </Center>
               <br />
               <SidebarCategory CategoryIcon={BiHome} categoryName='Home' categoryLink='/user/petowner'/>
+              <SidebarCategory CategoryIcon={MdOutlinePets} categoryName='Pets' categoryLink='/user/petowner/pets'/>
               <SidebarCategory CategoryIcon={BiSearchAlt2} categoryName='Diagnosis' categoryLink='/user/petowner/diagnosis'/>
               <SidebarCategory CategoryIcon={BiSolidReport} categoryName='Records' categoryLink='/user/petowner/records'/>
               <SidebarCategory CategoryIcon={FaRegHospital} categoryName='Hospital' categoryLink='/user/petowner/hospital'/>

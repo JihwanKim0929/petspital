@@ -10,9 +10,9 @@ import { FaRegHospital } from "react-icons/fa6";
 import { FaUsers } from "react-icons/fa6";
 import { BiUserCircle } from "react-icons/bi";
 import { BiCog } from "react-icons/bi";
+import { MdOutlinePets } from "react-icons/md";
 import SidebarCategory from '../sidebarCategory/SidebarCategory';
 import { FaNotesMedical } from "react-icons/fa6";
-import { Button } from "../ui/button";
 import {
   DrawerActionTrigger,
   DrawerBackdrop,
@@ -25,7 +25,7 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { Avatar } from "../ui/avatar";
-import { toaster } from '../ui/toaster';
+import SignOutButton from '../signOutButton/SignOutButton';
 
 const UserNavbar = () => {
 
@@ -45,21 +45,24 @@ const UserNavbar = () => {
     const parsedUser = JSON.parse(user);
     if (parsedUser.role === 'PETOWNER') {
       setUserType('petOwner');
-    } else if (parsedUser.role === 'DOCTOR') {
-      setUserType('doctor');
+    } else if (parsedUser.role === 'VET') {
+      setUserType('vet');
     } else if (parsedUser.role === 'ADMIN') {
       setUserType('admin');
     }
 
     setUsername(parsedUser.username);
-    setUserImageURL(parsedUser.image_url);
-    console.log("User Image URL:" + parsedUser.image_url);
+    setUserImageURL(`http://localhost:8080/image/user/${parsedUser.image_url}`);
   }, [navigate]);
-
+  
   const petOwnerMenuData = [{
     title: 'Home', 
     icon: BiHome,
     linkTo: '/user/petowner'
+  }, {
+    title: 'Pets', 
+    icon: MdOutlinePets,
+    linkTo: '/user/petowner/pets'
   }, {
     title: 'Diagnosis', 
     icon: BiSearchAlt2,
@@ -127,23 +130,12 @@ const UserNavbar = () => {
   }];
 
   const userLink = userType === 'petOwner' ? '/user/petowner' :
-                   userType === 'doctor' ? '/user/doctor' :
+                   userType === 'vet' ? '/user/doctor' :
                    userType === 'admin' ? '/user/admin' : '/';
 
   const menuItems = userType === 'petOwner' ? petOwnerMenuData :
-                    userType === 'doctor' ? doctorMenuData :
+                    userType === 'vet' ? doctorMenuData :
                     userType === 'admin' ? adminMenuData : [];
-
-  const handleSignOut = () => {
-    sessionStorage.removeItem('user');
-    navigate('/');
-    toaster.create({
-      title: "Successfully logged out.",
-      status: "success",
-      duration: 3000,
-      isClosable: true
-  });
-  };
 
   return (
     <Fragment>
@@ -178,7 +170,7 @@ const UserNavbar = () => {
                     </ul>
                   </DrawerBody>
                   <DrawerFooter>
-                    <Button className="signOutButton" colorScheme='gray' variant='solid' onClick={handleSignOut}>Sign out</Button>
+                    <SignOutButton className="signOutButton" colorScheme='gray' variant='solid'>Sign out</SignOutButton>
                   </DrawerFooter>
                 </DrawerContent>
               </DrawerRoot>
@@ -220,7 +212,7 @@ const UserNavbar = () => {
               </Link>
             </div>
             <div className="item">
-              <Button className="signOutButton" colorScheme='gray' variant='solid' onClick={handleSignOut}>Sign out</Button>
+              <SignOutButton className="signOutButton" colorScheme='gray' variant='solid'>Sign out</SignOutButton>
             </div>
           </div>
         </Box>

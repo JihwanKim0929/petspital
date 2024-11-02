@@ -6,6 +6,7 @@ import { IoMenu } from "react-icons/io5";
 import { IoIosArrowForward } from "react-icons/io";
 import { MenuContent, MenuItem, MenuRoot, MenuSeparator, MenuTrigger } from "../ui/menu";
 import { Button } from '../ui/button';
+import SignOutButton from '../signOutButton/SignOutButton';
 
 const Navbar = () => {
 
@@ -21,8 +22,8 @@ const Navbar = () => {
       const parsedUser = JSON.parse(user);
       if (parsedUser.role === 'PETOWNER') {
         setUserType('petOwner');
-      } else if (parsedUser.role === 'DOCTOR') {
-        setUserType('doctor');
+      } else if (parsedUser.role === 'VET') {
+        setUserType('vet');
       } else if (parsedUser.role === 'ADMIN') {
         setUserType('admin');
       }
@@ -33,14 +34,8 @@ const Navbar = () => {
   }, [navigate]);
 
   const userLink = userType === 'petOwner' ? '/user/petowner' :
-                   userType === 'doctor' ? '/user/doctor' :
+                   userType === 'vet' ? '/user/doctor' :
                    userType === 'admin' ? '/user/admin' : '/';
-
-  const handleSignOut = () => {
-    sessionStorage.removeItem('user');
-    setIsLoggedIn(false);
-    navigate('/');
-  };
 
   return (
     <Fragment>
@@ -68,7 +63,7 @@ const Navbar = () => {
             </div>
             { isLoggedIn && 
             (<div className="item">
-              <Button className="signOutButton" colorScheme='gray' variant='solid' onClick={handleSignOut}>Sign out</Button>
+              <SignOutButton className="signOutButton" colorScheme='gray' variant='solid'>Sign out</SignOutButton>
             </div>)}
             { !isLoggedIn && 
             (<div className="item">
@@ -90,7 +85,7 @@ const Navbar = () => {
             {
               isLoggedIn ?
               <div className="item">
-                <Button className="signOutButton" colorScheme='gray' variant='solid' onClick={handleSignOut}>Sign out</Button>
+                <SignOutButton className="signOutButton" colorScheme='gray' variant='solid'>Sign out</SignOutButton>
               </div> :
               <div className="item">
                 <Link to="/login" style={{ textDecoration: "none" }} className="signIn">

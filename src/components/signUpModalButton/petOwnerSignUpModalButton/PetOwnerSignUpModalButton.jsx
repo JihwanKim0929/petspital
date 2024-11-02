@@ -47,7 +47,8 @@ const PetOwnerSignUpModalButton = () => {
     fetch(url,{
         method: 'POST',
         body: formData,
-        headers: {}
+        headers: {},
+        credentials: 'include'
     });
     reset();
   };

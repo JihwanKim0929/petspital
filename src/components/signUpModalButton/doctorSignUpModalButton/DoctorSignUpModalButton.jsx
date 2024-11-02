@@ -26,29 +26,43 @@ const DoctorSignUpModalButton = () => {
   const { register, handleSubmit, errors, reset, setValue } = useForm();
 
   const onSubmit = (data) => {
+
+    const formData = new FormData();
+
     const userDto = {
       username: data.username,
       password: data.password,
       email: data.email,
       address: data.hospitaladdress,
       phone_num: data.phonenumber,
-      role: "DOCTOR"
+      role: "VET"
     };
+    const userJson = JSON.stringify(userDto);
+    const userBlob = new Blob([userJson],{type: "application/json"});
+    formData.append("userDto", userBlob);
+
     console.log(data.image);
     const dataImage = data.image;
-    const formData = new FormData();
     if (dataImage) {
       formData.append("image", dataImage);
     }
-    const json = JSON.stringify(userDto);
-    const blob = new Blob([json],{type: "application/json"});
-    formData.append("userDto",blob);
-    const url = "http://localhost:8080/user";
+
+    const animalHospitalDto = {
+      hospitalName: data.hospitalname,
+      hospitalAddress: data.hospitaladdress,
+    };
+    const animalHospitalJson = JSON.stringify(animalHospitalDto);
+    const animalHospitalBlob = new Blob([animalHospitalJson],{type: "application/json"});
+    formData.append("animalHospitalDto", animalHospitalBlob);
+
+    const url = "http://localhost:8080/vet";
     fetch(url,{
-        method: 'POST',
-        body: formData,
-        headers: {}
+      method: 'POST',
+      body: formData,
+      headers: {},
+      credentials: 'include'
     });
+
     reset();
   };
 
@@ -87,6 +101,9 @@ const DoctorSignUpModalButton = () => {
               </Field>
               <Field label="Phone Number" required mt={4}>
                 <Input placeholder='Input phone number' {...register('phonenumber', { required: true })}/>
+              </Field>
+              <Field label="Hospital Name" required mt={4}>
+                <Input placeholder='Input hospital name' {...register('hospitalname', { required: true })}/>
               </Field>
               <Field label="Hospital Address" required mt={4}>
                 <Input placeholder='Input hospital address' {...register('hospitaladdress', { required: true })}/>
