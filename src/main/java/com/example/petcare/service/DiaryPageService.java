@@ -34,7 +34,7 @@ public class DiaryPageService {
     public DiaryPageDto create(MultipartFile image, DiaryPageDto dto, Long diaryId) throws IOException {
         if(!image.isEmpty()){
             String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
-            String fullPathName = "C:\\spring_image_test\\diary_image\\"+fileName;
+            String fullPathName = "C:\\spring_image_test\\diary\\"+fileName;
             image.transferTo(new File(fullPathName));
              dto.setImage_url(fileName);
         }

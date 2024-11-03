@@ -24,7 +24,7 @@ public class UserService {
     public SiteUserDto createUser(MultipartFile image, SiteUserDto userDto) throws IOException {
         if(!image.isEmpty()){
             String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
-            String fullPathName = "C:\\spring_image_test\\user_thumbnail\\"+fileName;
+            String fullPathName = "C:\\spring_image_test\\user\\"+fileName;
             image.transferTo(new File(fullPathName));
             userDto.setImage_url(fileName);
         }
