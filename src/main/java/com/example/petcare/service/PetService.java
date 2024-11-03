@@ -26,7 +26,7 @@ public class PetService {
     public PetDto createPet(PetDto petDto, Long userId, MultipartFile image) throws IOException {
         if(!image.isEmpty()){
             String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
-            String fullPathName = "C:\\spring_image_test\\pet\\"+fileName;
+            String fullPathName = "C:\\spring_image_test\\pet_thumbnail\\"+fileName;
             image.transferTo(new File(fullPathName));
             petDto.setImage_url(fileName);
         }

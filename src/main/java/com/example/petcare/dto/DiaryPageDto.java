@@ -24,6 +24,8 @@ public class DiaryPageDto {
 
     private LocalDateTime createDate;
 
+    private String image_url;
+
     @JsonIgnore
     public DiaryPage getDiaryPage() {
         return DiaryPage.builder()
@@ -31,6 +33,7 @@ public class DiaryPageDto {
                 .diary(diary)
                 .content(content)
                 .createDate(createDate)
+                .image_url(image_url)
                 .build();
     }
 }

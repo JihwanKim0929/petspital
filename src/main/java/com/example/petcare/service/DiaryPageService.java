@@ -7,9 +7,13 @@ import com.example.petcare.repository.DiaryPageRepository;
 import com.example.petcare.repository.DiaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,7 +31,14 @@ public class DiaryPageService {
                 .collect(Collectors.toList());
     }
 
-    public DiaryPageDto create(DiaryPageDto dto, Long diaryId) {
+    public DiaryPageDto create(MultipartFile image, DiaryPageDto dto, Long diaryId) throws IOException {
+        if(!image.isEmpty()){
+            String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
+            String fullPathName = "C:\\spring_image_test\\diary_image\\"+fileName;
+            image.transferTo(new File(fullPathName));
+             dto.setImage_url(fileName);
+        }
+
         Diary diary = diaryRepository.findById(diaryId).orElse(null);
         dto.setDiary(diary);
         dto.setCreateDate(LocalDateTime.now());

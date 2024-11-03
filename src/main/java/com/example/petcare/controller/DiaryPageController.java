@@ -5,7 +5,9 @@ import com.example.petcare.service.DiaryPageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -20,8 +22,8 @@ public class DiaryPageController {
     }
 
     @PostMapping("/diary/{diaryId}/page")
-    public ResponseEntity<DiaryPageDto> create_diary_page(@PathVariable Long diaryId, @RequestBody DiaryPageDto dto) {
-        DiaryPageDto createdDto = diaryPageService.create(dto,diaryId);
+    public ResponseEntity<DiaryPageDto> create_diary_page(@PathVariable Long diaryId, @RequestPart("image") MultipartFile image, @RequestPart("DiaryPageDto") DiaryPageDto dto)throws IOException {
+        DiaryPageDto createdDto = diaryPageService.create(image, dto,diaryId);
         return ResponseEntity.ok().body(createdDto);
     }
 
