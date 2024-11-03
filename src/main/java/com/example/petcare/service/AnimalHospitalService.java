@@ -31,6 +31,12 @@ public class AnimalHospitalService {
             return created.getAnimalHospitalDto();
     }
 
+    public AnimalHospitalDto getAnimalHospital(Long id){
+        AnimalHospital animalHospital = animalHospitalRepository.findById(id).orElse(null);
+        return animalHospital!=null ? animalHospital.getAnimalHospitalDto() : null;
+
+    }
+
     public List<PetDto> getPets_vet(Long userId){
         AnimalHospital animalHospital = animalHospitalRepository.findBySiteUserId(userId).orElse(null);
         if(animalHospital == null){

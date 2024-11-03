@@ -2,6 +2,7 @@ package com.example.petcare.dto;
 
 import com.example.petcare.entity.AnimalHospital;
 import com.example.petcare.entity.SiteUser;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,6 +24,7 @@ public class AnimalHospitalDto {
 
     String hospitalAddress;
 
+    @JsonIgnore
     public AnimalHospital getAnimalHospital() {
         return AnimalHospital.builder()
                 .id(id)

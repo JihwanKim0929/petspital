@@ -1,6 +1,7 @@
 package com.example.petcare.entity;
 
 import com.example.petcare.dto.AnimalHospitalDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -28,6 +29,7 @@ public class AnimalHospital {
     public AnimalHospitalDto getAnimalHospitalDto() {
         return AnimalHospitalDto.builder()
                 .id(id)
+                .siteUser(siteUser)
                 .hospitalName(hospitalName)
                 .hospitalAddress(hospitalAddress)
                 .build();
@@ -40,6 +42,8 @@ public class AnimalHospital {
             joinColumns = @JoinColumn(name = "ANIMAL_HOSPITAL_ID"),
             inverseJoinColumns = @JoinColumn(name="PET_ID")
     )
+
+    @JsonIgnore
     private List<Pet> petList = new ArrayList<>();
 
 }
