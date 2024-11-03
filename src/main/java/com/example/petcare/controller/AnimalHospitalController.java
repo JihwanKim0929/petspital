@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class AnimalHospitalController {
 
@@ -28,6 +30,12 @@ public class AnimalHospitalController {
         Long userId = userService.get_user_by_username(username).getId();
         AnimalHospitalDto dto = animalHospitalService.getAnimalHospital(userId);
         return ResponseEntity.ok().body(dto);
+    }
+
+    @GetMapping("/animalHospitalList")
+    public ResponseEntity<List<AnimalHospitalDto>> getAnimalHospitalList() {
+        List<AnimalHospitalDto> dtos = animalHospitalService.getAnimalHospitalList();
+        return ResponseEntity.ok().body(dtos);
     }
 
 }

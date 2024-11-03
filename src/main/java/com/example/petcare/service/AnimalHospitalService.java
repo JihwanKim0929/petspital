@@ -47,4 +47,11 @@ public class AnimalHospitalService {
                 .map(pet->pet.get_PetDto())
                 .collect(Collectors.toList());
     }
+
+    public List<AnimalHospitalDto> getAnimalHospitalList(){
+        return animalHospitalRepository.findAll()
+                .stream()
+                .map(animalHospital->animalHospital.getAnimalHospitalDto())
+                .collect(Collectors.toList());
+    }
 }
