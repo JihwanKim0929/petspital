@@ -41,7 +41,7 @@ public class BoardService {
     public BoardDto createBoard(BoardDto boardDto, Long userId, MultipartFile image)throws IOException {
         if(!image.isEmpty()){
             String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
-            String fullPathName = "C:\\spring_image_test\\board\\"+fileName;
+            String fullPathName = "C:\\spring_image_test\\board_image\\"+fileName;
             image.transferTo(new File(fullPathName));
             boardDto.setImage_url(fileName);
         }
