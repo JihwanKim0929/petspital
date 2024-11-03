@@ -52,7 +52,7 @@ const PetViewModalButton = ({petID}) => {
             </DialogTrigger>
             <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
                 <DialogHeader>
-                    <DialogTitle>PET NAME</DialogTitle>
+                    <DialogTitle>PET</DialogTitle>
                 </DialogHeader>
                 <DialogCloseTrigger />
                 <DialogBody pb={6}>

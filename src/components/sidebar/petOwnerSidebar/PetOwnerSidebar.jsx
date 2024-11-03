@@ -46,6 +46,7 @@ const PetOwnerSidebar = () => {
               <SidebarCategory CategoryIcon={BiSearchAlt2} categoryName='Diagnosis' categoryLink='/user/petowner/diagnosis'/>
               <SidebarCategory CategoryIcon={BiSolidReport} categoryName='Records' categoryLink='/user/petowner/records'/>
               <SidebarCategory CategoryIcon={FaRegHospital} categoryName='Hospital' categoryLink='/user/petowner/hospital'/>
+              <SidebarCategory CategoryIcon={FaRegHospital} categoryName='Appointments' categoryLink='/user/petowner/appointments'/>
               <SidebarCategory CategoryIcon={FaUsers} categoryName='Community' categoryLink='/user/petowner/community'/>
               <SidebarCategory CategoryIcon={BiUserCircle} categoryName='Profile' categoryLink='/user/petowner/profile'/>
               <SidebarCategory CategoryIcon={BiCog} categoryName='Settings' categoryLink='/user/petowner/settings'/>

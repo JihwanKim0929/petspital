@@ -16,7 +16,8 @@ import AboutPetspital from "./pages/aboutPetspital/AboutPetspital";
 import Notifications from "./pages/notification/Notifications";
 import Diagnosis from "./pages/user/diagnosis/Diagnosis";
 import Hospital from "./pages/user/hospital/Hospital";
-import Appointments from "./pages/user/appointments/Appointments";
+import PetOwnerAppointments from "./pages/user/petOwner/petOwnerAppointments/PetOwnerAppointments.jsx";
+import DoctorAppointments from "./pages/user/doctor/doctorAppointments/DoctorAppointments";
 import Records from "./pages/user/records/Records";
 import Settings from "./pages/user/settings/Settings";
 import Pets from "./pages/user/pets/Pets";
@@ -56,6 +57,7 @@ function App() {
             <Route path="diagnosis/result" element={<DiagnosisResult />} />
             <Route path="records" element={<Records />} />
             <Route path="hospital" element={<Hospital />} />
+            <Route path="appointments" element={<PetOwnerAppointments />} />
             <Route path="community" element={<Community />}>
               <Route index element={<CommunityBoard />} />
               <Route path="post" element={<CommunityPost />} />
@@ -66,8 +68,11 @@ function App() {
 
           <Route path="doctor" element={<DoctorSidebar />}>
             <Route index element={<DoctorMain />} />
-            <Route path="appointments" element={<Appointments />} />
-            <Route path="community" element={<Community />} />
+            <Route path="appointments" element={<DoctorAppointments />} />
+            <Route path="community" element={<Community />}>
+              <Route index element={<CommunityBoard />} />
+              <Route path="post" element={<CommunityPost />} />
+            </Route>
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />
           </Route>

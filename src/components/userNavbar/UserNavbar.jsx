@@ -76,6 +76,10 @@ const UserNavbar = () => {
     icon: FaRegHospital,
     linkTo: '/user/petowner/hospital'
   }, {
+    title: 'Appointments', 
+    icon: FaRegHospital,
+    linkTo: '/user/petowner/appointments'
+  }, {
     title: 'Community', 
     icon: FaUsers,
     linkTo: '/user/petowner/community'

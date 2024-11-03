@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Diagnosis.scss';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { Group, createListCollection, Fieldset, Input, Stack, Card, Show, Text } from "@chakra-ui/react";
+import { Fieldset, Input, Stack, Card, Show, Text } from "@chakra-ui/react";
 import { Button } from '../../../components/ui/button';
 import {
   NativeSelectField,

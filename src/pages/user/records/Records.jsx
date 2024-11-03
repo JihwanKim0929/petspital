@@ -80,7 +80,7 @@ const Records = () => {
                     <Text fontWeight="bold">Diagnosis ID: {record.id}</Text>
                     <Text>Part: {record.part}</Text>
                     <Text>Create Date: {new Date(record.createDate).toLocaleString()}</Text>
-                    <Image src={record.image_url} alt={`Diagnosis for ${record.pet.name}`} boxSize="100px" objectFit="cover" />
+                    <Image src={`http://localhost:8080/image/diagnosis/${record.image_url}`} boxSize="100px" objectFit="cover" />
                     <Text>Diseases:</Text>
                     <VStack spacing={1} pl={4}>
                       {record.diseaseList.map(disease => (
