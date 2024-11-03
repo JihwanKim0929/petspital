@@ -26,6 +26,9 @@ public class BoardDto {
 
     private LocalDateTime modifyDate;
 
+    private String image_url;
+
+
     @JsonIgnore
     public Board getBoard() {
         return Board.builder()
@@ -35,6 +38,7 @@ public class BoardDto {
                 .createDate(createDate)
                 .author(author)
                 .modifyDate(modifyDate)
+                .image_url(image_url)
                 .build();
     }
 }

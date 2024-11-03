@@ -9,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Slf4j
@@ -35,11 +37,11 @@ public class BoardController {
     }
 
     @PostMapping("/board")
-    public ResponseEntity<BoardDto> create(@RequestBody BoardDto boardDto){
+    public ResponseEntity<BoardDto> create(@RequestPart("image") MultipartFile image,  @RequestPart("boardDto") BoardDto boardDto) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         Long userId = userService.get_user_by_username(username).getId();
-        BoardDto createdDto = boardService.createBoard(boardDto,userId);
+        BoardDto createdDto = boardService.createBoard(boardDto,userId, image);
         return ResponseEntity.ok().body(createdDto);
     }
 }
