@@ -25,6 +25,7 @@ import CommunityBoard from "./pages/user/community/communityBoard/CommunityBoard
 import CommunityPost from "./pages/user/community/communityPost/CommunityPost";
 import DiagnosisResult from "./pages/user/diagnosis/diagnosisResult/DiagnosisResult";
 import CommunityPostView from "./pages/user/community/communityPostView/CommunityPostView.jsx";
+import Diary from "./pages/user/diary/Diary.jsx";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
           <Route path="petowner" element={<PetOwnerSidebar />}>
             <Route index element={<PetOwnerMain />} />
             <Route path="pets" element={<Pets />} />
+            <Route path="pets/diary" element={<Diary />} />
             <Route path="diagnosis" element={<Diagnosis />} />
             <Route path="diagnosis/result" element={<DiagnosisResult />} />
             <Route path="records" element={<Records />} />

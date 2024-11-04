@@ -3,6 +3,7 @@ import './Pets.scss';
 import { Card, Show, Box, Center, Text, useBreakpointValue } from '@chakra-ui/react';
 import PetAddModalButton from '../../../components/petRegisterModalButton/PetRegisterModalButton';
 import PetViewModalButton from '../../../components/petViewModalButton/PetViewModalButton';
+import PetDiariesModalButton from '../../../components/petDiariesModalButton/PetDiariesModalButton';
 
 const Pets = () => {
     
@@ -51,6 +52,7 @@ const Pets = () => {
                                     className="petImage"
                                 />
                                 <PetViewModalButton petID={pet.id}/>
+                                <PetDiariesModalButton petID={pet.id} petName={pet.name} />
                             </div>
                         ))}
                     </Text>
