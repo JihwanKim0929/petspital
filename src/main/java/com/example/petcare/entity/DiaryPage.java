@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.File;
 import java.time.LocalDateTime;
 
 @Getter
@@ -26,6 +27,15 @@ public class DiaryPage {
     private LocalDateTime createDate;
 
     private String image_url;
+
+    @JsonIgnore
+    @PreRemove
+    public void deleteImage(){
+        File imageFile = new File("C:\\spring_image_test\\diary\\"+image_url);
+        if(imageFile.exists()){
+            imageFile.delete();
+        }
+    }
 
     @JsonIgnore
     public DiaryPageDto getDiaryPageDto(){

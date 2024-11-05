@@ -1,7 +1,9 @@
 package com.example.petcare.service;
 
 import com.example.petcare.dto.DiagnosisDto;
+import com.example.petcare.dto.DiaryPageDto;
 import com.example.petcare.entity.Diagnosis;
+import com.example.petcare.entity.DiaryPage;
 import com.example.petcare.entity.Disease;
 import com.example.petcare.entity.Pet;
 import com.example.petcare.repository.DiagnosisRepository;
@@ -78,4 +80,14 @@ public class DiagnosisService {
         return diagnosis!=null? diagnosis.get_DiagnosisDto():null;
     }
 
+    public DiagnosisDto deleteDiagnosis(Long diagnosisId) {
+        Diagnosis target = diagnosisRepository.findById(diagnosisId).orElse(null);
+        if(target != null){
+            DiagnosisDto dto =target.get_DiagnosisDto();
+            diagnosisRepository.delete(target);
+            return dto;
+        }
+        else
+            return null;
+    }
 }

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface DiaryPageRepository extends JpaRepository<DiaryPage, Integer> {
+public interface DiaryPageRepository extends JpaRepository<DiaryPage, Long> {
     @Query(value="SELECT * FROM diary_page WHERE diary_id = :diaryId",nativeQuery = true)
     List<DiaryPage> findByDiaryId(Long diaryId);
 }

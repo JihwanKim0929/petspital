@@ -1,10 +1,12 @@
 package com.example.petcare.controller;
 
 import com.example.petcare.dto.BoardDto;
+import com.example.petcare.dto.CommentDto;
 import com.example.petcare.service.BoardService;
 import com.example.petcare.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -43,5 +45,14 @@ public class BoardController {
         Long userId = userService.get_user_by_username(username).getId();
         BoardDto createdDto = boardService.createBoard(boardDto,userId, image);
         return ResponseEntity.ok().body(createdDto);
+    }
+
+    @DeleteMapping("/board/{id}")//pet 삭제
+    public ResponseEntity<BoardDto> deleteBoard(@PathVariable Long id) {
+        BoardDto deletedDto = boardService.deleteBoard(id);
+        if(deletedDto != null)
+            return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 }

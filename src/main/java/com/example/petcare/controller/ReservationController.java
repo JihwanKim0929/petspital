@@ -3,6 +3,7 @@ package com.example.petcare.controller;
 import com.example.petcare.dto.ReservationDto;
 import com.example.petcare.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +33,14 @@ public class ReservationController {
     public ResponseEntity<ReservationDto> createReservation(@PathVariable Long petId, @RequestBody ReservationDto reservationDto) {
            ReservationDto createdDto = reservationService.createReservation(petId,reservationDto);
            return ResponseEntity.ok().body(createdDto);
+    }
+
+    @DeleteMapping("/reservation/{id}")
+    public ResponseEntity<ReservationDto> deleteReservation(@PathVariable Long id) {
+        ReservationDto deletedDto = reservationService.deleteReservation(id);
+        if(deletedDto != null)
+            return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 }

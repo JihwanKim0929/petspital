@@ -1,8 +1,9 @@
 package com.example.petcare.service;
 
+import com.example.petcare.dto.BoardDto;
 import com.example.petcare.dto.DiaryDto;
-import com.example.petcare.entity.Diary;
-import com.example.petcare.entity.Pet;
+import com.example.petcare.entity.*;
+import com.example.petcare.repository.DiaryPageRepository;
 import com.example.petcare.repository.DiaryRepository;
 import com.example.petcare.repository.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class DiaryService {
 
     @Autowired
     private PetRepository petRepository;
+    @Autowired
+    private DiaryPageRepository diaryPageRepository;
+    @Autowired
+    private DiaryPageService diaryPageService;
 
     public DiaryDto createDiary(DiaryDto diaryDto,Long petId) {
         Pet pet = petRepository.findById(petId).orElse(null);
@@ -38,6 +43,21 @@ public class DiaryService {
                 .stream()
                 .map(diary->diary.getDiaryDto())
                 .collect(Collectors.toList());
+    }
+
+    public DiaryDto deleteDiary(Long diaryId) {
+        Diary target = diaryRepository.findById(diaryId).orElse(null);
+        if(target != null){
+            List<DiaryPage> diaryPages = diaryPageRepository.findByDiaryId(diaryId);
+            for(DiaryPage diaryPage : diaryPages){
+                diaryPageService.deleteDiaryPage(diaryPage.getId());
+            }
+            DiaryDto dto =target.getDiaryDto();
+            diaryRepository.delete(target);
+            return dto;
+        }
+        else
+            return null;
     }
 
 }

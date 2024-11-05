@@ -35,14 +35,13 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.OK).body(createdDto);
     }
 
-    @PostMapping("/user/deletePet")//등록된 pet 삭제
-    public ResponseEntity<PetDto> deletePet(@RequestBody PetDto petDto) throws IOException{
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        Long userId = userService.get_user_by_username(username).getId();
-        petService.deletePet(petDto, userId);
-
-        return ResponseEntity.status(HttpStatus.OK).body(petDto);
+    @DeleteMapping("/pet/{id}")//pet 삭제
+    public ResponseEntity<PetDto> deletePet(@PathVariable Long id) {
+        PetDto deletedDto = petService.deletePet(id);
+        if(deletedDto != null)
+            return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 
     }
 

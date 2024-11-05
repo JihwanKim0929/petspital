@@ -1,10 +1,8 @@
 package com.example.petcare.service;
 
+import com.example.petcare.dto.CommentDto;
 import com.example.petcare.dto.ReservationDto;
-import com.example.petcare.entity.AnimalHospital;
-import com.example.petcare.entity.Disease;
-import com.example.petcare.entity.Pet;
-import com.example.petcare.entity.Reservation;
+import com.example.petcare.entity.*;
 import com.example.petcare.repository.AnimalHospitalRepository;
 import com.example.petcare.repository.PetRepository;
 import com.example.petcare.repository.ReservationRepository;
@@ -51,5 +49,28 @@ public class ReservationService {
             animalHospitalRepository.save(animalHospital);
         }
         return created.getReservationDto();
+    }
+
+    public ReservationDto deleteReservation(Long reservationId) {
+        Reservation target = reservationRepository.findById(reservationId).orElse(null);
+        if(target != null){
+
+            ReservationDto dto =target.getReservationDto();
+            reservationRepository.delete(target);
+
+            //예약 삭제시 해당 동물의 예약 기록에 더 이상 해당 동물병원에 대한 예약이 존재하지 않을 경우 동물병원-동물 연관 끊음.
+            Long petId = target.getPet().getId();
+            List<ReservationDto> reservationDtos = getReservations(petId);
+            if(reservationDtos.stream().noneMatch(existingReservation -> existingReservation.getHospitalAddress().equals(target.getHospitalAddress()))) {
+                AnimalHospital animalHospital = animalHospitalRepository.findByHospitalAddress(target.getHospitalAddress()).orElse(null);
+                animalHospital.getPetList().remove(target.getPet());
+                animalHospitalRepository.save(animalHospital);
+            }
+
+
+            return dto;
+        }
+        else
+            return null;
     }
 }

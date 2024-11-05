@@ -1,6 +1,8 @@
 package com.example.petcare.service;
 
+import com.example.petcare.dto.CommentDto;
 import com.example.petcare.dto.DiaryPageDto;
+import com.example.petcare.entity.Comment;
 import com.example.petcare.entity.Diary;
 import com.example.petcare.entity.DiaryPage;
 import com.example.petcare.repository.DiaryPageRepository;
@@ -46,4 +48,14 @@ public class DiaryPageService {
         return created.getDiaryPageDto();
     }
 
+    public DiaryPageDto deleteDiaryPage(Long diaryPageId) {
+        DiaryPage target = diaryPageRepository.findById(diaryPageId).orElse(null);
+        if(target != null){
+            DiaryPageDto dto =target.getDiaryPageDto();
+            diaryPageRepository.delete(target);
+            return dto;
+        }
+        else
+            return null;
+    }
 }

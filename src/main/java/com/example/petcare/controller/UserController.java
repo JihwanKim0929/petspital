@@ -39,7 +39,6 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(createdUserDto);
     }
 
-
     @GetMapping("/user")
     public ResponseEntity<SiteUserDto> getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -48,5 +47,18 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userDto);
     }
 
+    @DeleteMapping("/user")
+    public ResponseEntity<SiteUserDto> deleteUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        SiteUserDto userDto = userService.get_user_by_username(username);
+        Long id = userDto.getId();
+        SiteUserDto deletedDto = userService.deleteUser(id);
+        if(deletedDto != null)
+            return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+
+    }
 }
 

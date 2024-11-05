@@ -1,8 +1,10 @@
 package com.example.petcare.service;
 
+import com.example.petcare.dto.AnimalHospitalDto;
+import com.example.petcare.dto.PetDto;
 import com.example.petcare.dto.SiteUserDto;
-import com.example.petcare.entity.SiteUser;
-import com.example.petcare.repository.SiteUserRepository;
+import com.example.petcare.entity.*;
+import com.example.petcare.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -20,6 +23,22 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private PetRepository petRepository;
+    @Autowired
+    private PetService petService;
+    @Autowired
+    private BoardRepository boardRepository;
+    @Autowired
+    private BoardService boardService;
+    @Autowired
+    private CommentRepository commentRepository;
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private AnimalHospitalService animalHospitalService;
+    @Autowired
+    private AnimalHospitalRepository animalHospitalRepository;
 
     public SiteUserDto createUser(MultipartFile image, SiteUserDto userDto) throws IOException {
         if(!image.isEmpty()){
@@ -38,4 +57,40 @@ public class UserService {
         SiteUser user = userRepository.findByUsername(username);
         return user!=null? user.get_SiteUserDto() : null;
     }
+
+    public SiteUserDto deleteUser(Long id) {
+        SiteUser target = userRepository.findById(id).orElse(null);
+        if(target != null){
+
+            List<Pet> pets = petRepository.findByUserId(id);
+            for(Pet pet : pets){
+                petService.deletePet(pet.getId());
+            }
+
+            List<Board> boards = boardRepository.findByAuthorId(id);
+            for(Board board : boards){
+                boardService.deleteBoard(board.getId());
+            }
+
+            List<Comment> comments = commentRepository.findByAuthorId(id);
+            for(Comment comment : comments){
+                commentService.deleteComment(comment.getId());
+            }
+
+            if(target.getRole().equals("VET")){
+                AnimalHospitalDto animalHospitalDto = animalHospitalService.getAnimalHospitalByUserId(target.getId());
+                if(animalHospitalDto!=null){
+                    AnimalHospital animalHospital = animalHospitalDto.getAnimalHospital();
+                    animalHospitalRepository.delete(animalHospital);
+                }
+            }
+
+            SiteUserDto dto =target.get_SiteUserDto();
+            userRepository.delete(target);
+            return dto;
+        }
+        else
+            return null;
+    }
+
 }

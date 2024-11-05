@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -39,6 +40,15 @@ public class Diagnosis {
             inverseJoinColumns = @JoinColumn(name="DISEASE_ID")
     )
     private List<Disease> diseaseList;
+
+    @JsonIgnore
+    @PreRemove
+    public void deleteImage(){
+        File imageFile = new File("C:\\spring_image_test\\diagnosis\\"+image_url);
+        if(imageFile.exists()){
+            imageFile.delete();
+        }
+    }
 
     @JsonIgnore
     public DiagnosisDto get_DiagnosisDto() {

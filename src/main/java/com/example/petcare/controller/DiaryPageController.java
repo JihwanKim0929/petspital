@@ -1,8 +1,10 @@
 package com.example.petcare.controller;
 
 import com.example.petcare.dto.DiaryPageDto;
+import com.example.petcare.dto.PetDto;
 import com.example.petcare.service.DiaryPageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,4 +29,13 @@ public class DiaryPageController {
         return ResponseEntity.ok().body(createdDto);
     }
 
+    @DeleteMapping("/diary/page/{diaryPageId}")//pet 삭제
+    public ResponseEntity<DiaryPageDto> deleteDiaryPage(@PathVariable Long diaryPageId) {
+        DiaryPageDto deletedDto = diaryPageService.deleteDiaryPage(diaryPageId);
+        if(deletedDto != null)
+            return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+
+    }
 }

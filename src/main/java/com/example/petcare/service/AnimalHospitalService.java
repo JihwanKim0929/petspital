@@ -34,7 +34,11 @@ public class AnimalHospitalService {
     public AnimalHospitalDto getAnimalHospital(Long id){
         AnimalHospital animalHospital = animalHospitalRepository.findById(id).orElse(null);
         return animalHospital!=null ? animalHospital.getAnimalHospitalDto() : null;
+    }
 
+    public AnimalHospitalDto getAnimalHospitalByUserId(Long userId){
+        AnimalHospital animalHospital = animalHospitalRepository.findBySiteUserId(userId).orElse(null);
+        return animalHospital!=null ? animalHospital.getAnimalHospitalDto() : null;
     }
 
     public List<PetDto> getPets_vet(Long userId){
@@ -54,4 +58,5 @@ public class AnimalHospitalService {
                 .map(animalHospital->animalHospital.getAnimalHospitalDto())
                 .collect(Collectors.toList());
     }
+
 }

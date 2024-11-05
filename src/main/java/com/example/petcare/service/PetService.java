@@ -1,10 +1,9 @@
 package com.example.petcare.service;
 
+import com.example.petcare.dto.BoardDto;
 import com.example.petcare.dto.PetDto;
-import com.example.petcare.entity.Pet;
-import com.example.petcare.entity.SiteUser;
-import com.example.petcare.repository.PetRepository;
-import com.example.petcare.repository.SiteUserRepository;
+import com.example.petcare.entity.*;
+import com.example.petcare.repository.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +21,18 @@ public class PetService {
     PetRepository petRepository;
     @Autowired
     SiteUserRepository userRepository;
+    @Autowired
+    private DiaryRepository diaryRepository;
+    @Autowired
+    private DiaryService diaryService;
+    @Autowired
+    private DiagnosisRepository diagnosisRepository;
+    @Autowired
+    private DiagnosisService diagnosisService;
+    @Autowired
+    private ReservationRepository reservationRepository;
+    @Autowired
+    private ReservationService reservationService;
 
     public PetDto createPet(PetDto petDto, Long userId, MultipartFile image) throws IOException {
         if(!image.isEmpty()){
@@ -36,10 +47,31 @@ public class PetService {
         return created.get_PetDto();
     }
 
-    public void deletePet(PetDto petDto, Long userId) throws IOException {
-        SiteUser siteUser = userRepository.findById(userId).orElse(null);
-        petDto.setSiteUser(siteUser);
-        petRepository.delete(petDto.get_Pet());
+    public PetDto deletePet(Long petId) {
+        Pet target = petRepository.findById(petId).orElse(null);
+        if(target != null){
+
+            List<Diary> diaries = diaryRepository.findByPetId(petId);
+            for(Diary diary : diaries){
+                diaryService.deleteDiary(diary.getId());
+            }
+
+            List<Diagnosis> diagnoses = diagnosisRepository.findByPetId(petId);
+            for(Diagnosis diagnosis : diagnoses){
+                diagnosisService.deleteDiagnosis(diagnosis.getId());
+            }
+
+            List<Reservation> reservations = reservationRepository.findByPetId(petId);
+            for(Reservation reservation : reservations){
+                reservationService.deleteReservation(reservation.getId());
+            }
+
+            PetDto dto =target.get_PetDto();
+            petRepository.delete(target);
+            return dto;
+        }
+        else
+            return null;
     }
 
     public void updatePet(PetDto petDto, Long userId, MultipartFile image) throws IOException {

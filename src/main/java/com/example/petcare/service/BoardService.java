@@ -1,9 +1,12 @@
 package com.example.petcare.service;
 
 import com.example.petcare.dto.BoardDto;
+import com.example.petcare.dto.CommentDto;
 import com.example.petcare.entity.Board;
+import com.example.petcare.entity.Comment;
 import com.example.petcare.entity.SiteUser;
 import com.example.petcare.repository.BoardRepository;
+import com.example.petcare.repository.CommentRepository;
 import com.example.petcare.repository.SiteUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,10 @@ public class BoardService {
 
     @Autowired
     SiteUserRepository userRepository;
+    @Autowired
+    private CommentRepository commentRepository;
+    @Autowired
+    private CommentService commentService;
 
     public List<BoardDto> boards() {
         return boardRepository.findAll()
@@ -51,5 +58,20 @@ public class BoardService {
         boardDto.setCreateDate(LocalDateTime.now());
         Board created = boardRepository.save(boardDto.getBoard());
         return created.getBoardDto();
+    }
+
+    public BoardDto deleteBoard(Long boardId) {
+        Board target = boardRepository.findById(boardId).orElse(null);
+        if(target != null){
+            List<Comment> comments = commentRepository.findByBoardId(boardId);
+            for(Comment comment : comments){
+                commentService.deleteComment(comment.getId());
+            }
+            BoardDto dto =target.getBoardDto();
+            boardRepository.delete(target);
+            return dto;
+        }
+        else
+            return null;
     }
 }

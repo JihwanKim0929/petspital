@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.File;
 import java.time.LocalDateTime;
 
 @Getter
@@ -30,6 +31,15 @@ public class Board {
     private LocalDateTime modifyDate;
 
     private String image_url;
+
+    @JsonIgnore
+    @PreRemove
+    public void deleteImage(){
+        File imageFile = new File("C:\\spring_image_test\\board\\"+image_url);
+        if(imageFile.exists()){
+            imageFile.delete();
+        }
+    }
 
     @JsonIgnore
     public BoardDto getBoardDto() {

@@ -1,8 +1,10 @@
 package com.example.petcare.service;
 
 import com.example.petcare.dto.CommentDto;
+import com.example.petcare.dto.PetDto;
 import com.example.petcare.entity.Board;
 import com.example.petcare.entity.Comment;
+import com.example.petcare.entity.Pet;
 import com.example.petcare.entity.SiteUser;
 import com.example.petcare.repository.BoardRepository;
 import com.example.petcare.repository.CommentRepository;
@@ -43,6 +45,16 @@ public class CommentService {
         dto.setCreateDate(LocalDateTime.now());
         Comment created = commentRepository.save(dto.getComment());
         return created.getCommentDto();
+    }
 
+    public CommentDto deleteComment(Long commentId) {
+        Comment target = commentRepository.findById(commentId).orElse(null);
+        if(target != null){
+            CommentDto dto =target.getCommentDto();
+            commentRepository.delete(target);
+            return dto;
+        }
+        else
+            return null;
     }
 }

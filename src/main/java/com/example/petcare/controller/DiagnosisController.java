@@ -1,6 +1,7 @@
 package com.example.petcare.controller;
 
 import com.example.petcare.dto.DiagnosisDto;
+import com.example.petcare.dto.DiaryDto;
 import com.example.petcare.service.DiagnosisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,9 +31,19 @@ public class DiagnosisController {
         List<DiagnosisDto> dtos = diagnosisService.get_diagnosis_list(petId);
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
     }
+
     @GetMapping("/diagnosis/{id}")
     public ResponseEntity<DiagnosisDto> getDiagnosis(@PathVariable Long id) {
         DiagnosisDto dto = diagnosisService.get_diagnosis(id);
         return ResponseEntity.status(HttpStatus.OK).body(dto);
+    }
+
+    @DeleteMapping("/diagnosis/{id}")//pet 삭제
+    public ResponseEntity<DiagnosisDto> deleteDiagnosis(@PathVariable Long id) {
+        DiagnosisDto deletedDto = diagnosisService.deleteDiagnosis(id);
+        if(deletedDto != null)
+            return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 }
