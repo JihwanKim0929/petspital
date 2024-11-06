@@ -20,7 +20,7 @@ public class Pet {
     private Long id;
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="siteUser_id")
     private SiteUser siteUser;
 
