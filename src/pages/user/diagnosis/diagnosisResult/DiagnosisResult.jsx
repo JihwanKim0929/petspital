@@ -6,58 +6,36 @@ const DiagnosisResult = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const petToDiagnose = sessionStorage.getItem('petToDiagnose');
-    if (petToDiagnose) {
-      const url = `http://localhost:8080/pet/${petToDiagnose}/diagnosis`;
-      console.log("Diagnosis Records URL: " + url);
-      fetch(url, {
-        method: 'GET',
-        credentials: 'include'
-      })
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          console.error('Error fetching records:', response.statusText);
-          throw new Error('Failed to fetch records');
-        }
-      })
-      .then(parsedRecordsData => {
-        if (Array.isArray(parsedRecordsData) && parsedRecordsData.length > 0) {
-          const lastItem = parsedRecordsData[parsedRecordsData.length - 1];
-          const lastDiagnosisID = lastItem.id;
-          
-          const url = `http://localhost:8080/diagnosis/${lastDiagnosisID}`;
-          console.log("Diagnosis Results URL: " + url);
-          fetch(url, {
-            method: 'GET',
-            credentials: 'include'
-          })
-          .then(response => {
-            if (response.ok) {
-              return response.json();
-            } else {
-              console.error('Error fetching diagnosis:', response.statusText);
-              throw new Error('Failed to fetch diagnosis');
-            }
-          })
-          .then(parsedDiagnosisResult => {
-            setDiagnosisResult(parsedDiagnosisResult);
-            console.log('- Pet Diagnosis Result Successfully Loaded -');
-            console.log("Diagnosis Result:", parsedDiagnosisResult);
-          })
-          .catch(error => {
-            setError(error.message);
-            console.error('Error loading diagnosis result:', error);
-          });
-        }
-      })
-      .catch(error => {
-        setError(error.message);
-        console.error('Error loading diagnosis records:', error);
-      });
+    if (!diagnosisResult) {
+      const diagnosisID = sessionStorage.getItem('diagnosisID');
+      if (diagnosisID) {
+        const url = `http://localhost:8080/diagnosis/${diagnosisID}`;
+        console.log("Diagnosis Records URL: " + url);
+        
+        fetch(url, {
+          method: 'GET',
+          credentials: 'include'
+        })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            console.error('Error fetching diagnosis:', response.statusText);
+            throw new Error('Failed to fetch diagnosis');
+          }
+        })
+        .then(parsedDiagnosisResult => {
+          setDiagnosisResult(parsedDiagnosisResult);
+          console.log('- Pet Diagnosis Result Successfully Loaded -');
+          console.log("Diagnosis Result:", parsedDiagnosisResult);
+        })
+        .catch(error => {
+          setError(error.message);
+          console.error('Error loading diagnosis result:', error);
+        });
+      }
     }
-  }, [diagnosisResult]);
+  }, []);
 
   if (error) {
     return <div className='diagnosisResult'>Error: {error}</div>;
@@ -73,7 +51,7 @@ const DiagnosisResult = () => {
       <p>Pet Name: {diagnosisResult.pet.name}</p>
       <p>Species: {diagnosisResult.species}</p>
       <p>Diagnosed Part: {diagnosisResult.part}</p>
-      <img src={diagnosisResult.image_url} alt="Diagnosis" />
+      <img src={`http://localhost:8080/image/diagnosis/${diagnosisResult.image_url}`} alt="Diagnosis" />
       <h2>Disease List:</h2>
       <ul>
         {diagnosisResult.diseaseList.map(disease => (

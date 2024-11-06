@@ -47,7 +47,7 @@ const Community = () => {
   const visibleItems = items.slice(startRange, endRange);
 
   return (
-    <div className="community">
+    <div className="communityBoard">
       <Stack gap="4">
         <Stack backgroundColor='lightgray'>
           {visibleItems.map((item) => (

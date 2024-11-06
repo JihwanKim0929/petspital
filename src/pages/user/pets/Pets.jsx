@@ -4,6 +4,7 @@ import { Card, Show, Box, Center, Text, useBreakpointValue } from '@chakra-ui/re
 import PetAddModalButton from '../../../components/petRegisterModalButton/PetRegisterModalButton';
 import PetViewModalButton from '../../../components/petViewModalButton/PetViewModalButton';
 import PetDiariesModalButton from '../../../components/petDiariesModalButton/PetDiariesModalButton';
+import PetDeleteModalButton from '../../../components/petDeleteModalButton/PetDeleteModalButton';
 
 const Pets = () => {
     
@@ -53,6 +54,7 @@ const Pets = () => {
                                 />
                                 <PetViewModalButton petID={pet.id}/>
                                 <PetDiariesModalButton petID={pet.id} petName={pet.name} />
+                                <PetDeleteModalButton petID={pet.id} />
                             </div>
                         ))}
                     </Text>

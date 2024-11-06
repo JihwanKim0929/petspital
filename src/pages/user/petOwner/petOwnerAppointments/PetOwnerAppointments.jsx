@@ -3,6 +3,7 @@ import './PetOwnerAppointments.scss';
 import { Card, Show, Text, Box, Image } from '@chakra-ui/react';
 import { NativeSelectField, NativeSelectRoot } from '../../../../components/ui/native-select';
 import AppointmentViewModalButton from '../../../../components/appointmentViewModalButton/AppointmentViewModalButton';
+import AppointmentDeleteModalButton from '../../../../components/appointmentDeleteModalButton/AppointmentDeleteModalButton';
 
 const PetOwnerAppointments = () => {
     
@@ -83,6 +84,7 @@ const PetOwnerAppointments = () => {
                                         <Text>Create Date: {new Date(appointment.createDate).toLocaleString()}</Text>
                                         <Text>Hospital: {appointment.hospitalAddress}</Text>
                                         <AppointmentViewModalButton appointmentID={appointment.id}/>
+                                        <AppointmentDeleteModalButton appointmentID={appointment.id} />
                                     </Box>
                                 ))
                             ) : (

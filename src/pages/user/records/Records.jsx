@@ -5,6 +5,7 @@ import {
   NativeSelectField,
   NativeSelectRoot,
 } from "../../../components/ui/native-select";
+import DiagnosisRecordDeleteModalButton from '../../../components/diagnosisRecordDeleteModalButton/DiagnosisRecordDeleteModalButton';
 
 const Records = () => {
 
@@ -89,6 +90,7 @@ const Records = () => {
                         </Text>
                       ))}
                     </VStack>
+                    <DiagnosisRecordDeleteModalButton diagnosisID={record.id}/>
                   </Box>
                 ))
               ) : (

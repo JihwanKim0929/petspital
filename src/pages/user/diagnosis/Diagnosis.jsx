@@ -44,38 +44,48 @@ const Diagnosis = () => {
     .catch(error => console.error('Pets not found 2', error));
   }, []);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-
+  
     const formData = new FormData();
-
+  
     const diagnosisDto = {
       species: data.species,
-      part: data.part
+      part: data.part,
     };
-    
+  
     const diagnosisJson = JSON.stringify(diagnosisDto);
-    const diagnosisBlob = new Blob([diagnosisJson], {type: "application/json"});
+    const diagnosisBlob = new Blob([diagnosisJson], { type: "application/json" });
     formData.append("diagnosisDto", diagnosisBlob);
-
+  
     const diagnosisImage = data.image;
-    if(diagnosisImage) {
+    if (diagnosisImage) {
       formData.append("image", diagnosisImage);
     }
-
+  
     const url = `http://localhost:8080/pet/${data.petID}/diagnosis`;
-    fetch(url,{
-      method: 'POST',
-      body: formData,
-      headers: {},
-      credentials: 'include'
-    });
+  
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
 
+      if (response.ok) {
+        const result = await response.json();
+        console.log("Diagnosis created successfully:", result);
+        sessionStorage.setItem("diagnosisID", result.id);
+        navigate("/user/petowner/diagnosis/result");
+  
+      } else {
+        throw new Error("Failed to create diagnosis");
+      }
+    } catch (error) {
+      console.error("Error creating diagnosis:", error);
+    }
+  
     reset();
-
-    sessionStorage.setItem('petToDiagnose', data.petID);
-
-    navigate("/user/petowner/diagnosis/result");
   };
 
   const handlePetChange = (event) => {
