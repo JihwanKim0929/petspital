@@ -76,6 +76,7 @@ function App() {
             <Route path="community" element={<Community />}>
               <Route index element={<CommunityBoard />} />
               <Route path="post" element={<CommunityPost />} />
+              <Route path="view" element={<CommunityPostView />} />
             </Route>
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Flex, Textarea, Stack, Text } from '@chakra-ui/react';
 import { Button } from '../../../../components/ui/button';
+import CommentDeleteModalButton from "../../../../components/commentDeleteModalButton/CommentDeleteModalButton";
 
 const CommunityPostView = () => {
   const [post, setPost] = useState(null);
@@ -8,6 +9,7 @@ const CommunityPostView = () => {
   const [error, setError] = useState(null);
   const [comment, setComment] = useState('');
   const [comments, setComments] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     const postID = sessionStorage.getItem('postID');
@@ -39,25 +41,25 @@ const CommunityPostView = () => {
       }
     };
 
-    const fetchComments = async (postID) => {
+    const fetchUser = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/board/${postID}/comment`, {
+        const userResponse = await fetch('http://localhost:8080/user', {
           method: 'GET',
           credentials: 'include'
         });
-
-        if (response.ok) {
-          const data = await response.json();
-          setComments(data);
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          setCurrentUser(userData);
         } else {
-          setError('Failed to load comments.');
+          console.error('Failed to fetch user data.');
         }
       } catch (error) {
-        setError('Network error while fetching comments.');
+        console.error('Network error while fetching user data.');
       }
     };
 
     fetchPost();
+    fetchUser();
   }, []);
 
   const fetchComments = async (postID) => {
@@ -87,17 +89,17 @@ const CommunityPostView = () => {
     }
 
     const commentData = {
-      content: comment
+      content: comment,
     };
 
     try {
       const response = await fetch(`http://localhost:8080/board/${postID}/comment`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         credentials: 'include',
-        body: JSON.stringify(commentData)
+        body: JSON.stringify(commentData),
       });
 
       if (response.ok) {
@@ -126,20 +128,26 @@ const CommunityPostView = () => {
       <p>Content: {post.content}</p>
       <p>Date: {new Date(post.createDate).toLocaleString()}</p>
       {post.image_url && <img src={`http://localhost:8080/image/board/${post.image_url}`} alt="Post" />}
+      
       <Flex>
-        <Textarea 
-          placeholder="Comment..." 
-          value={comment} 
-          onChange={(e) => setComment(e.target.value)} 
+        <Textarea
+          placeholder="Comment..."
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
         />
         <Button onClick={handleCommentSubmit}>Comment</Button>
       </Flex>
+
       <Stack spacing={4} marginTop={4}>
         {comments.map((comment) => (
           <Stack key={comment.id} padding="4" borderBottom="1px solid gray">
             <Text fontWeight="bold">{comment.author.username}</Text>
             <Text>{comment.content}</Text>
             <Text fontSize="sm" color="gray.500">{new Date(comment.createDate).toLocaleString()}</Text>
+
+            {currentUser && comment.author.id === currentUser.id && (
+              <CommentDeleteModalButton commentID={comment.id} />
+            )}
           </Stack>
         ))}
       </Stack>

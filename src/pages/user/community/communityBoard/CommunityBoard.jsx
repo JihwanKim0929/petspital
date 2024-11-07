@@ -9,13 +9,15 @@ import {
   PaginationRoot,
 } from "../../../../components/ui/pagination";
 import { Button } from '../../../../components/ui/button';
+import PostDeleteModalButton from '../../../../components/postDeleteModalButton/PostDeleteModalButton';
 
 const pageSize = 10;
 
-const Community = () => {
+const CommunityBoard = () => {
   const [page, setPage] = useState(1);
   const [items, setItems] = useState([]);
   const [count, setCount] = useState(0);
+  const [currentUser, setCurrentUser] = useState(null); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +28,17 @@ const Community = () => {
           setItems(data);
           setCount(data.length);
         } else {
-          console.error('Failed to fetch data:', response.statusText);
+          console.error('Failed to fetch board data:', response.statusText);
+        }
+
+        const userResponse = await fetch('http://localhost:8080/user', {
+          credentials: 'include'
+        });
+        if (userResponse.ok) {
+          const userData = await userResponse.json();
+          setCurrentUser(userData);
+        } else {
+          console.error('Failed to fetch user data:', userResponse.statusText);
         }
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -51,19 +63,24 @@ const Community = () => {
       <Stack gap="4">
         <Stack backgroundColor='lightgray'>
           {visibleItems.map((item) => (
-           <Link 
-              key={item.id} 
-              to="./view" 
-              style={{ textDecoration: 'none' }}
-              onClick={() => handleItemClick(item.id)}
-            >
-              <Stack key={item.id} padding="4" borderBottom="1px solid gray">
-                <Text>ID: {item.id}</Text>
-                <Text fontWeight="bold">{item.title}</Text>
-                <Text>Author: {item.author.username}</Text>
-                <Text>Date: {new Date(item.createDate).toLocaleString()}</Text>
-              </Stack>
-            </Link>
+            <Stack>
+              <Link 
+                key={item.id} 
+                to="./view" 
+                style={{ textDecoration: 'none' }}
+                onClick={() => handleItemClick(item.id)}
+              >
+                <Stack key={item.id} padding="4" borderBottom="1px solid gray">
+                  <Text>ID: {item.id}</Text>
+                  <Text fontWeight="bold">{item.title}</Text>
+                  <Text>Author: {item.author.username}</Text>
+                  <Text>Date: {new Date(item.createDate).toLocaleString()}</Text>
+                </Stack>
+              </Link>
+              {currentUser && item.author.id === currentUser.id && (
+                <PostDeleteModalButton postID={item.id} />
+              )}
+            </Stack>
           ))}
         </Stack>
         <PaginationRoot
@@ -86,4 +103,4 @@ const Community = () => {
   );
 };
 
-export default Community;
+export default CommunityBoard;
