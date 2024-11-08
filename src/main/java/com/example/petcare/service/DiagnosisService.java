@@ -60,7 +60,9 @@ public class DiagnosisService {
         diseaseList.add(diseaseRepository.findById(1L).orElse(null));
         diseaseList.add(diseaseRepository.findById(2L).orElse(null));
         diseaseList.add(diseaseRepository.findById(3L).orElse(null));
-        diagnosisDto.setDiseaseList(diseaseList);
+        diagnosisDto.setDiseaseList(diseaseList.stream()
+                .map(disease -> disease.getDiseaseDto())
+                .collect(Collectors.toList()));
         diagnosisDto.setCreateDate(LocalDateTime.now());
 
         Diagnosis created = diagnosisRepository.save(diagnosisDto.get_Diagnosis());

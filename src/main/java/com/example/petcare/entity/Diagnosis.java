@@ -9,6 +9,7 @@ import lombok.*;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -59,7 +60,9 @@ public class Diagnosis {
                 .part(part)
                 .createDate(createDate)
                 .image_url(image_url)
-                .diseaseList(diseaseList)
+                .diseaseList(diseaseList.stream()
+                        .map(disease -> disease.getDiseaseDto())
+                        .collect(Collectors.toList()))
                 .build();
     }
 }

@@ -1,6 +1,6 @@
-package com.example.petcare.entity;
+package com.example.petcare.dto;
 
-import com.example.petcare.dto.DiseaseDto;
+import com.example.petcare.entity.Disease;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -8,12 +8,10 @@ import lombok.*;
 
 @Setter
 @Getter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Disease {
-    @Id
+@Builder
+public class DiseaseDto {
     private Long id;
 
     private String name;
@@ -23,8 +21,8 @@ public class Disease {
     private String description;
 
     @JsonIgnore
-    public DiseaseDto getDiseaseDto(){
-        return DiseaseDto.builder()
+    public Disease getDisease(){
+        return Disease.builder()
                 .id(id)
                 .name(name)
                 .symptoms(symptoms)

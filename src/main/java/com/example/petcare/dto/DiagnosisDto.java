@@ -8,6 +8,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -28,7 +29,7 @@ public class DiagnosisDto {
 
     private String image_url;
 
-    private List<Disease> diseaseList;
+    private List<DiseaseDto> diseaseList;
 
     @JsonIgnore
     public Diagnosis get_Diagnosis() {
@@ -39,7 +40,9 @@ public class DiagnosisDto {
                 .part(part)
                 .createDate(createDate)
                 .image_url(image_url)
-                .diseaseList(diseaseList)
+                .diseaseList(diseaseList.stream()
+                        .map(diseaseDto -> diseaseDto.getDisease())
+                        .collect(Collectors.toList()))
                 .build();
     }
 }
