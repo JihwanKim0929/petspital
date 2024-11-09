@@ -74,4 +74,14 @@ public class BoardService {
         else
             return null;
     }
+
+    /*public BoardDto updateBoard(Long boardId, BoardDto boardDto, MultipartFile image) {
+        Board target = boardRepository.findById(boardId).orElse(null);
+
+        if(target != null){
+
+        }
+
+        return;
+    }*/
 }

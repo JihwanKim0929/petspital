@@ -93,4 +93,26 @@ public class UserService {
             return null;
     }
 
+    public SiteUserDto updateUser(Long id, SiteUserDto newUserDto) throws IOException {   //유저 수정
+        SiteUser target = userRepository.findById(id).orElse(null);
+        Long newId = newUserDto.getId();//새로운 userid
+        if(target != null){
+            //유저, animalHospital, board, comment, pet
+            //pet -> pet의 site_user_id를 new user id로
+            List<Pet> pets = petRepository.findByUserId(id);
+            for(Pet pet : pets){//기존 펫
+                PetDto newPetDto = pet.get_PetDto();
+                MultipartFile image = null;
+
+                petService.updatePet(newPetDto,newId,image);
+            }
+
+            List<Board> boards = boardRepository.findByAuthorId(id);
+            /*for(Board board : boards){
+                boardService.updateBoard();
+            }*/
+        }
+        return null;
+    }
+
 }

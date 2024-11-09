@@ -60,5 +60,25 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 
     }
+
+    @PutMapping("/user")
+    public ResponseEntity<SiteUserDto> updateUser(@RequestBody SiteUserDto newUserDto) throws  IOException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        SiteUserDto userDto = userService.get_user_by_username(username);
+        if (userDto == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+
+        Long id = userDto.getId();// id : 기존 id
+        SiteUserDto updatedDto = userService.updateUser(id, newUserDto);
+
+        if (updatedDto != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(updatedDto);
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
 }
 

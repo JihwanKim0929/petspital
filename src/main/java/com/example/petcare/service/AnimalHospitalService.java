@@ -9,6 +9,8 @@ import com.example.petcare.entity.Diary;
 import com.example.petcare.entity.Pet;
 import com.example.petcare.entity.SiteUser;
 import com.example.petcare.repository.AnimalHospitalRepository;
+import com.example.petcare.repository.SiteUserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +26,8 @@ import java.util.stream.Collectors;
 public class AnimalHospitalService {
     @Autowired
     AnimalHospitalRepository animalHospitalRepository;
+    @Autowired
+    SiteUserRepository userRepository;
 
     public AnimalHospitalDto createAnimalHospital(AnimalHospitalDto animalHospitalDto, SiteUserDto siteUserDto){
             animalHospitalDto.setSiteUser(siteUserDto.get_SiteUser());
@@ -57,6 +61,30 @@ public class AnimalHospitalService {
                 .stream()
                 .map(animalHospital->animalHospital.getAnimalHospitalDto())
                 .collect(Collectors.toList());
+    }
+
+    public void updateAnimalHospital(AnimalHospitalDto newAnimalHospitalDto, Long userId){
+        SiteUser siteUser = userRepository.findById(userId).orElse(null);//현재 유저
+        newAnimalHospitalDto.setSiteUser(siteUser);
+
+        AnimalHospital animalHospital = animalHospitalRepository.findBySiteUserId(newAnimalHospitalDto.getId()).orElse(null);
+        if(animalHospital != null){
+            BeanUtils.copyProperties(newAnimalHospitalDto, animalHospital, "id");
+            animalHospitalRepository.save(animalHospital);
+            System.out.println("animal hospital updated");
+            System.out.println(animalHospital);
+        }else{
+            System.out.println("animal hospital not updated");
+            System.out.println("animalHospital");
+            System.out.println(animalHospital);
+            System.out.println("newAnimalHospital");
+            System.out.println(newAnimalHospitalDto);
+            System.out.println("uid");
+            System.out.println(userId);
+            System.out.println("siteUser");
+            System.out.println(siteUser);
+
+        }
     }
 
 }
