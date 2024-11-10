@@ -84,7 +84,6 @@ public class BoardService {
             BeanUtils.copyProperties(newBoardDto, board, "id","image_url","author","createDate");
             boardRepository.save(board);
         }
-
         return board.getBoardDto();
     }
 }

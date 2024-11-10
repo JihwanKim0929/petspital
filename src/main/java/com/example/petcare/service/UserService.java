@@ -5,6 +5,7 @@ import com.example.petcare.dto.PetDto;
 import com.example.petcare.dto.SiteUserDto;
 import com.example.petcare.entity.*;
 import com.example.petcare.repository.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -94,25 +95,12 @@ public class UserService {
     }
 
     public SiteUserDto updateUser(Long id, SiteUserDto newUserDto) throws IOException {   //유저 수정
-        SiteUser target = userRepository.findById(id).orElse(null);
-        Long newId = newUserDto.getId();//새로운 userid
+        SiteUser target = userRepository.findById(id).orElse(null);//기존user
         if(target != null){
-            //유저, animalHospital, board, comment, pet
-            //pet -> pet의 site_user_id를 new user id로
-            List<Pet> pets = petRepository.findByUserId(id);
-            /*for(Pet pet : pets){//기존 펫
-                PetDto newPetDto = pet.get_PetDto();
-                MultipartFile image = null;
-
-                petService.updatePet(newPetDto,newId,image);
-            }*/
-
-            List<Board> boards = boardRepository.findByAuthorId(id);
-            /*for(Board board : boards){
-                boardService.updateBoard();
-            }*/
+            BeanUtils.copyProperties(newUserDto, target, "id","image_url");
+            userRepository.save(target);
         }
-        return null;
+        return target.get_SiteUserDto();
     }
 
 }

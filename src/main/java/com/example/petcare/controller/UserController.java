@@ -58,10 +58,9 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
         else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-
     }
 
-    @PutMapping("/user")
+    @PostMapping("/updateUser")
     public ResponseEntity<SiteUserDto> updateUser(@RequestBody SiteUserDto newUserDto) throws  IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
