@@ -46,4 +46,13 @@ public class DiagnosisController {
         else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
+
+    @PostMapping("/diagnosis/{id}")
+    public ResponseEntity<DiagnosisDto> updateDiagnosis(@PathVariable Long id, @RequestBody DiagnosisDto dto) {
+        DiagnosisDto updatedDto = diagnosisService.updateDiagnosis(id, dto);
+        if(updatedDto != null)
+            return ResponseEntity.status(HttpStatus.OK).body(updatedDto);
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
 }

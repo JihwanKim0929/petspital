@@ -9,6 +9,7 @@ import com.example.petcare.entity.Pet;
 import com.example.petcare.repository.DiagnosisRepository;
 import com.example.petcare.repository.DiseaseRepository;
 import com.example.petcare.repository.PetRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -91,5 +92,16 @@ public class DiagnosisService {
         }
         else
             return null;
+    }
+
+    public DiagnosisDto updateDiagnosis(Long diagnosisId, DiagnosisDto dto) {
+        Diagnosis target = diagnosisRepository.findById(diagnosisId).orElse(null);
+        if(target != null){
+            BeanUtils.copyProperties(dto, target, "id","pet","image_url", "createDate");
+             diagnosisRepository.save(target);
+            return dto;
+        }
+        return target.get_DiagnosisDto();
+
     }
 }
