@@ -75,7 +75,7 @@ public class PetService {
             return null;
     }
 
-    public void updatePet(Long petId, PetDto newpetDto, Long userId, MultipartFile image) throws IOException {
+    /*public void updatePet(Long petId, PetDto newpetDto, Long userId, MultipartFile image) throws IOException {
         //기존pet id, new dto, 기존user id, new img
         System.out.println("userID : ");
         System.out.println(userId);
@@ -95,8 +95,14 @@ public class PetService {
             System.out.println("saved to database");
         }
         System.out.println("not saved to database");
+    }*/
+    public void updatePet(Long petId, PetDto newpetDto) throws IOException {
+        Pet pet = petRepository.findById(petId).orElse(null);
+        if (pet != null) {
+            BeanUtils.copyProperties(newpetDto, pet, "id","siteUser","image_url");
+            petRepository.save(pet);
+        }
     }
-
 
     public PetDto get_pet(Long petId){
         Pet pet = petRepository.findById(petId).orElse(null);
