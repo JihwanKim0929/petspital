@@ -100,12 +100,12 @@ public class UserService {
             //유저, animalHospital, board, comment, pet
             //pet -> pet의 site_user_id를 new user id로
             List<Pet> pets = petRepository.findByUserId(id);
-            for(Pet pet : pets){//기존 펫
+            /*for(Pet pet : pets){//기존 펫
                 PetDto newPetDto = pet.get_PetDto();
                 MultipartFile image = null;
 
                 petService.updatePet(newPetDto,newId,image);
-            }
+            }*/
 
             List<Board> boards = boardRepository.findByAuthorId(id);
             /*for(Board board : boards){

@@ -7,6 +7,7 @@ import com.example.petcare.repository.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -74,7 +75,10 @@ public class PetService {
             return null;
     }
 
-    public void updatePet(PetDto newpetDto, Long userId, MultipartFile image) throws IOException {
+    public void updatePet(Long petId, PetDto newpetDto, Long userId, MultipartFile image) throws IOException {
+        //기존pet id, new dto, 기존user id, new img
+        System.out.println("userID : ");
+        System.out.println(userId);
         if(!image.isEmpty()){
             String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
             String fullPathName = "C:\\spring_image_test\\pet\\"+fileName;
@@ -84,12 +88,15 @@ public class PetService {
         SiteUser siteUser = userRepository.findById(userId).orElse(null);//현재 유저
         newpetDto.setSiteUser(siteUser);
 
-        Pet pet = petRepository.findById(newpetDto.getId()).orElse(null);
+        Pet pet = petRepository.findById(petId).orElse(null);
         if (pet != null) {
             BeanUtils.copyProperties(newpetDto, pet, "id");
             petRepository.save(pet);
+            System.out.println("saved to database");
         }
+        System.out.println("not saved to database");
     }
+
 
     public PetDto get_pet(Long petId){
         Pet pet = petRepository.findById(petId).orElse(null);

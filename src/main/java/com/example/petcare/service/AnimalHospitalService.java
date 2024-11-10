@@ -71,19 +71,6 @@ public class AnimalHospitalService {
         if(animalHospital != null){
             BeanUtils.copyProperties(newAnimalHospitalDto, animalHospital, "id");
             animalHospitalRepository.save(animalHospital);
-            System.out.println("animal hospital updated");
-            System.out.println(animalHospital);
-        }else{
-            System.out.println("animal hospital not updated");
-            System.out.println("animalHospital");
-            System.out.println(animalHospital);
-            System.out.println("newAnimalHospital");
-            System.out.println(newAnimalHospitalDto);
-            System.out.println("uid");
-            System.out.println(userId);
-            System.out.println("siteUser");
-            System.out.println(siteUser);
-
         }
     }
 
