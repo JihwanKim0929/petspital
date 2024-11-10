@@ -1,5 +1,6 @@
 package com.example.petcare.controller;
 
+import com.example.petcare.dto.AnimalHospitalDto;
 import com.example.petcare.dto.CommentDto;
 import com.example.petcare.dto.DiagnosisDto;
 import com.example.petcare.service.CommentService;
@@ -44,5 +45,13 @@ public class CommentController {
             return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
         else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
+
+    @PostMapping("/updateComment/{id}")//등록된 AnimalHospital 정보 수정
+    public ResponseEntity<CommentDto> updateComment(@RequestBody CommentDto commentDto, @PathVariable Long id) {
+
+        CommentDto dto =  commentService.updateComment(commentDto,id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 }

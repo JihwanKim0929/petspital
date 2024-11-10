@@ -2,13 +2,11 @@ package com.example.petcare.service;
 
 import com.example.petcare.dto.CommentDto;
 import com.example.petcare.dto.PetDto;
-import com.example.petcare.entity.Board;
-import com.example.petcare.entity.Comment;
-import com.example.petcare.entity.Pet;
-import com.example.petcare.entity.SiteUser;
+import com.example.petcare.entity.*;
 import com.example.petcare.repository.BoardRepository;
 import com.example.petcare.repository.CommentRepository;
 import com.example.petcare.repository.SiteUserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -56,5 +54,15 @@ public class CommentService {
         }
         else
             return null;
+    }
+
+    public CommentDto updateComment(CommentDto newCommentDto, Long commentId) {
+        Comment comment = commentRepository.findById(commentId).orElse(null);//기존
+        newCommentDto.setModifyDate(LocalDateTime.now());
+        if(comment != null){
+            BeanUtils.copyProperties(newCommentDto, comment, "id","board","author","createDate");
+            commentRepository.save(comment);
+        }
+        return comment.getCommentDto();
     }
 }
