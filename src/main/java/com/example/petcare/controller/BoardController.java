@@ -47,11 +47,20 @@ public class BoardController {
         return ResponseEntity.ok().body(createdDto);
     }
 
-    @DeleteMapping("/board/{id}")//pet 삭제
+    @DeleteMapping("/board/{id}")//board 삭제
     public ResponseEntity<BoardDto> deleteBoard(@PathVariable Long id) {
         BoardDto deletedDto = boardService.deleteBoard(id);
         if(deletedDto != null)
             return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
+
+    @PostMapping("/updateBoard/{id}")
+    public ResponseEntity<BoardDto> updateBoard(@RequestBody BoardDto boardDto, @PathVariable Long id) {
+        BoardDto updatedDto = boardService.updateBoard(boardDto, id);
+        if(updatedDto != null)
+            return ResponseEntity.status(HttpStatus.OK).body(updatedDto);
         else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }

@@ -8,6 +8,7 @@ import com.example.petcare.entity.SiteUser;
 import com.example.petcare.repository.BoardRepository;
 import com.example.petcare.repository.CommentRepository;
 import com.example.petcare.repository.SiteUserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -75,13 +76,15 @@ public class BoardService {
             return null;
     }
 
-    /*public BoardDto updateBoard(Long boardId, BoardDto boardDto, MultipartFile image) {
-        Board target = boardRepository.findById(boardId).orElse(null);
+    public BoardDto updateBoard(BoardDto newBoardDto, Long boardId) {
+        Board board = boardRepository.findById(boardId).orElse(null);
+        newBoardDto.setModifyDate(LocalDateTime.now());
 
-        if(target != null){
-
+        if(board != null){
+            BeanUtils.copyProperties(newBoardDto, board, "id","image_url","author","createDate");
+            boardRepository.save(board);
         }
 
-        return;
-    }*/
+        return board.getBoardDto();
+    }
 }
