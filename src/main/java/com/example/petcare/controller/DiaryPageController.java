@@ -41,7 +41,7 @@ public class DiaryPageController {
     }
 
     @PostMapping("/updateDiaryPage/{id}")
-    public ResponseEntity<DiaryPageDto> updateDiagnosis(@PathVariable Long id, @RequestBody DiaryPageDto dto) {
+    public ResponseEntity<DiaryPageDto> updateDiaryPage(@PathVariable Long id, @RequestBody DiaryPageDto dto) {
         DiaryPageDto updatedDto = diaryPageService.updateDiaryPage(id, dto);
         if(updatedDto != null)
             return ResponseEntity.status(HttpStatus.OK).body(updatedDto);

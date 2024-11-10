@@ -47,7 +47,7 @@ public class ReservationController {
     }
 
     @PostMapping("/updateReservation/{id}")
-    public ResponseEntity<ReservationDto> updatePet(@RequestBody ReservationDto reservationDto, @PathVariable Long id) throws IOException {
+    public ResponseEntity<ReservationDto> updateReservation(@RequestBody ReservationDto reservationDto, @PathVariable Long id){
         ReservationDto updatedDto = reservationService.updateReservation(id, reservationDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(updatedDto);

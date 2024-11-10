@@ -47,7 +47,7 @@ public class DiagnosisController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
-    @PostMapping("/diagnosis/{id}")
+    @PostMapping("/updateDiagnosis/{id}")
     public ResponseEntity<DiagnosisDto> updateDiagnosis(@PathVariable Long id, @RequestBody DiagnosisDto dto) {
         DiagnosisDto updatedDto = diagnosisService.updateDiagnosis(id, dto);
         if(updatedDto != null)
