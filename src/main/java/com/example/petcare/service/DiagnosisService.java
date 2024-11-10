@@ -97,7 +97,7 @@ public class DiagnosisService {
     public DiagnosisDto updateDiagnosis(Long diagnosisId, DiagnosisDto dto) {
         Diagnosis target = diagnosisRepository.findById(diagnosisId).orElse(null);
         if(target != null){
-            BeanUtils.copyProperties(dto, target, "id","pet","image_url", "createDate");
+            BeanUtils.copyProperties(dto, target, "id","pet","image_url", "createDate","diseaseList");
              diagnosisRepository.save(target);
             return dto;
         }

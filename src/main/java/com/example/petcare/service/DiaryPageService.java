@@ -2,11 +2,14 @@ package com.example.petcare.service;
 
 import com.example.petcare.dto.CommentDto;
 import com.example.petcare.dto.DiaryPageDto;
+import com.example.petcare.dto.ReservationDto;
 import com.example.petcare.entity.Comment;
 import com.example.petcare.entity.Diary;
 import com.example.petcare.entity.DiaryPage;
+import com.example.petcare.entity.Reservation;
 import com.example.petcare.repository.DiaryPageRepository;
 import com.example.petcare.repository.DiaryRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -57,5 +60,14 @@ public class DiaryPageService {
         }
         else
             return null;
+    }
+
+    public DiaryPageDto updateDiaryPage(Long id, DiaryPageDto dto) {
+        DiaryPage target = diaryPageRepository.findById(id).orElse(null);
+        if(target != null){
+            BeanUtils.copyProperties(dto, target, "id","diary","createDate","image_url");
+            diaryPageRepository.save(target);
+        }
+        return target.getDiaryPageDto();
     }
 }

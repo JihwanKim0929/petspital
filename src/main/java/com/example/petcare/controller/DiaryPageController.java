@@ -1,5 +1,6 @@
 package com.example.petcare.controller;
 
+import com.example.petcare.dto.DiagnosisDto;
 import com.example.petcare.dto.DiaryPageDto;
 import com.example.petcare.dto.PetDto;
 import com.example.petcare.service.DiaryPageService;
@@ -38,4 +39,14 @@ public class DiaryPageController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
 
     }
+
+    @PostMapping("/updateDiaryPage/{id}")
+    public ResponseEntity<DiaryPageDto> updateDiagnosis(@PathVariable Long id, @RequestBody DiaryPageDto dto) {
+        DiaryPageDto updatedDto = diaryPageService.updateDiaryPage(id, dto);
+        if(updatedDto != null)
+            return ResponseEntity.status(HttpStatus.OK).body(updatedDto);
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
+
 }

@@ -6,6 +6,7 @@ import com.example.petcare.entity.*;
 import com.example.petcare.repository.AnimalHospitalRepository;
 import com.example.petcare.repository.PetRepository;
 import com.example.petcare.repository.ReservationRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,5 +73,14 @@ public class ReservationService {
         }
         else
             return null;
+    }
+
+    public ReservationDto updateReservation(Long reservationId, ReservationDto reservationDto) {
+        Reservation target = reservationRepository.findById(reservationId).orElse(null);
+        if(target != null){
+            BeanUtils.copyProperties(reservationDto, target, "id","pet","createDate");
+            reservationRepository.save(target);
+        }
+        return target.getReservationDto();
     }
 }
