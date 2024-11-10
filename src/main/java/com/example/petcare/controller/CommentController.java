@@ -47,7 +47,7 @@ public class CommentController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
-    @PostMapping("/updateComment/{id}")//등록된 AnimalHospital 정보 수정
+    @PostMapping("/updateComment/{id}")
     public ResponseEntity<CommentDto> updateComment(@RequestBody CommentDto commentDto, @PathVariable Long id) {
 
         CommentDto dto =  commentService.updateComment(commentDto,id);

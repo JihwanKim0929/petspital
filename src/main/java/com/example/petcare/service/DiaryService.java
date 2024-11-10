@@ -6,6 +6,7 @@ import com.example.petcare.entity.*;
 import com.example.petcare.repository.DiaryPageRepository;
 import com.example.petcare.repository.DiaryRepository;
 import com.example.petcare.repository.PetRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,6 +59,16 @@ public class DiaryService {
         }
         else
             return null;
+    }
+
+    public DiaryDto updateDiary(Long diaryId, DiaryDto newDiaryDto) {
+
+        Diary target = diaryRepository.findById(diaryId).orElse(null);
+        if(target != null){
+            BeanUtils.copyProperties(newDiaryDto, target, "id","pet","createDate");
+            diaryRepository.save(target);
+        }
+        return target.getDiaryDto();
     }
 
 }

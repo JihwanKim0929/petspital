@@ -75,33 +75,14 @@ public class PetService {
             return null;
     }
 
-    /*public void updatePet(Long petId, PetDto newpetDto, Long userId, MultipartFile image) throws IOException {
-        //기존pet id, new dto, 기존user id, new img
-        System.out.println("userID : ");
-        System.out.println(userId);
-        if(!image.isEmpty()){
-            String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
-            String fullPathName = "C:\\spring_image_test\\pet\\"+fileName;
-            image.transferTo(new File(fullPathName));
-            newpetDto.setImage_url(fullPathName);
-        }
-        SiteUser siteUser = userRepository.findById(userId).orElse(null);//현재 유저
-        newpetDto.setSiteUser(siteUser);
 
-        Pet pet = petRepository.findById(petId).orElse(null);
-        if (pet != null) {
-            BeanUtils.copyProperties(newpetDto, pet, "id");
-            petRepository.save(pet);
-            System.out.println("saved to database");
-        }
-        System.out.println("not saved to database");
-    }*/
-    public void updatePet(Long petId, PetDto newpetDto) throws IOException {
+    public PetDto updatePet(Long petId, PetDto newpetDto) throws IOException {
         Pet pet = petRepository.findById(petId).orElse(null);
         if (pet != null) {
             BeanUtils.copyProperties(newpetDto, pet, "id","siteUser","image_url");
             petRepository.save(pet);
         }
+        return pet.get_PetDto();
     }
 
     public PetDto get_pet(Long petId){

@@ -34,9 +34,18 @@ public class DiaryController {
         return ResponseEntity.ok().body(createdDto);
     }
 
-    @DeleteMapping("/diary/{id}")//pet 삭제
+    @DeleteMapping("/diary/{id}")
     public ResponseEntity<DiaryDto> deleteDiary(@PathVariable Long id) {
         DiaryDto deletedDto = diaryService.deleteDiary(id);
+        if(deletedDto != null)
+            return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
+        else
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    }
+
+    @PostMapping("/updateDiary/{id}")
+    public ResponseEntity<DiaryDto> updateDiary(@PathVariable Long id, @RequestBody DiaryDto diaryDto) {
+        DiaryDto deletedDto = diaryService.updateDiary(id, diaryDto);
         if(deletedDto != null)
             return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
         else

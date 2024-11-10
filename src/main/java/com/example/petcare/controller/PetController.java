@@ -45,22 +45,13 @@ public class PetController {
 
     }
 
-    /*@PostMapping(value = "/user/updatePet", consumes = "multipart/form-data")
-    //등록된 pet 정보 수정
-    public ResponseEntity<PetDto> updatePet(@RequestPart("image") MultipartFile image, @RequestPart("petDto") PetDto petDto, @RequestPart("petId") Long petId) throws IOException{
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        Long userId = userService.get_user_by_username(username).getId();
-        petService.updatePet(petId, petDto, userId, image); //new dto, 기존id, new img
-
-        return ResponseEntity.status(HttpStatus.OK).body(petDto);
-    }*/
 
     @PostMapping("/updatePet/{petId}")
     public ResponseEntity<PetDto> updatePet(@RequestPart("petDto") PetDto petDto, @PathVariable Long petId) throws IOException{
-        petService.updatePet(petId, petDto);
+        PetDto updatedDto = petService.updatePet(petId, petDto);
 
-        return ResponseEntity.status(HttpStatus.OK).body(petDto);
+
+        return ResponseEntity.status(HttpStatus.OK).body(updatedDto);
     }
 
 
