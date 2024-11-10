@@ -42,11 +42,12 @@ public class AnimalHospitalController {
     }
 
     @PostMapping("/vet/updateAnimalHospital")//등록된 AnimalHospital 정보 수정
-    public ResponseEntity<AnimalHospitalDto> updatePet(@RequestBody AnimalHospitalDto animalHospitalDto) {
+    public ResponseEntity<AnimalHospitalDto> updateAnimalHospital(@RequestBody AnimalHospitalDto animalHospitalDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         Long userId = userService.get_user_by_username(username).getId();   //현재id
-        animalHospitalService.updateAnimalHospital(animalHospitalDto, userId);
+
+        animalHospitalService.updateAnimalHospital(animalHospitalDto, userId);//뉴 dto, 현재id
 
         return ResponseEntity.status(HttpStatus.OK).body(animalHospitalDto);
     }

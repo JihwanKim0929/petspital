@@ -67,7 +67,7 @@ public class AnimalHospitalService {
         SiteUser siteUser = userRepository.findById(userId).orElse(null);//현재 유저
         newAnimalHospitalDto.setSiteUser(siteUser);
 
-        AnimalHospital animalHospital = animalHospitalRepository.findBySiteUserId(newAnimalHospitalDto.getId()).orElse(null);
+        AnimalHospital animalHospital = animalHospitalRepository.findBySiteUserId(userId).orElse(null);//기존
         if(animalHospital != null){
             BeanUtils.copyProperties(newAnimalHospitalDto, animalHospital, "id");
             animalHospitalRepository.save(animalHospital);
