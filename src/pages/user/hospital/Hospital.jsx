@@ -8,6 +8,9 @@ import { NativeSelectRoot, NativeSelectField } from '../../../components/ui/nati
 import { Field } from "../../../components/ui/field";
 import { Button } from '../../../components/ui/button';
 import HospitalSelectCard from '../../../components/hospitalSelectCard/HospitalSelectCard';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { addDays } from 'date-fns';
 
 const { kakao } = window;
 
@@ -23,6 +26,7 @@ const Hospital = () => {
   const [hospitalLocations, setHospitalLocations] = useState([]);
   const [mapCenter, setMapCenter] = useState({ lat: null, lng: null });
   const [userLocation, setUserLocation] = useState(null);
+  const [appointmentDate, setAppointmentDate] = useState(new Date());
 
   const navigate = useNavigate();
   
@@ -122,10 +126,8 @@ const Hospital = () => {
     }
 
     const url = `http://localhost:8080/pet/${data.petID}/reservation`;
-    const currentDate = new Date().toISOString();
-    console.log("Current Date: " + currentDate);
     const appointmentData = {
-      reservationDate: currentDate,
+      reservationDate: appointmentDate,
       hospitalAddress: selectedHospitalAddress
     }
     console.log('Sending appointment data:', appointmentData);
@@ -197,11 +199,10 @@ const Hospital = () => {
                             </NativeSelectField>
                           </NativeSelectRoot>
                         </Field>
-
                         
                         <Field label="Hospital">
                           <Box
-                          minH="300px"
+                          minH="240px"
                           overflowY="auto"
                           border="1px solid #ccc"
                           borderRadius="md"
@@ -219,6 +220,14 @@ const Hospital = () => {
                             </Stack>
                           </Box>
                           {(!selectedHospitalAddress && <Text color="red.500">You must select a hospital.</Text>)}
+                        </Field>
+
+                        <Field label="Date">
+                          <DatePicker
+                            selected={appointmentDate}
+                            onChange={(date) => setAppointmentDate(date)}
+                            minDate={new Date()}
+                          />
                         </Field>
                       </Fieldset.Content>
 

@@ -16,7 +16,7 @@ import { Button } from "../ui/button";
 import { toaster } from '../ui/toaster';
 
 
-const PetDiaryDeleteModalButton = ({diaryID}) => {
+const PetDiaryDeleteModalButton = ({whenDisable, diaryID}) => {
 
     const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ const PetDiaryDeleteModalButton = ({diaryID}) => {
         <div className="petDiaryDeleteModalButton">
             <DialogRoot minH='1000px'>
                 <DialogTrigger>
-                    <Button disabled={!diaryID} margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
+                    <Button disabled={whenDisable} margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
                         Delete
                     </Button>
                 </DialogTrigger>

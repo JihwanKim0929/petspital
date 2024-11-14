@@ -78,7 +78,19 @@ const CommunityBoard = () => {
                 </Stack>
               </Link>
               {currentUser && item.author.id === currentUser.id && (
-                <PostDeleteModalButton postID={item.id} />
+                <div>
+                  <Link 
+                    key={item.id}
+                    to="./edit" 
+                    style={{ textDecoration: 'none' }}
+                    onClick={() => handleItemClick(item.id)}
+                  >
+                    <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
+                      Edit
+                    </Button>
+                  </Link>
+                  <PostDeleteModalButton postID={item.id} />
+                </div>
               )}
             </Stack>
           ))}

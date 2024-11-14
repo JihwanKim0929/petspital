@@ -25,13 +25,13 @@ const CommunityPost = () => {
       content: content
     };
   
-    console.log(boardDto); // 데이터 확인
+    console.log(boardDto);
     const json = JSON.stringify(boardDto);
     const blob = new Blob([json], { type: "application/json" });
     formData.append("boardDto", blob);
   
     if (image) {
-      console.log(image); // 이미지 파일 확인
+      console.log(image);
       formData.append("image", image);
     }
   

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './Pets.scss';
 import { Card, Show, Box, Center, Text, useBreakpointValue } from '@chakra-ui/react';
-import PetAddModalButton from '../../../components/petRegisterModalButton/PetRegisterModalButton';
+import PetRegisterModalButton from '../../../components/petRegisterModalButton/PetRegisterModalButton';
 import PetViewModalButton from '../../../components/petViewModalButton/PetViewModalButton';
 import PetDiariesModalButton from '../../../components/petDiariesModalButton/PetDiariesModalButton';
 import PetDeleteModalButton from '../../../components/petDeleteModalButton/PetDeleteModalButton';
+import PetEditModalButton from '../../../components/petEditModalButton/PetEditModalButton';
 
 const Pets = () => {
     
@@ -54,11 +55,20 @@ const Pets = () => {
                                 />
                                 <PetViewModalButton petID={pet.id}/>
                                 <PetDiariesModalButton petID={pet.id} petName={pet.name} />
+                                <PetEditModalButton 
+                                petID={pet.id} 
+                                petName={pet.name} 
+                                age={pet.age} 
+                                gender={pet.gender} 
+                                species={pet.species} 
+                                weight={pet.weight} 
+                                description={pet.description}
+                                />
                                 <PetDeleteModalButton petID={pet.id} />
                             </div>
                         ))}
                     </Text>
-                    <PetAddModalButton />
+                    <PetRegisterModalButton />
                 </Card.Body>
             </Card.Root>
         </div>

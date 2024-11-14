@@ -3,6 +3,7 @@ import './Diary.scss';
 import { Card } from '@chakra-ui/react';
 import PetDiaryPageCreateModalButton from '../../../components/petDiaryPageCreateModalButton/PetDiaryPageCreateModalButton';
 import PetDiaryPageDeleteModalButton from '../../../components/petDiaryPageDeleteModalButton/PetDiaryPageDeleteModalButton';
+import PetDiaryPageEditModalButton from '../../../components/petDiaryPageEditModalButton/PetDiaryPageEditModalButton';
 
 const Diary = () => {
   const [pages, setPages] = useState([]);
@@ -65,7 +66,10 @@ const Diary = () => {
                   <p>Created on: {new Date(page.createDate).toLocaleString()}</p>
                   {page.image_url && <img src={`http://localhost:8080/image/diary/${page.image_url}`} />}
                 </Card.Body>
-                <PetDiaryPageDeleteModalButton pageID={page.id} />
+                <Card.Footer>
+                  <PetDiaryPageEditModalButton pageID={page.id} pageContent={page.content}/>
+                  <PetDiaryPageDeleteModalButton pageID={page.id} />
+                </Card.Footer>
               </Card.Root>
             ))
           )}

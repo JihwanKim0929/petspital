@@ -26,7 +26,7 @@ import {
 } from "../ui/native-select"
 
 
-const PetAddModalButton = () => {
+const PetRegisterModalButton = () => {
 
   const { register, handleSubmit, errors, reset, setValue } = useForm();
   const navigate = useNavigate();
@@ -130,4 +130,4 @@ const PetAddModalButton = () => {
   )
 }
 
-export default PetAddModalButton
+export default PetRegisterModalButton

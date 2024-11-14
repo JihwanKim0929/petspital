@@ -25,6 +25,7 @@ import CommunityBoard from "./pages/user/community/communityBoard/CommunityBoard
 import CommunityPost from "./pages/user/community/communityPost/CommunityPost";
 import DiagnosisResult from "./pages/user/diagnosis/diagnosisResult/DiagnosisResult";
 import CommunityPostView from "./pages/user/community/communityPostView/CommunityPostView.jsx";
+import CommunityPostEdit from "./pages/user/community/communityPostEdit/CommunityPostEdit.jsx";
 import Diary from "./pages/user/diary/Diary.jsx";
 
 function App() {
@@ -65,6 +66,7 @@ function App() {
               <Route index element={<CommunityBoard />} />
               <Route path="post" element={<CommunityPost />} />
               <Route path="view" element={<CommunityPostView />} />
+              <Route path="edit" element={<CommunityPostEdit />} />
             </Route>
             <Route path="profile" element={<Profile />} />
             <Route path="settings" element={<Settings />} />

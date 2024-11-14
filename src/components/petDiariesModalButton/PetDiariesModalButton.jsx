@@ -18,6 +18,7 @@ import {
 } from "../ui/native-select"
 import PetDiaryCreateModalButton from '../petDiaryCreateModalButton/PetDiaryCreateModalButton';
 import PetDiaryDeleteModalButton from '../petDiaryDeleteModalButton/PetDiaryDeleteModalButton';
+import PetDiaryEditModalButton from '../petDiaryEditModalButton/PetDiaryEditModalButton';
 
 
 const PetDiariesModalButton = ({petID, petName}) => {
@@ -81,7 +82,8 @@ const PetDiariesModalButton = ({petID, petName}) => {
         </DialogBody>
         <DialogFooter>
           <Button variant="solid" disabled={!selectedDiaryID} onClick={handleClickViewButton}>View Diary</Button>
-          <PetDiaryDeleteModalButton diaryID={selectedDiaryID}>Delete Diary</PetDiaryDeleteModalButton>
+          <PetDiaryEditModalButton whenDisable={!selectedDiaryID} diaryID={selectedDiaryID} petName={petName} />
+          <PetDiaryDeleteModalButton whenDisable={!selectedDiaryID} diaryID={selectedDiaryID}>Delete Diary</PetDiaryDeleteModalButton>
           <PetDiaryCreateModalButton petID={petID} petName={petName} />
           <DialogActionTrigger asChild>
             <Button variant="solid">Close</Button>

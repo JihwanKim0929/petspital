@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Flex, Textarea, Stack, Text } from '@chakra-ui/react';
 import { Button } from '../../../../components/ui/button';
-import CommentDeleteModalButton from "../../../../components/commentDeleteModalButton/CommentDeleteModalButton";
+import CommentBox from '../../../../components/commentBox/CommentBox';
 
 const CommunityPostView = () => {
   const [post, setPost] = useState(null);
@@ -140,15 +140,7 @@ const CommunityPostView = () => {
 
       <Stack spacing={4} marginTop={4}>
         {comments.map((comment) => (
-          <Stack key={comment.id} padding="4" borderBottom="1px solid gray">
-            <Text fontWeight="bold">{comment.author.username}</Text>
-            <Text>{comment.content}</Text>
-            <Text fontSize="sm" color="gray.500">{new Date(comment.createDate).toLocaleString()}</Text>
-
-            {currentUser && comment.author.id === currentUser.id && (
-              <CommentDeleteModalButton commentID={comment.id} />
-            )}
-          </Stack>
+          <CommentBox comment={comment} currentUser={currentUser} postID={post.id} fetchComments={fetchComments}/>
         ))}
       </Stack>
     </div>
