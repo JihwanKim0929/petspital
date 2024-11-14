@@ -47,7 +47,7 @@ public class PetController {
 
 
     @PostMapping("/updatePet/{petId}")
-    public ResponseEntity<PetDto> updatePet(@RequestPart("petDto") PetDto petDto, @PathVariable Long petId) throws IOException{
+    public ResponseEntity<PetDto> updatePet(@RequestBody PetDto petDto, @PathVariable Long petId) throws IOException{
         PetDto updatedDto = petService.updatePet(petId, petDto);
 
 
