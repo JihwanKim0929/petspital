@@ -49,7 +49,7 @@ const Pets = () => {
                                 <Text>Weight: {pet.weight}</Text>
                                 <Text>Description: {pet.description}</Text>
                                 <img 
-                                    src={`http://localhost:8080/image/pet/${pet.image_url}`} 
+                                    src={pet.image_url} 
                                     alt={pet.name} 
                                     className="petImage"
                                 />

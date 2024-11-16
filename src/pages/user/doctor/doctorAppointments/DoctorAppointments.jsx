@@ -42,7 +42,7 @@ const DoctorAppointments = () => {
                 <Text>Weight: {pet.weight}</Text>
                 <Text>Description: {pet.description}</Text>
                 <Image 
-                    src={`http://localhost:8080/image/pet/${pet.image_url}`} 
+                    src={pet.image_url} 
                     alt={`Image of ${pet.name}`} 
                     boxSize="100px" 
                     objectFit="cover" 

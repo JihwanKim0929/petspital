@@ -78,7 +78,7 @@ const PetOwnerAppointments = () => {
                                     <Box key={appointment.id} p={4} borderWidth="1px" borderRadius="md" mb={4}>
                                         <Text fontWeight="bold">Appointment ID: {appointment.id}</Text>
                                         <Text>Pet: {appointment.pet.name} (Age: {appointment.pet.age}, Gender: {appointment.pet.gender})</Text>
-                                        <Image src={`http://localhost:8080/image/pet/${appointment.pet.image_url}`} boxSize="100px" objectFit="cover" />
+                                        <Image src={appointment.pet.image_url} boxSize="100px" objectFit="cover" />
                                         
                                         <Text mt={1}>Reservation Date: {new Date(appointment.reservationDate).toLocaleString()}</Text>
                                         <Text>Create Date: {new Date(appointment.createDate).toLocaleString()}</Text>

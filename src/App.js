@@ -1,3 +1,4 @@
+import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import { Provider } from "./components/ui/provider";
 import { Toaster } from "./components/ui/toaster";

@@ -25,7 +25,7 @@ const DoctorSidebar = () => {
     const parsedUser = JSON.parse(user);
 
     setUsername(parsedUser.username);
-    setUserImageURL(`http://localhost:8080/image/user/${parsedUser.image_url}`);
+    setUserImageURL(parsedUser.image_url);
   }, []);
 
   return (

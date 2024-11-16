@@ -52,7 +52,7 @@ const UserNavbar = () => {
     }
 
     setUsername(parsedUser.username);
-    setUserImageURL(`http://localhost:8080/image/user/${parsedUser.image_url}`);
+    setUserImageURL(parsedUser.image_url);
   }, [navigate]);
   
   const petOwnerMenuData = [{
@@ -201,17 +201,10 @@ const UserNavbar = () => {
 
         <Box hideBelow='md'>
           <div className="desktopItems">
-          <div className="item">
+            <div className="item">
               <Link to="/about" style={{ textDecoration: "none" }}>
                 <div className="abtPetspital">
                   About
-                </div>
-              </Link>
-            </div>
-            <div className="item">
-              <Link to="/notifications" style={{ textDecoration: "none" }}>
-                <div className="notification">
-                  Notification
                 </div>
               </Link>
             </div>

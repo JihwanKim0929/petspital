@@ -130,7 +130,7 @@ const Profile = () => {
     setUserEmail(parsedUser.email);
     setUserPhoneNumber(parsedUser.phone_num);
     setUserAddress(parsedUser.address);
-    setUserImageURL(`http://localhost:8080/image/user/${parsedUser.image_url}`);
+    setUserImageURL(parsedUser.image_url);
 
     setNextUsername(parsedUser.username);
     setNextUserEmail(parsedUser.email);

@@ -64,7 +64,7 @@ const Diary = () => {
                 <Card.Body>
                   <h3>{page.content}</h3>
                   <p>Created on: {new Date(page.createDate).toLocaleString()}</p>
-                  {page.image_url && <img src={`http://localhost:8080/image/diary/${page.image_url}`} />}
+                  {page.image_url && <img src={page.image_url} />}
                 </Card.Body>
                 <Card.Footer>
                   <PetDiaryPageEditModalButton pageID={page.id} pageContent={page.content}/>

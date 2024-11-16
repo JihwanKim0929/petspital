@@ -81,15 +81,9 @@ const Records = () => {
                     <Text fontWeight="bold">Diagnosis ID: {record.id}</Text>
                     <Text>Part: {record.part}</Text>
                     <Text>Create Date: {new Date(record.createDate).toLocaleString()}</Text>
-                    <Image src={`http://localhost:8080/image/diagnosis/${record.image_url}`} boxSize="100px" objectFit="cover" />
-                    <Text>Diseases:</Text>
-                    <VStack spacing={1} pl={4}>
-                      {record.diseaseList.map(disease => (
-                        <Text key={disease.id}>
-                          {disease.name}: {disease.symptoms} - {disease.description}
-                        </Text>
-                      ))}
-                    </VStack>
+                    <Image src={record.image_url} boxSize="100px" objectFit="cover" />
+                    <Text>Disease:</Text>
+                    <Text>{record.disease.name}: {record.disease.symptoms} - {record.disease.description}</Text>
                     <DiagnosisRecordDeleteModalButton diagnosisID={record.id}/>
                   </Box>
                 ))

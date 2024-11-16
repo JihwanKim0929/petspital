@@ -127,7 +127,7 @@ const CommunityPostView = () => {
       <h3>Author: {post.author.username}</h3>
       <p>Content: {post.content}</p>
       <p>Date: {new Date(post.createDate).toLocaleString()}</p>
-      {post.image_url && <img src={`http://localhost:8080/image/board/${post.image_url}`} alt="Post" />}
+      {post.image_url && <img src={post.image_url} alt="Post" />}
       
       <Flex>
         <Textarea

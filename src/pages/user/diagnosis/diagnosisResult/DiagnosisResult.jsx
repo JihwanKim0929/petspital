@@ -51,15 +51,9 @@ const DiagnosisResult = () => {
       <p>Pet Name: {diagnosisResult.pet.name}</p>
       <p>Species: {diagnosisResult.species}</p>
       <p>Diagnosed Part: {diagnosisResult.part}</p>
-      <img src={`http://localhost:8080/image/diagnosis/${diagnosisResult.image_url}`} alt="Diagnosis" />
-      <h2>Disease List:</h2>
-      <ul>
-        {diagnosisResult.diseaseList.map(disease => (
-          <li key={disease.id}>
-            <strong>{disease.name}</strong>: {disease.symptoms} - {disease.description}
-          </li>
-        ))}
-      </ul>
+      <img src={diagnosisResult.image_url} alt="Diagnosis" />
+      <h2>Disease:</h2>
+      <p>{diagnosisResult.disease.name}: {diagnosisResult.disease.symptoms} - {diagnosisResult.disease.description}</p>
     </div>
   );
 }

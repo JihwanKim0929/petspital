@@ -54,13 +54,6 @@ const Navbar = () => {
                 </div>
               </Link>
             </div>
-            <div className="item">
-              <Link to="/notifications" style={{ textDecoration: "none" }}>
-                <div className="notifications">
-                  Notifications
-                </div>
-              </Link>
-            </div>
             { isLoggedIn && 
             (<div className="item">
               <SignOutButton className="signOutButton" colorScheme='gray' variant='solid'>Sign out</SignOutButton>
@@ -104,11 +97,6 @@ const Navbar = () => {
                   <Link to="/about" style={{ textDecoration: "none" }}>
                     <MenuItem p={3} paddingRight={6} value='about'>
                       <IoIosArrowForward /> About
-                    </MenuItem>
-                  </Link>
-                  <Link to="/notifications" style={{ textDecoration: "none" }}>
-                    <MenuItem p={3} paddingRight={6} value='notifications'>
-                      <IoIosArrowForward /> Notifications
                     </MenuItem>
                   </Link>
                     { !isLoggedIn && (

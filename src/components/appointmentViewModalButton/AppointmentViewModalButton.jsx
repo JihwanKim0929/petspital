@@ -75,7 +75,7 @@ const AppointmentViewModalButton = ({appointmentID}) => {
                         <Text>{appointment.pet.description}</Text>
                     </Field>
                     <Field label="Pet Image" mt={4}>
-                        <Image src={`http://localhost:8080/image/pet/${appointment.pet.image_url}`} boxSize="100px" objectFit="cover" />
+                        <Image src={appointment.pet.image_url} boxSize="100px" objectFit="cover" />
                     </Field>
                     <Field label="Appointment Date" mt={4}>
                         <Text>{appointment.reservationDate}</Text>
