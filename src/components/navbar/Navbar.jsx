@@ -56,18 +56,18 @@ const Navbar = () => {
             </div>
             { isLoggedIn && 
             (<div className="item">
-              <SignOutButton className="signOutButton" colorScheme='gray' variant='solid'>Sign out</SignOutButton>
+              <SignOutButton className="signOutButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그아웃</SignOutButton>
             </div>)}
             { !isLoggedIn && 
             (<div className="item">
                 <Link to="/signup" style={{ textDecoration: "none" }}>
-                  <Button className="signInButton" colorScheme='gray' variant='solid'>Sign up</Button>
+                  <Button className="signInButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>회원가입</Button>
                 </Link>
             </div>)}
             { !isLoggedIn && 
             (<div className="item">
                 <Link to="/login" style={{ textDecoration: "none" }}>
-                  <Button className="signUpButton" colorScheme='gray' variant='solid'>Sign in</Button>
+                  <Button className="signUpButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그인</Button>
                 </Link>
             </div>)}
           </div>
@@ -78,11 +78,11 @@ const Navbar = () => {
             {
               isLoggedIn ?
               <div className="item">
-                <SignOutButton className="signOutButton" colorScheme='gray' variant='solid'>Sign out</SignOutButton>
+                <SignOutButton className="signOutButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그아웃</SignOutButton>
               </div> :
               <div className="item">
                 <Link to="/login" style={{ textDecoration: "none" }} className="signIn">
-                  <Button className="signUpButton" colorScheme='gray' variant='solid'>Sign in</Button>
+                  <Button className="signUpButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그인</Button>
                 </Link>
               </div>
             }
@@ -104,7 +104,7 @@ const Navbar = () => {
                       <MenuSeparator />
                       <MenuItem alignItems='center' justifyContent='center' p={3} value='signUp'>
                         <Link to="/signup" style={{ textDecoration: "none" }} className="signUp">
-                          <Button className="signUpButton" colorScheme='gray' variant='solid'>Sign up</Button>
+                          <Button className="signUpButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>회원가입</Button>
                         </Link>
                       </MenuItem>
                     </div>)}

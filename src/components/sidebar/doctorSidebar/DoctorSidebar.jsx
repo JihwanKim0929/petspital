@@ -39,11 +39,11 @@ const DoctorSidebar = () => {
                 <Text mt='0.5rem' mb='0.5rem' fontWeight='bold' fontSize='18px'>{username}</Text>
               </Center>
               <br />
-              <SidebarCategory CategoryIcon={BiHome} categoryName='Home' categoryLink='/user/doctor'/>
-              <SidebarCategory CategoryIcon={FaNotesMedical} categoryName='Appointments' categoryLink='/user/doctor/appointments'/>
-              <SidebarCategory CategoryIcon={FaUsers} categoryName='Community' categoryLink='/user/doctor/community'/>
-              <SidebarCategory CategoryIcon={BiUserCircle} categoryName='Profile' categoryLink='/user/doctor/profile'/>
-              <SidebarCategory CategoryIcon={BiCog} categoryName='Settings' categoryLink='/user/doctor/settings'/>
+              <SidebarCategory CategoryIcon={BiHome} categoryName='홈' categoryLink='/user/doctor'/>
+              <SidebarCategory CategoryIcon={FaNotesMedical} categoryName='예약 확인' categoryLink='/user/doctor/appointments'/>
+              <SidebarCategory CategoryIcon={FaUsers} categoryName='커뮤니티' categoryLink='/user/doctor/community'/>
+              <SidebarCategory CategoryIcon={BiUserCircle} categoryName='프로필' categoryLink='/user/doctor/profile'/>
+              <SidebarCategory CategoryIcon={BiCog} categoryName='설정' categoryLink='/user/doctor/settings'/>
             </ul>
           </Box>
         </Show>

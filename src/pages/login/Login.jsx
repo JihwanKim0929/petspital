@@ -41,11 +41,12 @@ const Login = () => {
             if (!response.ok) {
                 const errorText = await response.text();
                 toaster.create({
-                    title: "Login failed.",
-                    description: errorText || "Invalid email or password.",
+                    title: "로그인 실패",
+                    description: "유효하지 않은 아이디 또는 패스워드입니다.",
                     status: "error",
                     duration: 3000,
-                    isClosable: true
+                    isClosable: true,
+                    
                 });
                 return;
             }
@@ -68,8 +69,8 @@ const Login = () => {
                 const userJsonStr = JSON.stringify(user);
                 sessionStorage.setItem('user', userJsonStr);
                 toaster.create({
-                    title: "Login successful.",
-                    description: "Welcome to petspital, " + user.username + "!",
+                    title: "로그인 성공",
+                    description: user.username + "님 환영합니다!",
                     status: "success",
                     duration: 3000,
                     isClosable: true
@@ -83,8 +84,8 @@ const Login = () => {
                 }
             } else {
                 toaster.create({
-                    title: "Login failed.",
-                    description: "Invalid email or password.",
+                    title: "로그인 실패",
+                    description: "유효하지 않은 아이디 또는 패스워드입니다.",
                     status: "error",
                     duration: 3000,
                     isClosable: true
@@ -93,8 +94,8 @@ const Login = () => {
         } catch (error) {
             console.error("Error fetching user data:", error);
             toaster.create({
-                title: "An error occurred.",
-                description: "Unable to log in. Please try again later.",
+                title: "에러 발생",
+                description: "로그인 할 수 없었습니다. 나중에 시도해주세요.",
                 status: "error",
                 duration: 3000,
                 isClosable: true
@@ -112,25 +113,26 @@ const Login = () => {
                     animationTimingFunction: "ease-out"
                 }}>
                     <img src={process.env.PUBLIC_URL + "/assets/images/logo1.png"} alt="" className="logo" />
-                    <Text className="title" fontSize={{ base: '1.5rem', md: '2rem', lg: '2rem' }}>Sign in to Petspital</Text>
+                    <Text fontSize={{ base: '1.5rem', md: '2rem', lg: '2rem' }} fontFamily='poppins' fontWeight='700' m='0.5rem'>Petspital</Text>
                     <div className="inputContainer">
-                        <Text className="desc">Username</Text>
-                        <Input className='input' placeholder='Input Username' onChange={(e) => setUsername(e.target.value)}/>
+                        <Text className="desc">아이디</Text>
+                        <Input className='input' placeholder='아이디를 입력하세요.' onChange={(e) => setUsername(e.target.value)}/>
                     </div>
                     <div className="inputContainer">
-                        <Text className="desc">Password</Text>
-                        <PasswordInput className='input' placeholder='Input Password' onChange={(e) => setPassword(e.target.value)}/>
+                        <Text className="desc">패스워드</Text>
+                        <PasswordInput className='input' placeholder='비밀번호를 입력하세요.' onChange={(e) => setPassword(e.target.value)}/>
                     </div>
                     <Button className="loginButton" colorScheme='gray' variant='solid'
                     h={{ base: '50px', md: '53px', lg: '55px' }}
                     w={{ base: '200px', md: '225px', lg: '250px' }}
                     fontSize={{ base: '16px', md: '18px', lg: '20px' }}
+                    fontFamily='LINESeedKR-Bd'
                     margin='4px'
-                    onClick={handleLogin}>Login</Button>
+                    onClick={handleLogin}>로그인</Button>
                     <div className="signUpContainer">
-                        <Text fontSize={{ base: '0.9rem', md: '1.1rem', lg: '1.1rem' }}>Are you new in here?</Text>
+                        <Text fontSize={{ base: '0.9rem', md: '1.1rem', lg: '1.1rem' }} fontFamily='Pretendard Variable' fontWeight='400'>계정이 필요하신가요?</Text>
                         <Link to="/SignUp" style={{ textDecoration: "none" }} className="signUp">
-                            <Text fontSize={{ base: '0.9rem', md: '1.1rem', lg: '1.1rem' }}>Create Account</Text>
+                            <Text fontSize={{ base: '0.9rem', md: '1.1rem', lg: '1.1rem' }} fontFamily='Pretendard Variable' fontWeight='700'>계정 생성하기</Text>
                         </Link>
                     </div>
                 </Box>

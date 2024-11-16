@@ -41,15 +41,15 @@ const PetOwnerSidebar = () => {
                 <Text mt='0.5rem' mb='0.5rem' fontWeight='bold' fontSize='18px'>{username}</Text>
               </Center>
               <br />
-              <SidebarCategory CategoryIcon={BiHome} categoryName='Home' categoryLink='/user/petowner'/>
-              <SidebarCategory CategoryIcon={MdOutlinePets} categoryName='Pets' categoryLink='/user/petowner/pets'/>
-              <SidebarCategory CategoryIcon={BiSearchAlt2} categoryName='Diagnosis' categoryLink='/user/petowner/diagnosis'/>
-              <SidebarCategory CategoryIcon={BiSolidReport} categoryName='Records' categoryLink='/user/petowner/records'/>
-              <SidebarCategory CategoryIcon={FaRegHospital} categoryName='Hospital' categoryLink='/user/petowner/hospital'/>
-              <SidebarCategory CategoryIcon={FaRegHospital} categoryName='Appointments' categoryLink='/user/petowner/appointments'/>
-              <SidebarCategory CategoryIcon={FaUsers} categoryName='Community' categoryLink='/user/petowner/community'/>
-              <SidebarCategory CategoryIcon={BiUserCircle} categoryName='Profile' categoryLink='/user/petowner/profile'/>
-              <SidebarCategory CategoryIcon={BiCog} categoryName='Settings' categoryLink='/user/petowner/settings'/>
+              <SidebarCategory CategoryIcon={BiHome} categoryName='홈' categoryLink='/user/petowner'/>
+              <SidebarCategory CategoryIcon={MdOutlinePets} categoryName='반려동물' categoryLink='/user/petowner/pets'/>
+              <SidebarCategory CategoryIcon={BiSearchAlt2} categoryName='진단하기' categoryLink='/user/petowner/diagnosis'/>
+              <SidebarCategory CategoryIcon={BiSolidReport} categoryName='진단 기록' categoryLink='/user/petowner/records'/>
+              <SidebarCategory CategoryIcon={FaRegHospital} categoryName='병원 예약' categoryLink='/user/petowner/hospital'/>
+              <SidebarCategory CategoryIcon={FaRegHospital} categoryName='예약 확인' categoryLink='/user/petowner/appointments'/>
+              <SidebarCategory CategoryIcon={FaUsers} categoryName='커뮤니티' categoryLink='/user/petowner/community'/>
+              <SidebarCategory CategoryIcon={BiUserCircle} categoryName='프로필' categoryLink='/user/petowner/profile'/>
+              <SidebarCategory CategoryIcon={BiCog} categoryName='설정' categoryLink='/user/petowner/settings'/>
             </ul>
           </Box>
         </Show>

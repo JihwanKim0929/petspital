@@ -23,7 +23,8 @@ const SignOutButton = React.forwardRef((props, ref) => {
         navigate('/');
     
         toaster.create({
-            title: "Successfully logged out.",
+            title: "로그아웃 완료",
+            description: "로그아웃이 완료되었습니다.",
             status: "success",
             duration: 3000,
             isClosable: true
@@ -31,7 +32,8 @@ const SignOutButton = React.forwardRef((props, ref) => {
         } catch (error) {
             console.error('Logout error:', error);
             toaster.create({
-                title: "Logout failed.",
+                title: "로그아웃 에러",
+                description: "로그아웃 도중 에러가 발생하였습니다.",
                 status: "error",
                 duration: 3000,
                 isClosable: true,

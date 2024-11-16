@@ -56,79 +56,79 @@ const UserNavbar = () => {
   }, [navigate]);
   
   const petOwnerMenuData = [{
-    title: 'Home', 
+    title: '홈', 
     icon: BiHome,
     linkTo: '/user/petowner'
   }, {
-    title: 'Pets', 
+    title: '반려동물', 
     icon: MdOutlinePets,
     linkTo: '/user/petowner/pets'
   }, {
-    title: 'Diagnosis', 
+    title: '진단하기', 
     icon: BiSearchAlt2,
     linkTo: '/user/petowner/diagnosis'
   }, {
-    title: 'Records', 
+    title: '진단 기록', 
     icon: BiSolidReport,
     linkTo: '/user/petowner/records'
   }, {
-    title: 'Hospital', 
+    title: '병원 예약', 
     icon: FaRegHospital,
     linkTo: '/user/petowner/hospital'
   }, {
-    title: 'Appointments', 
+    title: '예약 확인', 
     icon: FaRegHospital,
     linkTo: '/user/petowner/appointments'
   }, {
-    title: 'Community', 
+    title: '커뮤니티', 
     icon: FaUsers,
     linkTo: '/user/petowner/community'
   }, {
-    title: 'Profile', 
+    title: '프로필', 
     icon: BiUserCircle,
     linkTo: '/user/petowner/profile'
   }, {
-    title: 'Settings', 
+    title: '설정', 
     icon: BiCog,
     linkTo: '/user/petowner/settings'
   }];
 
   const doctorMenuData = [{
-    title: 'Home', 
+    title: '홈', 
     icon: BiHome, 
     linkTo: '/user/doctor'
   }, {
-    title: 'Appointments', 
+    title: '예약 확인', 
     icon: FaNotesMedical, 
     linkTo: '/user/doctor/appointments'
   }, {
-    title: 'Community', 
+    title: '커뮤니티', 
     icon: FaUsers, 
     linkTo: '/user/doctor/community'
   }, {
-    title: 'Profile', 
+    title: '프로필', 
     icon: BiUserCircle, 
     linkTo: '/user/doctor/profile'
   }, {
-    title: 'Settings', 
+    title: '설정', 
     icon: BiCog, 
     linkTo: '/user/doctor/settings'
   }];
 
   const adminMenuData = [{
-    title: 'Home', 
+    title: '홈', 
     icon: BiHome, 
     linkTo: '/user/admin'
   }, {
-    title: 'Community', 
+    title: '커뮤니티', 
     icon: FaUsers, 
     linkTo: '/user/admin/community'
   }, {
-    title: 'Profile', 
+    title: '프로필', 
     icon: BiUserCircle, 
     linkTo: '/user/admin/profile'
   }, {
-    title: 'Settings', 
+    title: '설정', 
     icon: BiCog, 
     linkTo: '/user/admin/settings'
   }];
@@ -174,7 +174,7 @@ const UserNavbar = () => {
                     </ul>
                   </DrawerBody>
                   <DrawerFooter>
-                    <SignOutButton className="signOutButton" colorScheme='gray' variant='solid'>Sign out</SignOutButton>
+                    <SignOutButton className="signOutButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그아웃</SignOutButton>
                   </DrawerFooter>
                 </DrawerContent>
               </DrawerRoot>
@@ -203,13 +203,13 @@ const UserNavbar = () => {
           <div className="desktopItems">
             <div className="item">
               <Link to="/about" style={{ textDecoration: "none" }}>
-                <div className="abtPetspital">
+                <div className="abtPetspital" fontFamily='Pretendard Variable' fontWeight='600'>
                   About
                 </div>
               </Link>
             </div>
             <div className="item">
-              <SignOutButton className="signOutButton" colorScheme='gray' variant='solid'>Sign out</SignOutButton>
+              <SignOutButton className="signOutButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그아웃</SignOutButton>
             </div>
           </div>
         </Box>

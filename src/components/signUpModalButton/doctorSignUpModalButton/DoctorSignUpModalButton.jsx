@@ -20,6 +20,8 @@ import { Field } from "../../../components/ui/field";
 import { PasswordInput } from "../../../components/ui/password-input";
 import { Button } from "../../../components/ui/button";
 import { useForm } from 'react-hook-form';
+import { toaster } from '../../ui/toaster';
+import { Text, Flex } from '@chakra-ui/react';
 
 const DoctorSignUpModalButton = () => {
 
@@ -61,9 +63,36 @@ const DoctorSignUpModalButton = () => {
       body: formData,
       headers: {},
       credentials: 'include'
+    })
+    .then(response => {
+      if (response.ok) {
+        toaster.create({
+          title: "계정 생성 완료",
+          description: "성공적으로 계정이 생성되었습니다.",
+          status: "success",
+          duration: 3000,
+          isClosable: true
+        });
+        reset();
+      } else {
+        toaster.create({
+          title: "계정 생성 실패",
+          description: "계정 생성에 실패했습니다. 다시 시도해 주세요.",
+          status: "error",
+          duration: 3000,
+          isClosable: true
+        });
+      }
+    })
+    .catch(error => {
+      toaster.create({
+        title: "서버 오류 발생",
+        description: "서버와 연결할 수 없습니다. 다시 시도해 주세요.",
+        status: "error",
+        duration: 3000,
+        isClosable: true
+      });
     });
-
-    reset();
   };
 
   const handleFileChange = (e) => {
@@ -79,40 +108,68 @@ const DoctorSignUpModalButton = () => {
     return (
       <DialogRoot minH='1000px'>
         <DialogTrigger>
-          <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-            Create Doctor Account
+          <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
+            의사 계정 생성하기
           </Button>
         </DialogTrigger>
         <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
           <form onSubmit={handleSubmit(onSubmit)}>
             <DialogHeader>
-              <DialogTitle>Create doctor account</DialogTitle>
+              <DialogTitle fontFamily='LINESeedKR-Bd'>의사 계정 생성</DialogTitle>
             </DialogHeader>
             <DialogCloseTrigger />
             <DialogBody pb={6}>
-              <Field label="Username" required>
-                <Input placeholder="Enter your ID" {...register('username', { required: true })}/>
+              <Field>
+                <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>아이디</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+                </Flex>
+                <Input placeholder="아이디를 입력하세요." fontFamily='Pretendard Variable' {...register('username', { required: true })}/>
               </Field>
-              <Field label="Password" required mt={4}>
-                <PasswordInput placeholder='Input password' {...register('password', { required: true })}/>
+              <Field mt={4}>
+                <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>비밀번호</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+                </Flex>
+                <PasswordInput placeholder='패스워드를 입력하세요.' fontFamily='Pretendard Variable' {...register('password', { required: true })}/>
               </Field>
-              <Field label="Email" required mt={4}>
-                <Input placeholder='Input your email' {...register('email', { required: true })}/>
+              <Field required mt={4}>
+                <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>이메일</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+                </Flex>
+                <Input placeholder='이메일을 입력하세요.' fontFamily='Pretendard Variable' {...register('email', { required: true })}/>
               </Field>
-              <Field label="Phone Number" required mt={4}>
-                <Input placeholder='Input phone number' {...register('phonenumber', { required: true })}/>
+              <Field required mt={4}>
+                <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>전화번호</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+                </Flex>
+                <Input placeholder='전화번호를 입력하세요.' fontFamily='Pretendard Variable' {...register('phonenumber', { required: true })}/>
               </Field>
-              <Field label="Hospital Name" required mt={4}>
-                <Input placeholder='Input hospital name' {...register('hospitalname', { required: true })}/>
+              <Field required mt={4}>
+                <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>병원명</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+                </Flex>
+                <Input placeholder='병원명을 입력하세요.' fontFamily='Pretendard Variable' {...register('hospitalname', { required: true })}/>
               </Field>
-              <Field label="Hospital Address" required mt={4}>
-                <Input placeholder='Input hospital address' {...register('hospitaladdress', { required: true })}/>
+              <Field required mt={4}>
+                <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>병원 주소</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+                </Flex>
+                <Input placeholder='병원 주소를 입력하세요.' fontFamily='Pretendard Variable' {...register('hospitaladdress', { required: true })}/>
               </Field>
-              <Field label="Profile Image" mt={4}>
+              <Field mt={4}>
+                <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>프로필 이미지</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+                </Flex>
                 <FileUploadRoot onChange={handleFileChange}>
                   <FileUploadTrigger asChild>
-                    <Button variant="outline" size="sm">
-                      Upload file
+                    <Button variant="outline" size="sm" fontFamily='LINESeedKR-Bd'>
+                      프로필 이미지 업로드
                     </Button>
                   </FileUploadTrigger>
                   <FileUploadList />
@@ -121,9 +178,11 @@ const DoctorSignUpModalButton = () => {
             </DialogBody>
 
             <DialogFooter>
-              <Button type="submit">Make Account</Button>
               <DialogActionTrigger asChild>
-                <Button variant="outline" onClick={resetForm}>Cancel</Button>
+                <Button type="submit" fontFamily='LINESeedKR-Bd'>계정 생성</Button>
+              </DialogActionTrigger>
+              <DialogActionTrigger asChild>
+                <Button variant="outline" onClick={resetForm} fontFamily='LINESeedKR-Bd'>취소</Button>
               </DialogActionTrigger>
             </DialogFooter>
           </form>

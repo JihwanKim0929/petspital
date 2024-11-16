@@ -25,12 +25,12 @@
 
             .title{
                 color: black;
-                font-family: "poppins";
-                font-weight: bold;
+                font-family: 'LINESeedKR-Bd';
+                font-weight: 700;
                 margin: 1rem;
                 text-decoration: underline;
                 text-decoration-color: lightgray;
-                text-underline-offset: 0.7rem;
+                text-underline-offset: 0.3rem;
             }
 
             .selectBox{
@@ -41,6 +41,7 @@
 
                 .desc{
                     text-align: center;
+                    font-family: 'Pretendard Variable';
                 }
 
                 .signUpButton{

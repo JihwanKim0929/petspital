@@ -29,13 +29,6 @@
                 height: 4rem;
             }
 
-            .title{
-                color: black;
-                font-family: "poppins";
-                font-weight: bold;
-                margin: 0.5rem;
-            }
-
             .inputContainer{
                 display: flex;
                 flex-direction: column;
@@ -47,11 +40,14 @@
                     color: black;
                     margin-bottom: 0.5rem;
                     font-size: 1.1rem;
+                    font-family: 'LINESeedKR-Bd';
                     font-weight: 500;
                 }
 
                 .input{
                     align-self: center;
+                    font-family: 'Pretendard Variable';
+                    font-weight: 500;
                     width: 100%;
                 }
             }

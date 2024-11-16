@@ -20,25 +20,25 @@ const Signup = () => {
                     animationTimingFunction: "ease-out"
                 }}>
                     <Text className="title" fontSize={{ base: '1.5rem', md: '2rem', lg: '2rem' }}>
-                        Sign up
+                        Petspital 가입하기
                     </Text>
                     <Stack spacing={2} direction={{ base: 'column', md: 'row', lg: 'row' }} align='center' 
                     separator={<StackSeparator borderColor='gray.200' />}>
                         <Box className="selectBox"
-                        w={{base: "15rem", md: "14rem", lg: "18rem"}}
+                        w={{base: "15rem", md: "14rem", lg: "18.5rem"}}
                         h={{base: "12.5rem", md: "14rem", lg: "18rem"}}>
                             <Icon className="petOwnerIcon" w="3rem" h="3rem" margin="0.5rem"><MdOutlinePets /></Icon>
                             <Text className="desc" margin="0.5rem" fontSize={{ base: '0.7rem', md: '0.75rem', lg: '0.9rem' }}>
-                                This is pet owner account description. Write something nice.
+                                Petspital에 가입하여 AI를 통해 반려동물의 <br/>눈과 피부 건강을 체크해보세요.
                             </Text>
                             <PetOwnerSignUpModalButton />
                         </Box>
                         <Box className="selectBox"
-                        w={{base: "15rem", md: "14rem", lg: "18rem"}}
+                        w={{base: "15rem", md: "14rem", lg: "18.5rem"}}
                         h={{base: "12.5rem", md: "14rem", lg: "18rem"}}>
                             <Icon className="doctorIcon" w="3rem" h="3rem" margin="0.5rem"><FaUserDoctor /></Icon>
                             <Text className="desc" margin="0.5rem" fontSize={{ base: '0.7rem', md: '0.75rem', lg: '0.9rem' }}>
-                                This is doctor account description. Write something nice.
+                                Petspital에 가입하여 <br/>반려동물 진단 예약을 받아보세요.
                             </Text>
                             <DoctorSignUpModalButton />
                         </Box>
