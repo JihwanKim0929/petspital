@@ -90,17 +90,22 @@ const PetRegisterModalButton = () => {
               <Input placeholder="Enter your pet's age" {...register('age', { required: true })}/>
             </Field>
             <Field label="Gender" required mt={4}>
-              <Input placeholder="Enter your pet's gender" {...register('gender', { required: true })}/>
+              <NativeSelectRoot>
+                <NativeSelectField placeholder="Select gender" {...register('gender', { required: true })}>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </NativeSelectField>
+              </NativeSelectRoot>
             </Field>
             <Field label="Species" required mt={4}>
               <NativeSelectRoot>
-                <NativeSelectField placeholder="Select option" {...register('species', { required: true })}>
+                <NativeSelectField placeholder="Select species" {...register('species', { required: true })}>
                   <option value="dog">Dog</option>
                   <option value="cat">Cat</option>
                 </NativeSelectField>
               </NativeSelectRoot>
             </Field>
-            <Field label="Weight" required mt={4}>
+            <Field label="Weight(kg)" required mt={4}>
               <Input placeholder="Enter your pet's weight" {...register('weight', { required: true })}/>
             </Field>
             <Field label="Description" required mt={4}>

@@ -60,43 +60,51 @@ const PetOwnerAppointments = () => {
 
     return (
         <div className="petOwnerAppointments">
-            <Card.Root  w='96%' h='96%'>
-                <Card.Body>
-                    <Show when={hasPets()}>
-                        <NativeSelectRoot>
-                            <NativeSelectField placeholder="Select your pet" onChange={handlePetChange}>
-                                {pets.map(pet => (
-                                <option key={pet.id} value={pet.id}>
-                                    {pet.name}
-                                </option>
-                                ))}
-                            </NativeSelectField>
-                        </NativeSelectRoot>
-                        <Box mt={4}>
-                            {appointments.length > 0 ? (
-                                appointments.map(appointment => (
-                                    <Box key={appointment.id} p={4} borderWidth="1px" borderRadius="md" mb={4}>
-                                        <Text fontWeight="bold">Appointment ID: {appointment.id}</Text>
-                                        <Text>Pet: {appointment.pet.name} (Age: {appointment.pet.age}, Gender: {appointment.pet.gender})</Text>
-                                        <Image src={appointment.pet.image_url} boxSize="100px" objectFit="cover" />
-                                        
-                                        <Text mt={1}>Reservation Date: {new Date(appointment.reservationDate).toLocaleString()}</Text>
-                                        <Text>Create Date: {new Date(appointment.createDate).toLocaleString()}</Text>
-                                        <Text>Hospital: {appointment.hospitalAddress}</Text>
-                                        <AppointmentViewModalButton appointmentID={appointment.id}/>
-                                        <AppointmentDeleteModalButton appointmentID={appointment.id} />
-                                    </Box>
-                                ))
-                            ) : (
-                                <Text>No appointments found.</Text>
-                            )}
-                        </Box>
-                    </Show>
-                    <Show when={!hasPets()}>
-                        <Text>There is no pet.</Text>
-                    </Show>
-                </Card.Body>
-            </Card.Root>
+            <Box w='100%' h='100%' p={3}>
+                <Card.Root  w='100%' h='100%'
+                data-state="open" 
+                _open={{ 
+                    animationName: "fade-in, slide-from-top",
+                    animationDuration: "300ms",
+                    animationTimingFunction: "ease-out"
+                }}>
+                    <Card.Body>
+                        <Show when={hasPets()}>
+                            <NativeSelectRoot>
+                                <NativeSelectField placeholder="Select your pet" onChange={handlePetChange}>
+                                    {pets.map(pet => (
+                                    <option key={pet.id} value={pet.id}>
+                                        {pet.name}
+                                    </option>
+                                    ))}
+                                </NativeSelectField>
+                            </NativeSelectRoot>
+                            <Box mt={4}>
+                                {appointments.length > 0 ? (
+                                    appointments.map(appointment => (
+                                        <Box key={appointment.id} p={4} borderWidth="1px" borderRadius="md" mb={4}>
+                                            <Text fontWeight="bold">Appointment ID: {appointment.id}</Text>
+                                            <Text>Pet: {appointment.pet.name} (Age: {appointment.pet.age}, Gender: {appointment.pet.gender})</Text>
+                                            <Image src={appointment.pet.image_url} boxSize="100px" objectFit="cover" />
+                                            
+                                            <Text mt={1}>Reservation Date: {new Date(appointment.reservationDate).toLocaleString()}</Text>
+                                            <Text>Create Date: {new Date(appointment.createDate).toLocaleString()}</Text>
+                                            <Text>Hospital: {appointment.hospitalAddress}</Text>
+                                            <AppointmentViewModalButton appointmentID={appointment.id}/>
+                                            <AppointmentDeleteModalButton appointmentID={appointment.id} />
+                                        </Box>
+                                    ))
+                                ) : (
+                                    <Text>No appointments found.</Text>
+                                )}
+                            </Box>
+                        </Show>
+                        <Show when={!hasPets()}>
+                            <Text>There is no pet.</Text>
+                        </Show>
+                    </Card.Body>
+                </Card.Root>
+            </Box>
         </div>
     )
 }

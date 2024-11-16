@@ -29,33 +29,41 @@ const DoctorAppointments = () => {
 
   return (
     <div className='doctorAppointments'>
-      <Card.Root w='96%' h='96%'>
-        <Card.Body>
-          <Show when={hasPets()}>
-          <VStack spacing={4} align="stretch">
-            {pets.map(pet => (
-              <Box key={pet.id} p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
-                <Text fontWeight="bold">{pet.name}</Text>
-                <Text>Age: {pet.age}</Text>
-                <Text>Gender: {pet.gender}</Text>
-                <Text>Species: {pet.species}</Text>
-                <Text>Weight: {pet.weight}</Text>
-                <Text>Description: {pet.description}</Text>
-                <Image 
-                    src={pet.image_url} 
-                    alt={`Image of ${pet.name}`} 
-                    boxSize="100px" 
-                    objectFit="cover" 
-                />
-              </Box>
-              ))}
-            </VStack>
-          </Show>
-          <Show when={!hasPets()}>
-            <Text>There is no pet.</Text>
-          </Show>
-        </Card.Body>
-      </Card.Root>
+      <Box w='100%' h='100%' p={3}>
+        <Card.Root w='100%' h='100%'
+        data-state="open" 
+        _open={{ 
+            animationName: "fade-in, slide-from-top",
+            animationDuration: "300ms",
+            animationTimingFunction: "ease-out"
+        }}>
+          <Card.Body>
+            <Show when={hasPets()}>
+            <VStack spacing={4} align="stretch">
+              {pets.map(pet => (
+                <Box key={pet.id} p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
+                  <Text fontWeight="bold">{pet.name}</Text>
+                  <Text>Age: {pet.age}</Text>
+                  <Text>Gender: {pet.gender}</Text>
+                  <Text>Species: {pet.species}</Text>
+                  <Text>Weight: {pet.weight}</Text>
+                  <Text>Description: {pet.description}</Text>
+                  <Image 
+                      src={pet.image_url} 
+                      alt={`Image of ${pet.name}`} 
+                      boxSize="100px" 
+                      objectFit="cover" 
+                  />
+                </Box>
+                ))}
+              </VStack>
+            </Show>
+            <Show when={!hasPets()}>
+              <Text>There is no pet.</Text>
+            </Show>
+          </Card.Body>
+        </Card.Root>
+      </Box>
     </div>
   )
 }

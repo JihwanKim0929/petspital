@@ -62,41 +62,51 @@ const Records = () => {
 
   return (
     <div className='records'>
-      <Card.Root w='96%' h='96%'>
-        <Card.Body>
-          <Show  when={hasPets()}>
-            <NativeSelectRoot>
-              <NativeSelectField placeholder="Select your pet" onChange={handlePetChange}>
-                {pets.map(pet => (
-                  <option key={pet.id} value={pet.id}>
-                    {pet.name}
-                  </option>
-                ))}
-              </NativeSelectField>
-            </NativeSelectRoot>
-            <Box mt={4}>
-              {records.length > 0 ? (
-                records.map(record => (
-                  <Box key={record.id} p={4} borderWidth="1px" borderRadius="md" mb={4}>
-                    <Text fontWeight="bold">Diagnosis ID: {record.id}</Text>
-                    <Text>Part: {record.part}</Text>
-                    <Text>Create Date: {new Date(record.createDate).toLocaleString()}</Text>
-                    <Image src={record.image_url} boxSize="100px" objectFit="cover" />
-                    <Text>Disease:</Text>
-                    <Text>{record.disease.name}: {record.disease.symptoms} - {record.disease.description}</Text>
-                    <DiagnosisRecordDeleteModalButton diagnosisID={record.id}/>
-                  </Box>
-                ))
-              ) : (
-                <Text>No records found.</Text>
-              )}
-            </Box>
-          </Show>
-          <Show when={!hasPets()}>
-            <Text>Pet is empty.</Text>
-          </Show>
-        </Card.Body>
-      </Card.Root>
+      <Box w='100%' h='100%' p={3}>
+        <Card.Root w='100%' h='100%'
+        data-state="open" 
+        _open={{ 
+            animationName: "fade-in, slide-from-top",
+            animationDuration: "300ms",
+            animationTimingFunction: "ease-out"
+        }}>
+          <Card.Body>
+            <Show  when={hasPets()}>
+              <NativeSelectRoot>
+                <NativeSelectField placeholder="Select your pet" onChange={handlePetChange}>
+                  {pets.map(pet => (
+                    <option key={pet.id} value={pet.id}>
+                      {pet.name}
+                    </option>
+                  ))}
+                </NativeSelectField>
+              </NativeSelectRoot>
+              <Box mt={4}>
+                {records.length > 0 ? (
+                  records.map(record => (
+                    <Box key={record.id} p={4} borderWidth="1px" borderRadius="md" mb={4}>
+                      <Text fontWeight="bold">Diagnosis ID: {record.id}</Text>
+                      <Text>Part: {record.part}</Text>
+                      <Text>Create Date: {new Date(record.createDate).toLocaleString()}</Text>
+                      <Image src={record.image_url} boxSize="100px" objectFit="cover" />
+                      <Text>Disease:</Text>
+                      {record.disease ? 
+                      <Text>{record.disease.name}: {record.disease.symptoms} - {record.disease.description}</Text> :
+                      <Text>No disease.</Text>}
+                      <DiagnosisRecordDeleteModalButton diagnosisID={record.id}/>
+                    </Box>
+                  ))
+                ) : (
+                  <Text>No records found.</Text>
+                )}
+              </Box>
+            </Show>
+            <Show when={!hasPets()}>
+              <Text>Pet is empty.</Text>
+            </Show>
+          </Card.Body>
+        </Card.Root>
+      </Box>
     </div>
   )
 }

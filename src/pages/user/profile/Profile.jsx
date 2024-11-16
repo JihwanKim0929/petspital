@@ -140,132 +140,140 @@ const Profile = () => {
 
   return (
     <div className="profile">
-      <Card.Root className="card" w='96%' h='96%'>
-        <Card.Body>
-          <Show when={!isEditMode}>
-            <Box>
-              <Avatar name={username} src={userImageURL} w='125px' h='125px' />
-            </Box>
-            <Box>
-              <Text>Username: {username}</Text>
-              <Text>Email: {userEmail}</Text>
-              <Text>Tel: {userPhoneNumber}</Text>
-              <Text>Address: {userAddress}</Text>
-            </Box>
-            <Button alignSelf="flex-start" mt={6} onClick={toggleEditMode}>
-              Edit
-            </Button>
-          </Show>
-          
-          <Show when={isEditMode}>
-            <Flex gap='8px' alignItems='center'>
-              <Text>Username</Text>
-              <Editable.Root defaultValue={username} onValueCommit={handleNextUsername}>
-                <Editable.Preview />
-                <Editable.Input/>
-                <Editable.Control>
-                  <Editable.EditTrigger asChild>
-                    <IconButton variant="ghost" size="xs">
-                      <LuPencilLine />
-                    </IconButton>
-                  </Editable.EditTrigger>
-                  <Editable.CancelTrigger asChild>
-                    <IconButton variant="outline" size="xs">
-                      <LuX />
-                    </IconButton>
-                  </Editable.CancelTrigger>
-                  <Editable.SubmitTrigger asChild>
-                    <IconButton variant="outline" size="xs">
-                      <LuCheck />
-                    </IconButton>
-                  </Editable.SubmitTrigger>
-                </Editable.Control>
-              </Editable.Root>
-            </Flex>
+      <Box w='100%' h='100%' p={3}>
+        <Card.Root className="card" w='100%' h='100%'
+        data-state="open" 
+        _open={{ 
+            animationName: "fade-in, slide-from-top",
+            animationDuration: "300ms",
+            animationTimingFunction: "ease-out"
+        }}>
+          <Card.Body>
+            <Show when={!isEditMode}>
+              <Box>
+                <Avatar name={username} src={userImageURL} w='125px' h='125px' />
+              </Box>
+              <Box>
+                <Text>Username: {username}</Text>
+                <Text>Email: {userEmail}</Text>
+                <Text>Tel: {userPhoneNumber}</Text>
+                <Text>Address: {userAddress}</Text>
+              </Box>
+              <Button alignSelf="flex-start" mt={6} onClick={toggleEditMode}>
+                Edit
+              </Button>
+            </Show>
+            
+            <Show when={isEditMode}>
+              <Flex gap='8px' alignItems='center'>
+                <Text>Username</Text>
+                <Editable.Root defaultValue={username} onValueCommit={handleNextUsername}>
+                  <Editable.Preview />
+                  <Editable.Input/>
+                  <Editable.Control>
+                    <Editable.EditTrigger asChild>
+                      <IconButton variant="ghost" size="xs">
+                        <LuPencilLine />
+                      </IconButton>
+                    </Editable.EditTrigger>
+                    <Editable.CancelTrigger asChild>
+                      <IconButton variant="outline" size="xs">
+                        <LuX />
+                      </IconButton>
+                    </Editable.CancelTrigger>
+                    <Editable.SubmitTrigger asChild>
+                      <IconButton variant="outline" size="xs">
+                        <LuCheck />
+                      </IconButton>
+                    </Editable.SubmitTrigger>
+                  </Editable.Control>
+                </Editable.Root>
+              </Flex>
 
-            <Flex gap='8px' alignItems='center'>
-              <Text>Email</Text>
-              <Editable.Root defaultValue={userEmail} onValueCommit={handleNextUserEmail}>
-                <Editable.Preview />
-                <Editable.Input />
-                <Editable.Control>
-                  <Editable.EditTrigger asChild>
-                    <IconButton variant="ghost" size="xs">
-                      <LuPencilLine />
-                    </IconButton>
-                  </Editable.EditTrigger>
-                  <Editable.CancelTrigger asChild>
-                    <IconButton variant="outline" size="xs">
-                      <LuX />
-                    </IconButton>
-                  </Editable.CancelTrigger>
-                  <Editable.SubmitTrigger asChild>
-                    <IconButton variant="outline" size="xs">
-                      <LuCheck />
-                    </IconButton>
-                  </Editable.SubmitTrigger>
-                </Editable.Control>
-              </Editable.Root>
-            </Flex>
+              <Flex gap='8px' alignItems='center'>
+                <Text>Email</Text>
+                <Editable.Root defaultValue={userEmail} onValueCommit={handleNextUserEmail}>
+                  <Editable.Preview />
+                  <Editable.Input />
+                  <Editable.Control>
+                    <Editable.EditTrigger asChild>
+                      <IconButton variant="ghost" size="xs">
+                        <LuPencilLine />
+                      </IconButton>
+                    </Editable.EditTrigger>
+                    <Editable.CancelTrigger asChild>
+                      <IconButton variant="outline" size="xs">
+                        <LuX />
+                      </IconButton>
+                    </Editable.CancelTrigger>
+                    <Editable.SubmitTrigger asChild>
+                      <IconButton variant="outline" size="xs">
+                        <LuCheck />
+                      </IconButton>
+                    </Editable.SubmitTrigger>
+                  </Editable.Control>
+                </Editable.Root>
+              </Flex>
 
-            <Flex gap='8px' alignItems='center'>
-              <Text>Tel</Text>
-              <Editable.Root defaultValue={userPhoneNumber} onValueCommit={handleNextUserPhoneNumber}>
-                <Editable.Preview />
-                <Editable.Input />
-                <Editable.Control>
-                  <Editable.EditTrigger asChild>
-                    <IconButton variant="ghost" size="xs">
-                      <LuPencilLine />
-                    </IconButton>
-                  </Editable.EditTrigger>
-                  <Editable.CancelTrigger asChild>
-                    <IconButton variant="outline" size="xs">
-                      <LuX />
-                    </IconButton>
-                  </Editable.CancelTrigger>
-                  <Editable.SubmitTrigger asChild>
-                    <IconButton variant="outline" size="xs">
-                      <LuCheck />
-                    </IconButton>
-                  </Editable.SubmitTrigger>
-                </Editable.Control>
-              </Editable.Root>
-            </Flex>
+              <Flex gap='8px' alignItems='center'>
+                <Text>Tel</Text>
+                <Editable.Root defaultValue={userPhoneNumber} onValueCommit={handleNextUserPhoneNumber}>
+                  <Editable.Preview />
+                  <Editable.Input />
+                  <Editable.Control>
+                    <Editable.EditTrigger asChild>
+                      <IconButton variant="ghost" size="xs">
+                        <LuPencilLine />
+                      </IconButton>
+                    </Editable.EditTrigger>
+                    <Editable.CancelTrigger asChild>
+                      <IconButton variant="outline" size="xs">
+                        <LuX />
+                      </IconButton>
+                    </Editable.CancelTrigger>
+                    <Editable.SubmitTrigger asChild>
+                      <IconButton variant="outline" size="xs">
+                        <LuCheck />
+                      </IconButton>
+                    </Editable.SubmitTrigger>
+                  </Editable.Control>
+                </Editable.Root>
+              </Flex>
 
-            <Flex gap='8px' alignItems='center'>
-              <Text>Address</Text>
-              <Editable.Root defaultValue={userAddress} onValueCommit={handleNextUserAddress}>
-                <Editable.Preview />
-                <Editable.Input />
-                <Editable.Control>
-                  <Editable.EditTrigger asChild>
-                    <IconButton variant="ghost" size="xs">
-                      <LuPencilLine />
-                    </IconButton>
-                  </Editable.EditTrigger>
-                  <Editable.CancelTrigger asChild>
-                    <IconButton variant="outline" size="xs">
-                      <LuX />
-                    </IconButton>
-                  </Editable.CancelTrigger>
-                  <Editable.SubmitTrigger asChild>
-                    <IconButton variant="outline" size="xs">
-                      <LuCheck />
-                    </IconButton>
-                  </Editable.SubmitTrigger>
-                </Editable.Control>
-              </Editable.Root>
-            </Flex>
-            <Button alignSelf="flex-start" mt={6} onClick={editUser}>
-              Save
-            </Button>
-            <Button alignSelf="flex-start" mt={6} onClick={cancelEditMode}>
-              Cancel
-            </Button>
-          </Show>
-        </Card.Body>
-      </Card.Root>
+              <Flex gap='8px' alignItems='center'>
+                <Text>Address</Text>
+                <Editable.Root defaultValue={userAddress} onValueCommit={handleNextUserAddress}>
+                  <Editable.Preview />
+                  <Editable.Input />
+                  <Editable.Control>
+                    <Editable.EditTrigger asChild>
+                      <IconButton variant="ghost" size="xs">
+                        <LuPencilLine />
+                      </IconButton>
+                    </Editable.EditTrigger>
+                    <Editable.CancelTrigger asChild>
+                      <IconButton variant="outline" size="xs">
+                        <LuX />
+                      </IconButton>
+                    </Editable.CancelTrigger>
+                    <Editable.SubmitTrigger asChild>
+                      <IconButton variant="outline" size="xs">
+                        <LuCheck />
+                      </IconButton>
+                    </Editable.SubmitTrigger>
+                  </Editable.Control>
+                </Editable.Root>
+              </Flex>
+              <Button alignSelf="flex-start" mt={6} onClick={editUser}>
+                Save
+              </Button>
+              <Button alignSelf="flex-start" mt={6} onClick={cancelEditMode}>
+                Cancel
+              </Button>
+            </Show>
+          </Card.Body>
+        </Card.Root>
+      </Box>
     </div>
   )
 }

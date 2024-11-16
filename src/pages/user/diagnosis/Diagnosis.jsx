@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Diagnosis.scss';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { Fieldset, Input, Stack, Card, Show, Text } from "@chakra-ui/react";
+import { Fieldset, Input, Stack, Card, Show, Text, Box } from "@chakra-ui/react";
 import { Button } from '../../../components/ui/button';
 import {
   NativeSelectField,
@@ -104,7 +104,14 @@ const Diagnosis = () => {
 
   return (
     <div className='diagnosis'>
-       <Card.Root w='96%' h='96%'>
+      <Box w='100%' h='100%' p={3}>
+        <Card.Root w='100%' h='100%'
+        data-state="open" 
+        _open={{ 
+            animationName: "fade-in, slide-from-top",
+            animationDuration: "300ms",
+            animationTimingFunction: "ease-out"
+        }}>
           <Card.Body>
             <Show when={hasPets()}>
               <form onSubmit={handleSubmit(onSubmit)}>
@@ -155,7 +162,8 @@ const Diagnosis = () => {
               <Text>Pet is empty.</Text>
             </Show>
           </Card.Body>
-       </Card.Root>
+        </Card.Root>
+       </Box>
     </div>
   )
 }

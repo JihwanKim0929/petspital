@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Diary.scss';
-import { Card } from '@chakra-ui/react';
+import { Card, Box } from '@chakra-ui/react';
 import PetDiaryPageCreateModalButton from '../../../components/petDiaryPageCreateModalButton/PetDiaryPageCreateModalButton';
 import PetDiaryPageDeleteModalButton from '../../../components/petDiaryPageDeleteModalButton/PetDiaryPageDeleteModalButton';
 import PetDiaryPageEditModalButton from '../../../components/petDiaryPageEditModalButton/PetDiaryPageEditModalButton';
@@ -54,28 +54,36 @@ const Diary = () => {
 
   return (
     <div className='diary'>
-      <Card.Root w='96%' h='96%'>
-        <Card.Body>
-          {pages.length === 0 ? (
-            <div>Page is empty</div>
-          ) : (
-            pages.map(page => (
-              <Card.Root key={page.id} w='80%' h='auto' mb='1rem'>
-                <Card.Body>
-                  <h3>{page.content}</h3>
-                  <p>Created on: {new Date(page.createDate).toLocaleString()}</p>
-                  {page.image_url && <img src={page.image_url} />}
-                </Card.Body>
-                <Card.Footer>
-                  <PetDiaryPageEditModalButton pageID={page.id} pageContent={page.content}/>
-                  <PetDiaryPageDeleteModalButton pageID={page.id} />
-                </Card.Footer>
-              </Card.Root>
-            ))
-          )}
-          <PetDiaryPageCreateModalButton diaryID={diaryID}/>
-        </Card.Body>
-      </Card.Root>
+      <Box w='100%' h='100%' p={3}>
+        <Card.Root w='100%' h='100%'
+        data-state="open" 
+        _open={{ 
+            animationName: "fade-in, slide-from-top",
+            animationDuration: "300ms",
+            animationTimingFunction: "ease-out"
+        }}>
+          <Card.Body>
+            {pages.length === 0 ? (
+              <div>Page is empty</div>
+            ) : (
+              pages.map(page => (
+                <Card.Root key={page.id} w='80%' h='auto' mb='1rem'>
+                  <Card.Body>
+                    <h3>{page.content}</h3>
+                    <p>Created on: {new Date(page.createDate).toLocaleString()}</p>
+                    {page.image_url && <img src={page.image_url} />}
+                  </Card.Body>
+                  <Card.Footer>
+                    <PetDiaryPageEditModalButton pageID={page.id} pageContent={page.content}/>
+                    <PetDiaryPageDeleteModalButton pageID={page.id} />
+                  </Card.Footer>
+                </Card.Root>
+              ))
+            )}
+            <PetDiaryPageCreateModalButton diaryID={diaryID}/>
+          </Card.Body>
+        </Card.Root>
+      </Box>
     </div>
   );
 };

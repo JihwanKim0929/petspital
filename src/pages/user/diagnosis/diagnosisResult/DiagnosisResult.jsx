@@ -53,7 +53,9 @@ const DiagnosisResult = () => {
       <p>Diagnosed Part: {diagnosisResult.part}</p>
       <img src={diagnosisResult.image_url} alt="Diagnosis" />
       <h2>Disease:</h2>
-      <p>{diagnosisResult.disease.name}: {diagnosisResult.disease.symptoms} - {diagnosisResult.disease.description}</p>
+      {diagnosisResult.disease ? 
+      <p>{diagnosisResult.disease.name}: {diagnosisResult.disease.symptoms} - {diagnosisResult.disease.description}</p> :
+      <p>No disease.</p>}
     </div>
   );
 }

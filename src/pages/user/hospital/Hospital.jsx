@@ -153,98 +153,105 @@ const Hospital = () => {
 
   return (
       <div className="hospital">
-        <Card.Root  w='96%' h='96%'>
-          <Card.Body>
-            <Show when={hasPets()}>
-              <Flex justifyContent='center' alignItems='center'>
-                <Box m={6}>
-                  <Map 
-                  center={mapCenter}
-                  style={{ width: '400px', height: '400px', borderRadius: '0.5rem' }}
-                  level={7}>
-                    {hospitalLocations.map((location, index) => (
-                      <MapMarker 
-                        key={index} 
-                        position={{ lat: location.lat, lng: location.lng }} 
-                        title={location.address} 
-                      />
-                    ))}
-                    {userLocation && (
-                      <MapMarker
-                        position={{ lat: userLocation.lat, lng: userLocation.lng }} 
-                        title={userLocation.address}
-                        image={{
-                          src: process.env.PUBLIC_URL + "/assets/images/MapMarker.png",
-                          size: {
-                            width: 32,
-                            height: 32,
-                          }
-                        }}
-                      />
-                    )}
-                  </Map>
-                </Box>
-                <Box m={6}>
-                  <form onSubmit={handleSubmit(onSubmit)}>
-                    <Fieldset.Root size="lg" maxW="md">
-                      <Fieldset.Content>
-                        <Field label="Pet">
-                          <NativeSelectRoot>
-                            <NativeSelectField placeholder="Select your pet" {...register('petID', { required: true })}>
-                              {pets.map(pet => (
-                                <option key={pet.id} value={pet.id}>
-                                  {pet.name}
-                                </option>
-                              ))}
-                            </NativeSelectField>
-                          </NativeSelectRoot>
-                        </Field>
-                        
-                        <Field label="Hospital">
-                          <Box
-                          minH="240px"
-                          overflowY="auto"
-                          border="1px solid #ccc"
-                          borderRadius="md"
-                          p={2}
-                          mt={2}>
-                            <Stack spacing={2}>
-                              {hospitals.map(hospital => (
-                                <HospitalSelectCard
-                                  key={hospital.id}
-                                  hospital={hospital}
-                                  isSelected={selectedHospitalAddress === hospital.hospitalAddress}
-                                  onSelect={() => handleHospitalSelect(hospital)}
-                                />
-                              ))}
-                            </Stack>
-                          </Box>
-                          {(!selectedHospitalAddress && <Text color="red.500">You must select a hospital.</Text>)}
-                        </Field>
+        <Box w='100%' h='100%' p={3}>
+          <Card.Root  w='100%' h='100%'
+          data-state="open" 
+          _open={{ 
+              animationName: "fade-in, slide-from-top",
+              animationDuration: "300ms",
+              animationTimingFunction: "ease-out"
+          }}>
+            <Card.Body>
+              <Show when={hasPets()}>
+                <Flex justifyContent='center' alignItems='center'>
+                  <Box m={6}>
+                    <Map 
+                    center={mapCenter}
+                    style={{ width: '400px', height: '400px', borderRadius: '0.5rem' }}
+                    level={7}>
+                      {hospitalLocations.map((location, index) => (
+                        <MapMarker 
+                          key={index} 
+                          position={{ lat: location.lat, lng: location.lng }} 
+                          title={location.address} 
+                        />
+                      ))}
+                      {userLocation && (
+                        <MapMarker
+                          position={{ lat: userLocation.lat, lng: userLocation.lng }} 
+                          title={userLocation.address}
+                          image={{
+                            src: process.env.PUBLIC_URL + "/assets/images/MapMarker.png",
+                            size: {
+                              width: 32,
+                              height: 32,
+                            }
+                          }}
+                        />
+                      )}
+                    </Map>
+                  </Box>
+                  <Box m={6}>
+                    <form onSubmit={handleSubmit(onSubmit)}>
+                      <Fieldset.Root size="lg" maxW="md">
+                        <Fieldset.Content>
+                          <Field label="Pet">
+                            <NativeSelectRoot>
+                              <NativeSelectField placeholder="Select your pet" {...register('petID', { required: true })}>
+                                {pets.map(pet => (
+                                  <option key={pet.id} value={pet.id}>
+                                    {pet.name}
+                                  </option>
+                                ))}
+                              </NativeSelectField>
+                            </NativeSelectRoot>
+                          </Field>
+                          
+                          <Field label="Hospital">
+                            <Box
+                            minH="240px"
+                            overflowY="auto"
+                            border="1px solid #ccc"
+                            borderRadius="md"
+                            p={2}
+                            mt={2}>
+                              <Stack spacing={2}>
+                                {hospitals.map(hospital => (
+                                  <HospitalSelectCard
+                                    key={hospital.id}
+                                    hospital={hospital}
+                                    isSelected={selectedHospitalAddress === hospital.hospitalAddress}
+                                    onSelect={() => handleHospitalSelect(hospital)}
+                                  />
+                                ))}
+                              </Stack>
+                            </Box>
+                            {(!selectedHospitalAddress && <Text color="red.500">You must select a hospital.</Text>)}
+                          </Field>
 
-                        <Field label="Date">
-                          <DatePicker
-                            selected={appointmentDate}
-                            onChange={(date) => setAppointmentDate(date)}
-                            minDate={new Date()}
-                          />
-                        </Field>
-                      </Fieldset.Content>
+                          <Field label="Date">
+                            <DatePicker
+                              selected={appointmentDate}
+                              onChange={(date) => setAppointmentDate(date)}
+                              minDate={new Date()}
+                            />
+                          </Field>
+                        </Fieldset.Content>
 
-                      <Button type="submit" alignSelf="flex-start" mt={6} disabled={!selectedHospitalAddress || !petID}>
-                        Submit
-                      </Button>
-                    </Fieldset.Root>
-                  </form>
-                </Box>
-              </Flex>
-            </Show>
-            <Show when={!hasPets()}>
-              <Text>There is no pet.</Text>
-            </Show>
-          </Card.Body>
-        </Card.Root>
-        
+                        <Button type="submit" alignSelf="flex-start" mt={6} disabled={!selectedHospitalAddress || !petID}>
+                          Submit
+                        </Button>
+                      </Fieldset.Root>
+                    </form>
+                  </Box>
+                </Flex>
+              </Show>
+              <Show when={!hasPets()}>
+                <Text>There is no pet.</Text>
+              </Show>
+            </Card.Body>
+          </Card.Root>
+        </Box>
       </div>
     );
 };
