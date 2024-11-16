@@ -38,14 +38,6 @@ public class Pet {
 
     private String image_url;
 
-    @JsonIgnore
-    @PreRemove
-    public void deleteImage(){
-        File imageFile = new File("C:\\spring_image_test\\pet\\"+image_url);
-        if(imageFile.exists()){
-            imageFile.delete();
-        }
-    }
 
     @JsonIgnore
     public PetDto get_PetDto(){

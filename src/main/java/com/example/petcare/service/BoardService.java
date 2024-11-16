@@ -1,5 +1,6 @@
 package com.example.petcare.service;
 
+import com.example.petcare.S3Service;
 import com.example.petcare.dto.BoardDto;
 import com.example.petcare.dto.CommentDto;
 import com.example.petcare.entity.Board;
@@ -29,10 +30,15 @@ public class BoardService {
 
     @Autowired
     SiteUserRepository userRepository;
+
     @Autowired
     private CommentRepository commentRepository;
+
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    private S3Service s3Service;
 
     public List<BoardDto> boards() {
         return boardRepository.findAll()
@@ -48,12 +54,9 @@ public class BoardService {
 
     public BoardDto createBoard(BoardDto boardDto, Long userId, MultipartFile image)throws IOException {
         if(!image.isEmpty()){
-            String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
-            String fullPathName = "C:\\spring_image_test\\board\\"+fileName;
-            image.transferTo(new File(fullPathName));
+            String fileName = s3Service.uploadFile(image);
             boardDto.setImage_url(fileName);
         }
-
         SiteUser siteUser = userRepository.findById(userId).orElse(null);
         boardDto.setAuthor(siteUser);
         boardDto.setCreateDate(LocalDateTime.now());
@@ -64,6 +67,7 @@ public class BoardService {
     public BoardDto deleteBoard(Long boardId) {
         Board target = boardRepository.findById(boardId).orElse(null);
         if(target != null){
+//            s3Service.deleteFile(target.getImage_url());
             List<Comment> comments = commentRepository.findByBoardId(boardId);
             for(Comment comment : comments){
                 commentService.deleteComment(comment.getId());

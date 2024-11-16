@@ -42,14 +42,6 @@ public class Diagnosis {
     )
     private List<Disease> diseaseList;
 
-    @JsonIgnore
-    @PreRemove
-    public void deleteImage(){
-        File imageFile = new File("C:\\spring_image_test\\diagnosis\\"+image_url);
-        if(imageFile.exists()){
-            imageFile.delete();
-        }
-    }
 
     @JsonIgnore
     public DiagnosisDto get_DiagnosisDto() {

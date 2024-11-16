@@ -1,5 +1,6 @@
 package com.example.petcare.service;
 
+import com.example.petcare.S3Service;
 import com.example.petcare.dto.CommentDto;
 import com.example.petcare.dto.DiaryPageDto;
 import com.example.petcare.dto.ReservationDto;
@@ -28,6 +29,8 @@ public class DiaryPageService {
 
     @Autowired
     private DiaryRepository diaryRepository;
+    @Autowired
+    private S3Service s3Service;
 
     public List<DiaryPageDto> get_diary_page_list(Long diaryId) {
         return diaryPageRepository.findByDiaryId(diaryId)
@@ -38,10 +41,8 @@ public class DiaryPageService {
 
     public DiaryPageDto create(MultipartFile image, DiaryPageDto dto, Long diaryId) throws IOException {
         if(!image.isEmpty()){
-            String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
-            String fullPathName = "C:\\spring_image_test\\diary\\"+fileName;
-            image.transferTo(new File(fullPathName));
-             dto.setImage_url(fileName);
+            String fileName = s3Service.uploadFile(image);
+            dto.setImage_url(fileName);
         }
 
         Diary diary = diaryRepository.findById(diaryId).orElse(null);
@@ -54,6 +55,7 @@ public class DiaryPageService {
     public DiaryPageDto deleteDiaryPage(Long diaryPageId) {
         DiaryPage target = diaryPageRepository.findById(diaryPageId).orElse(null);
         if(target != null){
+//            s3Service.deleteFile(target.getImage_url());
             DiaryPageDto dto =target.getDiaryPageDto();
             diaryPageRepository.delete(target);
             return dto;

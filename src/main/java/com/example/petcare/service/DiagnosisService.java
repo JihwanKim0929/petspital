@@ -1,5 +1,6 @@
 package com.example.petcare.service;
 
+import com.example.petcare.S3Service;
 import com.example.petcare.dto.DiagnosisDto;
 import com.example.petcare.dto.DiaryPageDto;
 import com.example.petcare.entity.Diagnosis;
@@ -31,6 +32,8 @@ public class DiagnosisService {
     private DiseaseRepository diseaseRepository;
     @Autowired
     private PetRepository petRepository;
+    @Autowired
+    private S3Service s3Service;
 
     public DiagnosisDto createDiagnosis(Long petId, MultipartFile image, DiagnosisDto diagnosisDto) throws IOException {
         if(image.isEmpty())
@@ -40,10 +43,8 @@ public class DiagnosisService {
         diagnosisDto.setPet(pet);
 
         //save image and set path to diagnosis dto
-        String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
-        String fullPathName = "C:\\spring_image_test\\diagnosis\\"+fileName;
-        image.transferTo(new File(fullPathName));
-        diagnosisDto.setImage_url(fileName);
+        String fileUrl = s3Service.uploadFile(image);
+        diagnosisDto.setImage_url(fileUrl);
 
         //get disease list from python
 //        URI uri = UriComponentsBuilder
@@ -54,7 +55,7 @@ public class DiagnosisService {
 //                .toUri();
 
 //        RestTemplate restTemplate = new RestTemplate();
-//        Integer[] result = restTemplate.postForObject(uri, fileName, Integer[].class);    //postForObject(uri,sending_body,class type to receive)
+//        Integer[] result = restTemplate.postForObject(uri, fileUrl, Integer[].class);    //postForObject(uri,sending_body,class type to receive)
 
         //set disease to diagnosisDto
         List<Disease> diseaseList = new ArrayList<>();
@@ -86,6 +87,7 @@ public class DiagnosisService {
     public DiagnosisDto deleteDiagnosis(Long diagnosisId) {
         Diagnosis target = diagnosisRepository.findById(diagnosisId).orElse(null);
         if(target != null){
+//            s3Service.deleteFile(target.getImage_url());
             DiagnosisDto dto =target.get_DiagnosisDto();
             diagnosisRepository.delete(target);
             return dto;

@@ -1,5 +1,6 @@
 package com.example.petcare.service;
 
+import com.example.petcare.S3Service;
 import com.example.petcare.dto.BoardDto;
 import com.example.petcare.dto.PetDto;
 import com.example.petcare.entity.*;
@@ -34,12 +35,12 @@ public class PetService {
     private ReservationRepository reservationRepository;
     @Autowired
     private ReservationService reservationService;
+    @Autowired
+    private S3Service s3Service;
 
     public PetDto createPet(PetDto petDto, Long userId, MultipartFile image) throws IOException {
         if(!image.isEmpty()){
-            String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
-            String fullPathName = "C:\\spring_image_test\\pet\\"+fileName;
-            image.transferTo(new File(fullPathName));
+            String fileName = s3Service.uploadFile(image);
             petDto.setImage_url(fileName);
         }
         SiteUser siteUser = userRepository.findById(userId).orElse(null);
@@ -51,6 +52,7 @@ public class PetService {
     public PetDto deletePet(Long petId) {
         Pet target = petRepository.findById(petId).orElse(null);
         if(target != null){
+//            s3Service.deleteFile(target.getImage_url());
 
             List<Diary> diaries = diaryRepository.findByPetId(petId);
             for(Diary diary : diaries){
