@@ -29,7 +29,7 @@ public class DiagnosisDto {
 
     private String image_url;
 
-    private List<DiseaseDto> diseaseList;
+    private Disease disease;
 
     @JsonIgnore
     public Diagnosis get_Diagnosis() {
@@ -40,9 +40,7 @@ public class DiagnosisDto {
                 .part(part)
                 .createDate(createDate)
                 .image_url(image_url)
-                .diseaseList(diseaseList.stream()
-                        .map(diseaseDto -> diseaseDto.getDisease())
-                        .collect(Collectors.toList()))
+                .disease(disease)
                 .build();
     }
 }

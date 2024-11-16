@@ -46,7 +46,7 @@ public class DiagnosisService {
         String fileUrl = s3Service.uploadFile(image);
         diagnosisDto.setImage_url(fileUrl);
 
-        //get disease list from python
+        //get disease from python
 //        URI uri = UriComponentsBuilder
 //                .fromUriString("http://localhost:8000")
 //                .path("/image_read")
@@ -55,16 +55,10 @@ public class DiagnosisService {
 //                .toUri();
 
 //        RestTemplate restTemplate = new RestTemplate();
-//        Integer[] result = restTemplate.postForObject(uri, fileUrl, Integer[].class);    //postForObject(uri,sending_body,class type to receive)
+//        Integer result = restTemplate.postForObject(uri, fileUrl, Integer.class);    //postForObject(uri,sending_body,class type to receive)
 
         //set disease to diagnosisDto
-        List<Disease> diseaseList = new ArrayList<>();
-        diseaseList.add(diseaseRepository.findById(1L).orElse(null));
-        diseaseList.add(diseaseRepository.findById(2L).orElse(null));
-        diseaseList.add(diseaseRepository.findById(3L).orElse(null));
-        diagnosisDto.setDiseaseList(diseaseList.stream()
-                .map(disease -> disease.getDiseaseDto())
-                .collect(Collectors.toList()));
+        diagnosisDto.setDisease(diseaseRepository.findById(1L).orElse(null));
         diagnosisDto.setCreateDate(LocalDateTime.now());
 
         Diagnosis created = diagnosisRepository.save(diagnosisDto.get_Diagnosis());
@@ -96,14 +90,4 @@ public class DiagnosisService {
             return null;
     }
 
-    public DiagnosisDto updateDiagnosis(Long diagnosisId, DiagnosisDto dto) {
-        Diagnosis target = diagnosisRepository.findById(diagnosisId).orElse(null);
-        if(target != null){
-            BeanUtils.copyProperties(dto, target, "id","pet","image_url", "createDate","diseaseList");
-             diagnosisRepository.save(target);
-            return dto;
-        }
-        return target.get_DiagnosisDto();
-
-    }
 }

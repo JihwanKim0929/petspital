@@ -38,20 +38,11 @@ public class DiagnosisController {
         return ResponseEntity.status(HttpStatus.OK).body(dto);
     }
 
-    @DeleteMapping("/diagnosis/{id}")//pet 삭제
+    @DeleteMapping("/diagnosis/{id}")
     public ResponseEntity<DiagnosisDto> deleteDiagnosis(@PathVariable Long id) {
         DiagnosisDto deletedDto = diagnosisService.deleteDiagnosis(id);
         if(deletedDto != null)
             return ResponseEntity.status(HttpStatus.OK).body(deletedDto);
-        else
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-    }
-
-    @PostMapping("/updateDiagnosis/{id}")
-    public ResponseEntity<DiagnosisDto> updateDiagnosis(@PathVariable Long id, @RequestBody DiagnosisDto dto) {
-        DiagnosisDto updatedDto = diagnosisService.updateDiagnosis(id, dto);
-        if(updatedDto != null)
-            return ResponseEntity.status(HttpStatus.OK).body(updatedDto);
         else
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }

@@ -34,13 +34,8 @@ public class Diagnosis {
 
     private String image_url;
 
-    @ManyToMany
-    @JoinTable(
-            name="diagnosis_disease",
-            joinColumns = @JoinColumn(name = "DIAGNOSIS_ID"),
-            inverseJoinColumns = @JoinColumn(name="DISEASE_ID")
-    )
-    private List<Disease> diseaseList;
+    @ManyToOne
+    private Disease disease;
 
 
     @JsonIgnore
@@ -52,9 +47,7 @@ public class Diagnosis {
                 .part(part)
                 .createDate(createDate)
                 .image_url(image_url)
-                .diseaseList(diseaseList.stream()
-                        .map(disease -> disease.getDiseaseDto())
-                        .collect(Collectors.toList()))
+                .disease(disease)
                 .build();
     }
 }
