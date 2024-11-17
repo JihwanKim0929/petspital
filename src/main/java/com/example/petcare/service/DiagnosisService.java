@@ -56,7 +56,7 @@ public class DiagnosisService {
 
         URI uri = UriComponentsBuilder
                 .fromUriString("http://localhost:8000")
-                .path("/getDesease")
+                .path("/getDisease")
                 .encode()
                 .build()
                 .toUri();
@@ -76,12 +76,12 @@ public class DiagnosisService {
 
         ResponseEntity<Long> response = restTemplate.postForEntity(uri, requestEntity, Long.class);
 
-        Long deseaseId = response.getBody();
+        Long diseaseId = response.getBody();
 
 
 
         //set disease to diagnosisDto
-        diagnosisDto.setDisease(diseaseRepository.findById(deseaseId).orElse(null));
+        diagnosisDto.setDisease(diseaseRepository.findById(diseaseId).orElse(null));
         diagnosisDto.setCreateDate(LocalDateTime.now());
 
         Diagnosis created = diagnosisRepository.save(diagnosisDto.get_Diagnosis());
