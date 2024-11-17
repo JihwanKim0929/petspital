@@ -12,15 +12,22 @@ import com.example.petcare.repository.DiseaseRepository;
 import com.example.petcare.repository.PetRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.UriComponentsBuilder;
+import org.springframework.http.HttpHeaders;
+
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
+
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,19 +53,35 @@ public class DiagnosisService {
         String fileUrl = s3Service.uploadFile(image);
         diagnosisDto.setImage_url(fileUrl);
 
-        //get disease from python
-//        URI uri = UriComponentsBuilder
-//                .fromUriString("http://localhost:8000")
-//                .path("/image_read")
-//                .encode()
-//                .build()
-//                .toUri();
 
-//        RestTemplate restTemplate = new RestTemplate();
-//        Integer result = restTemplate.postForObject(uri, fileUrl, Integer.class);    //postForObject(uri,sending_body,class type to receive)
+        URI uri = UriComponentsBuilder
+                .fromUriString("http://localhost:8000")
+                .path("/getDesease")
+                .encode()
+                .build()
+                .toUri();
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("image_url", fileUrl);
+        requestBody.put("species",diagnosisDto.getSpecies());
+        requestBody.put("part", diagnosisDto.getPart());
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Map<String, String>> requestEntity = new HttpEntity<>(requestBody, headers);
+
+        ResponseEntity<Long> response = restTemplate.postForEntity(uri, requestEntity, Long.class);
+
+        Long deseaseId = response.getBody();
+
+
 
         //set disease to diagnosisDto
-        diagnosisDto.setDisease(diseaseRepository.findById(1L).orElse(null));
+        diagnosisDto.setDisease(diseaseRepository.findById(deseaseId).orElse(null));
         diagnosisDto.setCreateDate(LocalDateTime.now());
 
         Diagnosis created = diagnosisRepository.save(diagnosisDto.get_Diagnosis());
