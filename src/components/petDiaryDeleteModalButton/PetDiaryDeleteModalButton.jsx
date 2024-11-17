@@ -56,25 +56,25 @@ const PetDiaryDeleteModalButton = ({whenDisable, diaryID}) => {
         <div className="petDiaryDeleteModalButton">
             <DialogRoot minH='1000px'>
                 <DialogTrigger>
-                    <Button disabled={whenDisable} margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-                        Delete
+                    <Button disabled={whenDisable} margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
+                        삭제
                     </Button>
                 </DialogTrigger>
                 <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
                     <DialogCloseTrigger />
                     <DialogHeader>
-                    <DialogTitle>Deleting Diary</DialogTitle>
+                    <DialogTitle fontFamily='LINESeedKR-Bd'>수첩 삭제하기</DialogTitle>
                     </DialogHeader>
                     <DialogBody pb={6}>
-                        <Text>Are you really want to delete?</Text>
+                        <Text fontFamily='Pretendard Variable'>선택한 수첩을 삭제하시겠습니까?</Text>
                     </DialogBody>
 
                     <DialogFooter>
                         <DialogActionTrigger asChild>
-                            <Button onClick={handleDeleteDiary}>Delete</Button>
+                            <Button onClick={handleDeleteDiary} fontFamily='LINESeedKR-Bd'>삭제</Button>
                         </DialogActionTrigger>
                         <DialogActionTrigger asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline" fontFamily='LINESeedKR-Bd'>취소</Button>
                         </DialogActionTrigger>
                     </DialogFooter>
                 </DialogContent>

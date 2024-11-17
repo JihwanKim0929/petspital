@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Input } from "@chakra-ui/react";
+import { Input, Text } from "@chakra-ui/react";
 import {
     DialogActionTrigger,
     DialogBody,
@@ -21,7 +21,7 @@ const PetDiaryCreateModalButton = ({ petID, petName }) => {
   const [title, setTitle] = useState('');
 
   const handleCreateDiary = async () => {
-    const diaryTitle = title.trim() === '' ? `${petName}'s diary` : title;
+    const diaryTitle = title.trim() === '' ? `${petName}의 수첩` : title;
 
     try {
 
@@ -47,35 +47,41 @@ const PetDiaryCreateModalButton = ({ petID, petName }) => {
     }
   };
 
+  const resetTitle = () => {
+    setTitle('');
+  }
+
   return (
     <DialogRoot minH='1000px'>
       <DialogTrigger>
-        <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-            Create New Diary
+        <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
+            새로운 수첩 만들기
         </Button>
       </DialogTrigger>
       <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
         <DialogHeader>
-          <DialogTitle>New {petName}'s Diary</DialogTitle>
+          <DialogTitle fontFamily='LINESeedKR-Bd'>{petName}의 새로운 수첩 만들기</DialogTitle>
         </DialogHeader>
         <DialogCloseTrigger />
         <DialogBody pb={6}>
-          <Field label="Title">
+          <Field>
+            <Text fontFamily='LINESeedKR-Bd'>제목</Text>
             <Input 
-              placeholder="Enter title"
+              placeholder="수첩 제목을 입력하세요."
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              fontFamily='Pretendard Variable'
             />
           </Field>
         </DialogBody>
         <DialogFooter>
           <DialogActionTrigger asChild>
-            <Button variant="solid" onClick={handleCreateDiary}>
-                Create New {petName}'s Diary
+            <Button variant="solid" onClick={handleCreateDiary} fontFamily='LINESeedKR-Bd'>
+              새로운 수첩 생성
             </Button>
           </DialogActionTrigger>
           <DialogActionTrigger asChild>
-            <Button variant="solid">Close</Button>
+            <Button variant="solid" fontFamily='LINESeedKR-Bd' onClick={resetTitle}>취소</Button>
           </DialogActionTrigger>
         </DialogFooter>
       </DialogContent>

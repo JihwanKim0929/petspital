@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
 import './Hospital.scss';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useForm, useWatch } from 'react-hook-form';
@@ -9,8 +10,8 @@ import { Field } from "../../../components/ui/field";
 import { Button } from '../../../components/ui/button';
 import HospitalSelectCard from '../../../components/hospitalSelectCard/HospitalSelectCard';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import { addDays } from 'date-fns';
+import { ko } from 'date-fns/locale';
 
 const { kakao } = window;
 
@@ -154,7 +155,7 @@ const Hospital = () => {
   return (
       <div className="hospital">
         <Box w='100%' h='100%' p={3}>
-          <Card.Root  w='100%' h='100%'
+          <Card.Root  w='100%' h='100%' overflow='auto'
           data-state="open" 
           _open={{ 
               animationName: "fade-in, slide-from-top",
@@ -231,9 +232,11 @@ const Hospital = () => {
 
                           <Field label="Date">
                             <DatePicker
+                              showIcon
                               selected={appointmentDate}
                               onChange={(date) => setAppointmentDate(date)}
                               minDate={new Date()}
+                              locale={ko}
                             />
                           </Field>
                         </Fieldset.Content>

@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './Records.scss';
+import { Link } from 'react-router-dom';
 import { Card, Show, Text, Box, VStack, Image } from '@chakra-ui/react';
 import {
   NativeSelectField,
   NativeSelectRoot,
 } from "../../../components/ui/native-select";
+import { EmptyState } from "../../../components/ui/empty-state";
+import { Button } from '../../../components/ui/button';
 import DiagnosisRecordDeleteModalButton from '../../../components/diagnosisRecordDeleteModalButton/DiagnosisRecordDeleteModalButton';
+import { MdOutlinePets } from "react-icons/md";
 
 const Records = () => {
 
@@ -63,7 +67,7 @@ const Records = () => {
   return (
     <div className='records'>
       <Box w='100%' h='100%' p={3}>
-        <Card.Root w='100%' h='100%'
+        <Card.Root w='100%' h='100%' overflow='auto'
         data-state="open" 
         _open={{ 
             animationName: "fade-in, slide-from-top",
@@ -102,7 +106,17 @@ const Records = () => {
               </Box>
             </Show>
             <Show when={!hasPets()}>
-              <Text>Pet is empty.</Text>
+              <Box w='100%' h='100%' display='flex' justifyContent='center' alignItems='center'>
+                <EmptyState 
+                title="등록되어 있는 반려동물이 없어요."
+                description="아래 버튼을 클릭해서 반려동물을 등록하세요." 
+                icon={<MdOutlinePets/>}
+                >
+                  <Link to='/user/petowner/pets'>
+                    <Button fontFamily='LINESeedKR-Bd'>반려동물 등록하러 가기</Button>
+                  </Link>
+                </EmptyState>
+              </Box>
             </Show>
           </Card.Body>
         </Card.Root>

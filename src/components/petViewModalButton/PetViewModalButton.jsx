@@ -46,39 +46,45 @@ const PetViewModalButton = ({petID}) => {
     return (
         <DialogRoot minH='1000px'>
             <DialogTrigger>
-                <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-                View
+                <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
+                상세 정보
                 </Button>
             </DialogTrigger>
             <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
                 <DialogHeader>
-                    <DialogTitle>PET</DialogTitle>
+                    <DialogTitle fontFamily='LINESeedKR-Bd'>반려동물 상세 정보</DialogTitle>
                 </DialogHeader>
                 <DialogCloseTrigger />
                 <DialogBody pb={6}>
-                    <Field label="Pet name">
-                        <Text>{pet.name}</Text>
+                    <Field>
+                        <Text fontFamily='LINESeedKR-Bd'>이름</Text>
+                        <Text fontFamily='Pretendard Variable'>{pet.name}</Text>
                     </Field>
-                    <Field label="Age" mt={4}>
-                        <Text>{pet.age}</Text>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>나이</Text>
+                        <Text fontFamily='Pretendard Variable'>{pet.age}</Text>
                     </Field>
-                    <Field label="Gender" mt={4}>
-                        <Text>{pet.gender}</Text>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>성별</Text>
+                        <Text fontFamily='Pretendard Variable'>{pet.gender}</Text>
                     </Field>
-                    <Field label="Species" mt={4}>
-                        <Text>{pet.species}</Text>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>종</Text>
+                        <Text fontFamily='Pretendard Variable'>{pet.species}</Text>
                     </Field>
-                    <Field label="Weight" mt={4}>
-                        <Text>{pet.weight}</Text>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>무게</Text>
+                        <Text fontFamily='Pretendard Variable'>{pet.weight}</Text>
                     </Field>
-                    <Field label="Description" mt={4}>
-                        <Text>{pet.description}</Text>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>설명</Text>
+                        <Text fontFamily='Pretendard Variable'>{pet.description}</Text>
                     </Field>
                 </DialogBody>
 
                 <DialogFooter>
                     <DialogActionTrigger asChild>
-                        <Button variant="outline">Close</Button>
+                        <Button variant="outline" fontFamily='LINESeedKR-Bd'>닫기</Button>
                     </DialogActionTrigger>
                 </DialogFooter>
             </DialogContent>

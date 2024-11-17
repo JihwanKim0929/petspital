@@ -22,12 +22,15 @@ import { Button } from "../../../components/ui/button";
 import { useForm } from 'react-hook-form';
 import { toaster } from '../../ui/toaster';
 import { Text, Flex } from '@chakra-ui/react';
+import { useNavigate } from 'react-router-dom';
 
 
 const PetOwnerSignUpModalButton = () => {
 
   const { register, handleSubmit, errors, reset, setValue } = useForm();
   
+  const navigate = useNavigate();
+
   const onSubmit = (data) => {
     const userDto = {
       username: data.username,
@@ -63,6 +66,7 @@ const PetOwnerSignUpModalButton = () => {
           isClosable: true
         });
         reset();
+        navigate('/login');
       } else {
         toaster.create({
           title: "계정 생성 실패",

@@ -6,7 +6,7 @@ import AccountDeleteModalButton from '../../../components/accountDeleteModalButt
 const Settings = () => {
   return (
     <div className='settings'>
-      <Box w='100%' h='100%' p={3}
+      <Box w='100%' h='100%' p={3} overflow='auto'
       data-state="open" 
       _open={{ 
           animationName: "fade-in, slide-from-top",

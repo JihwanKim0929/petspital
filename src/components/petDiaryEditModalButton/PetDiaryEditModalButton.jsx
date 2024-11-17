@@ -47,32 +47,34 @@ const PetDiaryEditModalButton = ({whenDisable, diaryID, petName}) => {
     return (
         <DialogRoot minH='1000px'>
             <DialogTrigger>
-                <Button disabled={whenDisable} margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-                    Edit
+                <Button disabled={whenDisable} margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} 
+                fontFamily='LINESeedKR-Bd'>
+                    편집
                 </Button>
             </DialogTrigger>
             <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
                 <DialogHeader>
-                    <DialogTitle>Edit Diary</DialogTitle>
+                    <DialogTitle fontFamily='LINESeedKR-Bd'>수첩 제목 변경</DialogTitle>
                 </DialogHeader>
                 <DialogCloseTrigger />
                 <DialogBody pb={6}>
-                    <Field label="Title">
+                    <Field>
                         <Input 
-                        placeholder="Enter title"
+                        placeholder="수첩의 제목을 입력하세요."
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
+                        fontFamily='Pretendard Variable'
                         />
                     </Field>
                 </DialogBody>
                 <DialogFooter>
                     <DialogActionTrigger asChild>
-                        <Button variant="solid" onClick={handleEditDiary}>
-                            Edit
+                        <Button variant="solid" onClick={handleEditDiary} fontFamily='LINESeedKR-Bd'>
+                            편집
                         </Button>
                     </DialogActionTrigger>
                     <DialogActionTrigger asChild>
-                        <Button variant="solid">Cancel</Button>
+                        <Button variant="solid" fontFamily='LINESeedKR-Bd'>취소</Button>
                     </DialogActionTrigger>
                 </DialogFooter>
             </DialogContent>

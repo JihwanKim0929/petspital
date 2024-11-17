@@ -141,7 +141,7 @@ const Profile = () => {
   return (
     <div className="profile">
       <Box w='100%' h='100%' p={3}>
-        <Card.Root className="card" w='100%' h='100%'
+        <Card.Root className="card" w='100%' h='100%' overflow='auto'
         data-state="open" 
         _open={{ 
             animationName: "fade-in, slide-from-top",

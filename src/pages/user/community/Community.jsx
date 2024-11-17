@@ -7,7 +7,7 @@ const Community = () => {
   return (
     <div className="community">
       <Box w='100%' h='100%' p={3}>
-        <Card.Root w='100%' h='100%' boxSizing='border-box'>
+        <Card.Root w='100%' h='100%' overflow='auto'>
           <Card.Body justifyContent='center' alignItems='center'
           data-state="open" 
           _open={{ 

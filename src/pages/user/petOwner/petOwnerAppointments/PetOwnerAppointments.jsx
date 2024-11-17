@@ -61,7 +61,7 @@ const PetOwnerAppointments = () => {
     return (
         <div className="petOwnerAppointments">
             <Box w='100%' h='100%' p={3}>
-                <Card.Root  w='100%' h='100%'
+                <Card.Root  w='100%' h='100%' overflow='auto'
                 data-state="open" 
                 _open={{ 
                     animationName: "fade-in, slide-from-top",

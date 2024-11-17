@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { Input } from "@chakra-ui/react";
+import { Input, Text, Flex } from "@chakra-ui/react";
 import {
     DialogActionTrigger,
     DialogBody,
@@ -72,50 +72,90 @@ const PetRegisterModalButton = () => {
   return (
     <DialogRoot minH='1000px'>
       <DialogTrigger>
-        <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-          Register your pet
+        <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
+          새로운 반려동물 등록하기
         </Button>
       </DialogTrigger>
       <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
         <form onSubmit={handleSubmit(onSubmit)}>
           <DialogHeader>
-            <DialogTitle>Register your pet</DialogTitle>
+            <DialogTitle fontFamily='LINESeedKR-Bd'>새로운 반려동물 등록하기</DialogTitle>
           </DialogHeader>
           <DialogCloseTrigger />
           <DialogBody pb={6}>
-            <Field label="Pet name" required>
-              <Input placeholder="Enter your pet's name" {...register('petName', { required: true })}/>
+            <Field>
+              <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>이름</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+              </Flex>
+              <Input placeholder="반려동물의 이름을 입력하세요." {...register('petName', { required: true })}
+              fontFamily='Pretendard Variable'
+              />
             </Field>
-            <Field label="Age" required mt={4}>
-              <Input placeholder="Enter your pet's age" {...register('age', { required: true })}/>
+            <Field required mt={4}>
+              <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>나이</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+              </Flex>
+              <Input placeholder="반려동물의 나이를 입력하세요." {...register('age', { required: true })}
+              fontFamily='Pretendard Variable'
+              />
             </Field>
-            <Field label="Gender" required mt={4}>
+            <Field required mt={4}>
+              <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>성별</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+              </Flex>
               <NativeSelectRoot>
-                <NativeSelectField placeholder="Select gender" {...register('gender', { required: true })}>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
+                <NativeSelectField placeholder="반려동물의 성별을 선택하세요." {...register('gender', { required: true })}
+                fontFamily='Pretendard Variable'
+                >
+                  <option value="male" style={{ fontFamily:'Pretendard Variable' }}>수컷</option>
+                  <option value="female" style={{ fontFamily:'Pretendard Variable' }}>암컷</option>
                 </NativeSelectField>
               </NativeSelectRoot>
             </Field>
-            <Field label="Species" required mt={4}>
+            <Field required mt={4}>
+              <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>종</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+              </Flex>
               <NativeSelectRoot>
-                <NativeSelectField placeholder="Select species" {...register('species', { required: true })}>
-                  <option value="dog">Dog</option>
-                  <option value="cat">Cat</option>
+                <NativeSelectField placeholder="반려동물의 종을 선택하세요." {...register('species', { required: true })}
+                fontFamily='Pretendard Variable'
+                >
+                  <option value="dog" style={{ fontFamily:'Pretendard Variable' }}>개</option>
+                  <option value="cat" style={{ fontFamily:'Pretendard Variable' }}>고양이</option>
                 </NativeSelectField>
               </NativeSelectRoot>
             </Field>
-            <Field label="Weight(kg)" required mt={4}>
-              <Input placeholder="Enter your pet's weight" {...register('weight', { required: true })}/>
+            <Field required mt={4}>
+              <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>무게(kg)</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+              </Flex>
+              <Input placeholder="반려동물의 무게를 입력하세요." {...register('weight', { required: true })}
+              fontFamily='Pretendard Variable'
+              />
             </Field>
-            <Field label="Description" required mt={4}>
-              <Input placeholder="Enter your pet's description" {...register('description', { required: true })}/>
+            <Field required mt={4}>
+              <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>설명</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+              </Flex>
+              <Input placeholder="반려동물에 대한 설명을 입력하세요." {...register('description', { required: true })}
+              fontFamily='Pretendard Variable'
+              />
             </Field>
-            <Field label="Pet Image" mt={4}>
+            <Field mt={4}>
+              <Flex>
+                  <Text fontFamily='LINESeedKR-Bd'>동물 사진</Text>
+                  <Text color='red.500' ml='0.25rem'>*</Text>
+              </Flex>
               <FileUploadRoot onChange={handleFileChange}>
                 <FileUploadTrigger asChild>
-                  <Button variant="outline" size="sm">
-                    Upload file
+                  <Button variant="outline" size="sm" fontFamily='LINESeedKR-Bd'>
+                    파일 업로드
                   </Button>
                 </FileUploadTrigger>
                 <FileUploadList />
@@ -124,9 +164,9 @@ const PetRegisterModalButton = () => {
           </DialogBody>
 
           <DialogFooter>
-            <Button type="submit">Register</Button>
+            <Button type="submit" fontFamily='LINESeedKR-Bd'>등록</Button>
             <DialogActionTrigger asChild>
-              <Button variant="outline" onClick={resetForm}>Cancel</Button>
+              <Button variant="outline" onClick={resetForm} fontFamily='LINESeedKR-Bd'>취소</Button>
             </DialogActionTrigger>
           </DialogFooter>
         </form>

@@ -60,33 +60,33 @@ const PetDiariesModalButton = ({petID, petName}) => {
   return (
     <DialogRoot minH='1000px'>
       <DialogTrigger>
-        <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-          View Diaries
+        <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
+          수첩 조회하기
         </Button>
       </DialogTrigger>
       <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
         <DialogHeader>
-          <DialogTitle>{petName}'s Diaries</DialogTitle>
+          <DialogTitle>{petName}의 수첩</DialogTitle>
         </DialogHeader>
         <DialogCloseTrigger />
         <DialogBody pb={6}>
           <NativeSelectRoot>
-            <NativeSelectField placeholder="Select diary" onChange={handleSelectChange}>
+            <NativeSelectField placeholder="조회할 수첩을 선택하세요." onChange={handleSelectChange} fontFamily='Pretendard Variable'>
               {diaries.map(diary => (
-                <option key={diary.id} value={diary.id}>
-                  {diary.title} - {diary.createDate}
+                <option key={diary.id} value={diary.id} style={{ fontFamily: 'Pretendard Variable' }}>
+                  {diary.title}
                 </option>
               ))}
             </NativeSelectField>
           </NativeSelectRoot>
         </DialogBody>
         <DialogFooter>
-          <Button variant="solid" disabled={!selectedDiaryID} onClick={handleClickViewButton}>View Diary</Button>
+          <Button variant="solid" disabled={!selectedDiaryID} onClick={handleClickViewButton} fontFamily='LINESeedKR-Bd'>선택한 수첩 조회하기</Button>
           <PetDiaryEditModalButton whenDisable={!selectedDiaryID} diaryID={selectedDiaryID} petName={petName} />
-          <PetDiaryDeleteModalButton whenDisable={!selectedDiaryID} diaryID={selectedDiaryID}>Delete Diary</PetDiaryDeleteModalButton>
+          <PetDiaryDeleteModalButton whenDisable={!selectedDiaryID} diaryID={selectedDiaryID} />
           <PetDiaryCreateModalButton petID={petID} petName={petName} />
           <DialogActionTrigger asChild>
-            <Button variant="solid">Close</Button>
+            <Button variant="solid" fontFamily='LINESeedKR-Bd'>닫기</Button>
           </DialogActionTrigger>
         </DialogFooter>
       </DialogContent>
