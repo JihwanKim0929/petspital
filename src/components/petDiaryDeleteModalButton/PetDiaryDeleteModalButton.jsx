@@ -31,7 +31,8 @@ const PetDiaryDeleteModalButton = ({whenDisable, diaryID}) => {
             if (response.ok) {
                 navigate(0);
                 toaster.create({
-                    title: "Successfully deleted.",
+                    title: "삭제 완료",
+                    description: "성공적으로 삭제가 완료되었습니다.",
                     status: "success",
                     duration: 3000,
                     isClosable: true
@@ -43,7 +44,7 @@ const PetDiaryDeleteModalButton = ({whenDisable, diaryID}) => {
         } catch (err) {
             console.error("Error deleting diary:", err);
             toaster.create({
-                title: "Failed to delete diary.",
+                title: "삭제 실패",
                 description: err.message,
                 status: "error",
                 duration: 3000,

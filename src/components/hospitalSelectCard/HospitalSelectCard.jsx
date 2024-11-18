@@ -11,8 +11,8 @@ const HospitalSelectCard = ({ hospital, isSelected, onSelect }) => {
       w='400px'
     >
         <Card.Body>
-            <Text fontWeight="bold">{hospital.hospitalName}</Text>
-            <Text>{hospital.hospitalAddress}</Text>
+            <Text fontWeight="bold" fontFamily='LINESeedKR-Bd'>{hospital.hospitalName}</Text>
+            <Text fontFamily='Pretendard Variable'>{hospital.hospitalAddress}</Text>
         </Card.Body>
     </Card.Root>
   );

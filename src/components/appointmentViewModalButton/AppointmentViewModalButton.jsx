@@ -46,48 +46,57 @@ const AppointmentViewModalButton = ({appointmentID}) => {
     return (
         <DialogRoot minH='1000px'>
             <DialogTrigger>
-                <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-                View
+                <Button margin="0.5rem" fontFamily='LINESeedKR-Bd' fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
+                    상세 정보
                 </Button>
             </DialogTrigger>
             <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
                 <DialogHeader>
-                    <DialogTitle>APPOINTMENT</DialogTitle>
+                    <DialogTitle fontFamily='LINESeedKR-Bd'>예약 조회</DialogTitle>
                 </DialogHeader>
                 <DialogCloseTrigger />
                 <DialogBody pb={6}>
-                    <Field label="Pet Name">
-                        <Text>{appointment.pet.name}</Text>
+                    <Field>
+                        <Text fontFamily='LINESeedKR-Bd'>동물명</Text>
+                        <Text fontFamily='Pretendard Variable'>{appointment.pet.name}</Text>
                     </Field>
-                    <Field label="Age" mt={4}>
-                        <Text>{appointment.pet.age}</Text>
+                    <Field mt={4}>
+                    <Text fontFamily='LINESeedKR-Bd'>나이</Text>
+                        <Text fontFamily='Pretendard Variable'>{appointment.pet.age}</Text>
                     </Field>
-                    <Field label="Gender" mt={4}>
-                        <Text>{appointment.pet.gender}</Text>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>성별</Text>
+                        <Text fontFamily='Pretendard Variable'>{appointment.pet.gender}</Text>
                     </Field>
-                    <Field label="Weight" mt={4}>
-                        <Text>{appointment.pet.weight}</Text>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>무게</Text>
+                        <Text fontFamily='Pretendard Variable'>{appointment.pet.weight}</Text>
                     </Field>
-                    <Field label="Species" mt={4}>
-                        <Text>{appointment.pet.species}</Text>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>종</Text>
+                        <Text fontFamily='Pretendard Variable'>{appointment.pet.species}</Text>
                     </Field>
-                    <Field label="Description" mt={4}>
-                        <Text>{appointment.pet.description}</Text>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>설명</Text>
+                        <Text fontFamily='Pretendard Variable'>{appointment.pet.description}</Text>
                     </Field>
-                    <Field label="Pet Image" mt={4}>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>반려동물 이미지</Text>
                         <Image src={appointment.pet.image_url} boxSize="100px" objectFit="cover" />
                     </Field>
-                    <Field label="Appointment Date" mt={4}>
-                        <Text>{appointment.reservationDate}</Text>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>예약 날짜</Text>
+                        <Text fontFamily='Pretendard Variable'>{appointment.reservationDate}</Text>
                     </Field>
-                    <Field label="Hospital Address" mt={4}>
-                        <Text>{appointment.hospitalAddress}</Text>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>병원 주소</Text>
+                        <Text fontFamily='Pretendard Variable'>{appointment.hospitalAddress}</Text>
                     </Field>
                 </DialogBody>
 
                 <DialogFooter>
                     <DialogActionTrigger asChild>
-                        <Button variant="outline">Close</Button>
+                        <Button variant="outline" fontFamily='LINESeedKR-Bd'>닫기</Button>
                     </DialogActionTrigger>
                 </DialogFooter>
             </DialogContent>

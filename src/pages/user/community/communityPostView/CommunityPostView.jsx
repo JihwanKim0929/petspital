@@ -131,11 +131,12 @@ const CommunityPostView = () => {
       
       <Flex>
         <Textarea
-          placeholder="Comment..."
+          placeholder="댓글 내용을 입력하세요."
+          fontFamily='Pretendard Variable'
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
-        <Button onClick={handleCommentSubmit}>Comment</Button>
+        <Button onClick={handleCommentSubmit} fontFamily='LINESeedKR-Bd'>작성</Button>
       </Flex>
 
       <Stack spacing={4} marginTop={4}>

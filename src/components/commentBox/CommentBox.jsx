@@ -46,14 +46,16 @@ const CommentBox = ({comment, currentUser, postID, fetchComments}) => {
         <div className="commentBox">
             <Show when={!isEditMode}>
                 <Stack key={comment.id} padding="4" borderBottom="1px solid gray">
-                    <Text fontWeight="bold">{comment.author.username}</Text>
-                    <Text>{comment.content}</Text>
-                    <Text fontSize="sm" color="gray.500">{new Date(comment.createDate).toLocaleString()}</Text>
+                    <Text fontWeight="bold" fontFamily='LINESeedKR-Bd'>{comment.author.username}</Text>
+                    <Text fontFamily='Pretendard Variable'>{comment.content}</Text>
+                    <Text fontSize="sm" color="gray.500" fontFamily='Pretendard Variable'>
+                        {new Date(comment.createDate).toLocaleString()}
+                    </Text>
 
                     {currentUser && comment.author.id === currentUser.id && (
                     <div>
-                        <Button margin="0.5rem" alignSelf="flex-start" onClick={startEditMode}>
-                            Edit
+                        <Button margin="0.5rem" alignSelf="flex-start" onClick={startEditMode} fontFamily='LINESeedKR-Bd'>
+                            편집
                         </Button>
                         <CommentDeleteModalButton commentID={comment.id} />
                     </div>
@@ -62,12 +64,13 @@ const CommentBox = ({comment, currentUser, postID, fetchComments}) => {
             </Show>
             <Show when={isEditMode}>
                 <Textarea
-                placeholder="Comment..."
+                placeholder="댓글 내용을 입력하세요."
                 value={nextContent}
                 onChange={(e) => setNextContent(e.target.value)}
+                fontFamily='Pretendard Variable'
                 />
-                <Button onClick={handleCommentSubmit}>Submit</Button>
-                <Button onClick={cancelEditMode}>Cancel</Button>
+                <Button onClick={handleCommentSubmit} fontFamily='LINESeedKR-Bd'>편집</Button>
+                <Button onClick={cancelEditMode} fontFamily='LINESeedKR-Bd'>취소</Button>
             </Show>
         </div>
     )

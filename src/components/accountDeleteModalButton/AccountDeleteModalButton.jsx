@@ -30,7 +30,8 @@ const AccountDeleteModalButton = () => {
                 sessionStorage.removeItem('user');
                 navigate('/');
                 toaster.create({
-                    title: "Successfully deleted account.",
+                    title: "계정 삭제 완료",
+                    description: "성공적으로 계정을 삭제하였습니다.",
                     status: "success",
                     duration: 3000,
                     isClosable: true
@@ -47,25 +48,25 @@ const AccountDeleteModalButton = () => {
         <div className="accountDeleteModalButton">
             <DialogRoot minH='1000px'>
                 <DialogTrigger>
-                    <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-                        Delete Account
+                    <Button margin="0.5rem" fontFamily='LINESeedKR-Bd' fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
+                        계정 삭제
                     </Button>
                 </DialogTrigger>
                 <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
                     <DialogCloseTrigger />
                     <DialogHeader>
-                    <DialogTitle>Deleting Account</DialogTitle>
+                    <DialogTitle fontFamily='LINESeedKR-Bd'>계정 삭제</DialogTitle>
                     </DialogHeader>
                     <DialogBody pb={6}>
-                        <Text>Are you really want to delete account?</Text>
+                        <Text fontFamily='Pretendard Variable'>정말로 계정을 삭제하시겠습니까?</Text>
                     </DialogBody>
 
                     <DialogFooter>
                         <DialogActionTrigger asChild>
-                            <Button onClick={handleDeleteAccount}>Delete Account</Button>
+                            <Button onClick={handleDeleteAccount} fontFamily='LINESeedKR-Bd'>삭제</Button>
                         </DialogActionTrigger>
                         <DialogActionTrigger asChild>
-                            <Button variant="outline">Cancel</Button>
+                            <Button variant="outline" fontFamily='LINESeedKR-Bd'>취소</Button>
                         </DialogActionTrigger>
                     </DialogFooter>
                 </DialogContent>

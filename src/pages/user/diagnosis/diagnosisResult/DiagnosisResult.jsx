@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './DiagnosisResult.scss';
+import { Box, Card, Flex, Text, Image } from '@chakra-ui/react';
 
 const DiagnosisResult = () => {
   const [diagnosisResult, setDiagnosisResult] = useState(null);
@@ -47,15 +48,57 @@ const DiagnosisResult = () => {
 
   return (
     <div className='diagnosisResult'>
-      <h1>Diagnosis Result</h1>
-      <p>Pet Name: {diagnosisResult.pet.name}</p>
-      <p>Species: {diagnosisResult.species}</p>
-      <p>Diagnosed Part: {diagnosisResult.part}</p>
-      <img src={diagnosisResult.image_url} alt="Diagnosis" />
-      <h2>Disease:</h2>
-      {diagnosisResult.disease ? 
-      <p>{diagnosisResult.disease.name}: {diagnosisResult.disease.symptoms} - {diagnosisResult.disease.description}</p> :
-      <p>No disease.</p>}
+      <Box w='100%' h='100%' p={10}>
+        <Card.Root w='100%' h='100%' overflow='auto'>
+          <Card.Body justifyContent='center' alignItems='center'
+          data-state="open" 
+          _open={{ 
+              animationName: "fade-in, slide-from-top",
+              animationDuration: "300ms",
+              animationTimingFunction: "ease-out"
+          }}>
+            <Box w='fit-content'>
+              <Text fontFamily='LINESeedKR-Bd' fontSize='30px' w='100%' textAlign='left'>진단 결과</Text>
+              <Box display='flex' align='left' w='100%' mt={6}>
+              <Image src={diagnosisResult.image_url} alt="Diagnosis" borderRadius='1rem' w='300px' h='300px' mr={10} />
+                <Box>
+                  <Flex>
+                    <Text fontFamily='Pretendard Variable' fontWeight='700' fontSize='20px' whiteSpace='nowrap'>이름 :</Text>
+                    <Text fontFamily='Pretendard Variable' fontSize='20px' ml={2} wordBreak='break-word'>{diagnosisResult.pet.name}</Text>
+                  </Flex>
+                  <Flex mt={3}>
+                    <Text fontFamily='Pretendard Variable' fontWeight='700' fontSize='20px' whiteSpace='nowrap'>종 :</Text>
+                    <Text fontFamily='Pretendard Variable' fontSize='20px' ml={2} wordBreak='break-word'>{diagnosisResult.species}</Text>
+                  </Flex>
+                  <Flex mt={3}>
+                    <Text fontFamily='Pretendard Variable' fontWeight='700' fontSize='20px' whiteSpace='nowrap'>진단 부위 :</Text>
+                    <Text fontFamily='Pretendard Variable' fontSize='20px' ml={2} wordBreak='break-word'>{diagnosisResult.part}</Text>
+                  </Flex>
+                  <Flex mt={3}>
+                    <Text fontFamily='Pretendard Variable' fontWeight='700' fontSize='20px' whiteSpace='nowrap'>예상 질병 :</Text>
+                    {diagnosisResult.disease ? 
+                    <Box ml={2}>
+                      <Flex>
+                        <Text fontFamily='Pretendard Variable' fontSize='20px' whiteSpace='nowrap'>질병명:</Text>
+                        <Text fontFamily='Pretendard Variable' fontSize='20px' ml={2} wordBreak='break-word'>{diagnosisResult.disease.name}</Text>
+                      </Flex>
+                      <Flex mt={3}>
+                        <Text fontFamily='Pretendard Variable' fontSize='20px' whiteSpace='nowrap'>증상:</Text>
+                        <Text fontFamily='Pretendard Variable' fontSize='20px' ml={2} wordBreak='break-word'>{diagnosisResult.disease.symptoms}</Text>
+                      </Flex>
+                      <Flex mt={3}>
+                        <Text fontFamily='Pretendard Variable' fontSize='20px' whiteSpace='nowrap'>설명:</Text>
+                        <Text fontFamily='Pretendard Variable' fontSize='20px' ml={2} wordBreak='break-word'>{diagnosisResult.disease.description}</Text>
+                      </Flex>
+                    </Box> : 
+                    <Text fontFamily='Pretendard Variable' fontSize='20px' ml={2} wordBreak='break-word'>예상되는 질병이 없습니다.</Text>}
+                  </Flex>
+                </Box>
+              </Box>
+            </Box>
+          </Card.Body>
+        </Card.Root>
+      </Box>
     </div>
   );
 }

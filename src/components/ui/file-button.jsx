@@ -38,8 +38,8 @@ export const FileUploadDropzone = forwardRef(
           <LuUpload />
         </Icon>
         <ChakraFileUpload.DropzoneContent>
-          <div>{label}</div>
-          {description && <Text color='fg.muted'>{description}</Text>}
+          <div style={{ fontFamily: 'Pretendard Variable' }}>{label}</div>
+          {description && <Text color='fg.muted' fontFamily='Pretendard Variable'>{description}</Text>}
         </ChakraFileUpload.DropzoneContent>
         {children}
       </ChakraFileUpload.Dropzone>

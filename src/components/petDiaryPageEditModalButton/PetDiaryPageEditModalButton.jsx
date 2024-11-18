@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Input } from "@chakra-ui/react";
+import { Input, Flex, Text } from "@chakra-ui/react";
 import {
   DialogActionTrigger,
   DialogBody,
@@ -51,22 +51,27 @@ const PetDiaryPageEditModalButton = ({ pageID, pageContent }) => {
     return (
         <DialogRoot minH='1000px'>
             <DialogTrigger>
-                <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-                    Edit
+                <Button margin="0.5rem" fontFamily='LINESeedKR-Bd' fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
+                    편집
                 </Button>
             </DialogTrigger>
             <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <DialogHeader>
-                        <DialogTitle>Edit Page</DialogTitle>
+                        <DialogTitle fontFamily='LINESeedKR-Bd'>페이지 편집</DialogTitle>
                     </DialogHeader>
                     <DialogCloseTrigger />
                     <DialogBody pb={6}>
-                        <Field label="Content" required>
+                        <Field required>
+                            <Flex>
+                                <Text fontFamily='LINESeedKR-Bd'>내용</Text>
+                                <Text color='red.500' ml='0.25rem'>*</Text>
+                            </Flex>
                             <Input 
-                                placeholder="Enter content"
+                                placeholder="내용을 입력하세요."
                                 defaultValue={pageContent}
-                                {...register('content', { required: true })} 
+                                {...register('content', { required: true })}
+                                fontFamily='Pretendard Variable'
                             />
                         </Field>
                     </DialogBody>
@@ -76,12 +81,13 @@ const PetDiaryPageEditModalButton = ({ pageID, pageContent }) => {
                             <Button 
                                 type="submit" 
                                 disabled={!contentValue}
+                                fontFamily='LINESeedKR-Bd'
                             >
-                                Edit
+                                편집
                             </Button>
                         </DialogActionTrigger>
                         <DialogActionTrigger asChild>
-                            <Button variant="outline" onClick={resetForm}>Cancel</Button>
+                            <Button variant="outline" onClick={resetForm} fontFamily='LINESeedKR-Bd'>취소</Button>
                         </DialogActionTrigger>
                     </DialogFooter>
                 </form>

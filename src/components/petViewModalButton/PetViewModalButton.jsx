@@ -78,7 +78,7 @@ const PetViewModalButton = ({petID}) => {
                     </Field>
                     <Field mt={4}>
                         <Text fontFamily='LINESeedKR-Bd'>설명</Text>
-                        <Text fontFamily='Pretendard Variable'>{pet.description}</Text>
+                        <Text fontFamily='Pretendard Variable' wordBreak='break-word'>{pet.description}</Text>
                     </Field>
                 </DialogBody>
 

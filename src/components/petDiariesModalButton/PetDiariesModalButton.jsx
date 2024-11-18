@@ -64,7 +64,7 @@ const PetDiariesModalButton = ({petID, petName}) => {
           수첩 조회하기
         </Button>
       </DialogTrigger>
-      <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
+      <DialogContent marginLeft='0.5rem' marginRight='0.5rem' minWidth="fit-content" height="fit-content">
         <DialogHeader>
           <DialogTitle>{petName}의 수첩</DialogTitle>
         </DialogHeader>

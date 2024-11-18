@@ -58,22 +58,26 @@ const CommunityPost = () => {
     <div className="communityPost">
       <VStack w='100%'>
         <form onSubmit={onSubmit} style={{ width: '100%' }}>
-          <Field label="Title" w='60%' m={6}>
-            <Input placeholder="Enter title"  onChange={(e) => setTitle(e.target.value)}/>
+          <Field w='60%' m={6}>
+            <Text fontFamily='LINESeedKR-Bd'>제목</Text>
+            <Input placeholder="제목을 입력하세요." onChange={(e) => setTitle(e.target.value)}
+            fontFamily='Pretendard Variable'/>
           </Field>
-          <Field label="Content" w='60%' m={6}>
-            <Textarea placeholder="Enter content" onChange={(e) => setContent(e.target.value)} h='300px'/>
+          <Field w='60%' m={6}>
+            <Text fontFamily='LINESeedKR-Bd'>내용</Text>
+            <Textarea placeholder="내용을 입력하세요." onChange={(e) => setContent(e.target.value)} h='300px'
+            fontFamily='Pretendard Variable'/>
           </Field>
           <FileUploadRoot onChange={(e) => setImage(e.target.files[0])} accept={["image/*"]} m={6}>
             <FileUploadTrigger>
-              <Button>Upload file</Button>
+              <Button fontFamily='LINESeedKR-Bd'>이미지 파일 업로드</Button>
             </FileUploadTrigger>
             <FileUploadList />
           </FileUploadRoot>
           <Flex>
-            <Button type='submit'>Post</Button>
+            <Button type='submit' fontFamily='LINESeedKR-Bd'>작성</Button>
             <Link to="../" style={{ textDecoration: "none" }}>
-              <Button>Back</Button>
+              <Button fontFamily='LINESeedKR-Bd'>뒤로가기</Button>
             </Link>
           </Flex>
         </form>

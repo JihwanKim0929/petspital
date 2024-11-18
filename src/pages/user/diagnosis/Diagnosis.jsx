@@ -117,43 +117,49 @@ const Diagnosis = () => {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Fieldset.Root size="lg" maxW="md">
                   <Stack mb={4}>
-                    <Fieldset.Legend>Diagnosis</Fieldset.Legend>
+                    <Fieldset.Legend fontFamily='LINESeedKR-Bd'>반려동물 AI로 진단해보기</Fieldset.Legend>
                   </Stack>
 
                   <Fieldset.Content>
-                    <Field label="Select your pet to diagnose">
+                    <Field>
+                      <Text fontFamily='Pretendard Variable' fontWeight='500'>반려동물 선택</Text>
                       <NativeSelectRoot>
-                        <NativeSelectField placeholder="Select your pet" {...register('petID', { required: true })}
-                        onChange={handlePetChange}>
+                        <NativeSelectField placeholder="진단할 반려동물을 선택하세요." {...register('petID', { required: true })}
+                        onChange={handlePetChange}
+                        fontFamily='Pretendard Variable'
+                        >
                           {pets.map(pet => (
-                            <option key={pet.id} value={pet.id}>
+                            <option key={pet.id} value={pet.id} style={{fontFamily: 'Pretendard Variable'}}>
                               {pet.name}
                             </option>
                           ))}
                         </NativeSelectField>
                       </NativeSelectRoot>
                     </Field>
-                    <Field label="Body part">
+                    <Field>
+                      <Text fontFamily='Pretendard Variable' fontWeight='500'>신체부위 선택</Text>
                       <NativeSelectRoot>
-                        <NativeSelectField placeholder="Select the body part to diagnose." {...register('part', { required: true })}>
-                        <option value="eye">Eye</option>
-                        <option value="skin">Skin</option>
+                        <NativeSelectField placeholder="진단할 신체부위를 선택하세요." {...register('part', { required: true })} 
+                        fontFamily='Pretendard Variable'
+                        >
+                        <option value="eye" style={{fontFamily: 'Pretendard Variable'}}>눈</option>
+                        <option value="skin" style={{fontFamily: 'Pretendard Variable'}}>피부</option>
                         </NativeSelectField>
                       </NativeSelectRoot>
                     </Field>
-                    <Field label="Image">
+                    <Field>
                       <FileUploadRoot maxW="xl" alignItems="stretch" maxFiles={1} onChange={handleImageFileChange}>
                         <FileUploadDropzone
-                          label="Drag and drop here to upload"
-                          description=".png, .jpg up to 5MB"
+                          label="파일을 드래그하여 업로드"
+                          description="5MB 이하의 이미지 파일을 업로드하세요."
                         />
                         <FileUploadList />
                       </FileUploadRoot>
                     </Field>
                   </Fieldset.Content>
 
-                  <Button type="submit" alignSelf="flex-start" mt={6}>
-                    Submit
+                  <Button type="submit" alignSelf="flex-start" mt={6} fontFamily='LINESeedKR-Bd'>
+                    진단하기
                   </Button>
                 </Fieldset.Root>
               </form>

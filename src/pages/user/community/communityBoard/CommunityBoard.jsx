@@ -85,8 +85,8 @@ const CommunityBoard = () => {
                     style={{ textDecoration: 'none' }}
                     onClick={() => handleItemClick(item.id)}
                   >
-                    <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-                      Edit
+                    <Button margin="0.5rem" fontFamily='LINESeedKR-Bd' fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
+                      편집
                     </Button>
                   </Link>
                   <PostDeleteModalButton postID={item.id} />
@@ -108,7 +108,7 @@ const CommunityBoard = () => {
           </HStack>
         </PaginationRoot>
         <Link to="./post" style={{ textDecoration: "none" }}>
-          <Button>Post</Button>
+          <Button fontFamily='LINESeedKR-Bd'>게시글 작성</Button>
         </Link>
       </Stack>
     </div>

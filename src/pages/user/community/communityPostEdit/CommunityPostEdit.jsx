@@ -67,16 +67,20 @@ const CommunityPostEdit = () => {
         <div className="communityPost">
             <VStack w='100%'>
                 <form onSubmit={onSubmit} style={{ width: '100%' }}>
-                    <Field label="Title" w='60%' m={6}>
-                        <Input placeholder="Enter title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                    <Field w='60%' m={6}>
+                        <Text fontFamily='LINESeedKR-Bd'>제목</Text>
+                        <Input placeholder="제목을 입력하세요." value={title} onChange={(e) => setTitle(e.target.value)}
+                        fontFamily='Pretendard Variable'/>
                     </Field>
-                    <Field label="Content" w='60%' m={6}>
-                        <Textarea placeholder="Enter content" value={content} onChange={(e) => setContent(e.target.value)} h='300px'/>
+                    <Field w='60%' m={6}>
+                        <Text fontFamily='LINESeedKR-Bd'>내용</Text>
+                        <Textarea placeholder="내용을 입력하세요." value={content} onChange={(e) => setContent(e.target.value)}
+                        h='300px' fontFamily='Pretendard Variable'/>
                     </Field>
                     <Flex>
-                        <Button type='submit'>Edit Post</Button>
+                        <Button type='submit' fontFamily='LINESeedKR-Bd'>게시글 편집</Button>
                         <Link to="../" style={{ textDecoration: "none" }}>
-                            <Button>Back</Button>
+                            <Button fontFamily='LINESeedKR-Bd'>뒤로가기</Button>
                         </Link>
                     </Flex>
                 </form>
