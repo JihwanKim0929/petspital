@@ -170,7 +170,7 @@ const Diagnosis = () => {
               <Box w='100%' h='100%' display='flex' justifyContent='center' alignItems='center'>
                 <EmptyState 
                 title="등록되어 있는 반려동물이 없어요."
-                description="아래 버튼을 클릭해서 반려동물을 등록하세요." 
+                description="아래 버튼을 클릭해서 반려동물을 등록하세요."
                 icon={<MdOutlinePets/>}
                 >
                   <Link to='/user/petowner/pets'>

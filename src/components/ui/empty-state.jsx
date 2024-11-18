@@ -11,8 +11,8 @@ export const EmptyState = forwardRef(function EmptyState(props, ref) {
         )}
         {description ? (
           <VStack textAlign='center'>
-            <ChakraEmptyState.Title fontFamily='LINESeedKR-Bd'>{title}</ChakraEmptyState.Title>
-            <ChakraEmptyState.Description fontFamily='Pretendard Variable'>
+            <ChakraEmptyState.Title fontFamily='LINESeedKR-Bd' fontSize={{base:'14px', md:'18px', lg:'20px'}}>{title}</ChakraEmptyState.Title>
+            <ChakraEmptyState.Description fontFamily='Pretendard Variable' fontSize={{base:'12px', md:'15px', lg:'16px'}}>
               {description}
             </ChakraEmptyState.Description>
           </VStack>

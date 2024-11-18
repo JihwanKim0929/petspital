@@ -35,24 +35,76 @@ const UserNavbar = () => {
   const isBelowMd = useBreakpointValue({ base: true, md: false });
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const user = sessionStorage.getItem('user');
-    if (!user) {
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/user', {
+        method: 'GET',
+        credentials: "include"
+      });
+  
+      if (!response.ok) {
+        const userSessionData = sessionStorage.getItem('user');
+        if (userSessionData) {
+          sessionStorage.removeItem('user');
+          handleSignOut();
+        }
+        return;
+      }
+  
+      const text = await response.text();
+      if (!text) {
+        throw new Error('Empty response body');
+      }
+  
+      const user = JSON.parse(text);
+      sessionStorage.setItem('user', JSON.stringify(user));
+  
+      if (user) {
+        setUserType(user.role);
+        setUsername(user.username);
+        setUserImageURL(user.image_url);
+      } else {
+        const userSessionData = sessionStorage.getItem('user');
+        if (userSessionData) {
+          sessionStorage.removeItem('user');
+          handleSignOut();
+        }
+        navigate('/login');
+        return;
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      const userSessionData = sessionStorage.getItem('user');
+      if (userSessionData) {
+        sessionStorage.removeItem('user');
+        handleSignOut();
+      }
       navigate('/login');
-      return;
     }
-    
-    const parsedUser = JSON.parse(user);
-    if (parsedUser.role === 'PETOWNER') {
-      setUserType('petOwner');
-    } else if (parsedUser.role === 'VET') {
-      setUserType('vet');
-    } else if (parsedUser.role === 'ADMIN') {
-      setUserType('admin');
-    }
+  };
 
-    setUsername(parsedUser.username);
-    setUserImageURL(parsedUser.image_url);
+  const handleSignOut = async () => {
+    try 
+      {
+      const response = await fetch('http://localhost:8080/logout', {
+          method: 'GET',
+          credentials: 'include'
+      });
+  
+      if (!response.ok) {
+          throw new Error('Failed to log out');
+      }
+  
+      sessionStorage.removeItem('user');
+      navigate('/');
+      
+    } catch (error) {
+        console.error('Logout error:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
   }, [navigate]);
   
   const petOwnerMenuData = [{
@@ -133,13 +185,13 @@ const UserNavbar = () => {
     linkTo: '/user/admin/settings'
   }];
 
-  const userLink = userType === 'petOwner' ? '/user/petowner' :
-                   userType === 'vet' ? '/user/doctor' :
-                   userType === 'admin' ? '/user/admin' : '/';
+  const userLink = userType === 'PETOWNER' ? '/user/petowner' :
+                   userType === 'VET' ? '/user/doctor' :
+                   userType === 'ADMIN' ? '/user/admin' : '/';
 
-  const menuItems = userType === 'petOwner' ? petOwnerMenuData :
-                    userType === 'vet' ? doctorMenuData :
-                    userType === 'admin' ? adminMenuData : [];
+  const menuItems = userType === 'PETOWNER' ? petOwnerMenuData :
+                    userType === 'VET' ? doctorMenuData :
+                    userType === 'ADMIN' ? adminMenuData : [];
 
   return (
     <Fragment>

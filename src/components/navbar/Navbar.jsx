@@ -15,22 +15,61 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const user = sessionStorage.getItem('user');
-    if (user) {
-      setIsLoggedIn(true);
-      const parsedUser = JSON.parse(user);
-      if (parsedUser.role === 'PETOWNER') {
-        setUserType('petOwner');
-      } else if (parsedUser.role === 'VET') {
-        setUserType('vet');
-      } else if (parsedUser.role === 'ADMIN') {
-        setUserType('admin');
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/user', {
+        method: 'GET',
+        credentials: "include"
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch user data');
       }
-    } else {
+  
+      const text = await response.text();
+      if (text) {
+        const user = JSON.parse(text);
+        const userJsonStr = JSON.stringify(user);
+        sessionStorage.setItem('user', userJsonStr);
+        setIsLoggedIn(true);
+        if (user.role === 'PETOWNER') {
+          setUserType('petOwner');
+        } else if (user.role === 'VET') {
+          setUserType('vet');
+        } else if (user.role === 'ADMIN') {
+          setUserType('admin');
+        }
+      } else {
+        setIsLoggedIn(false);
+      }
+    } catch (error) {
+      console.error('Error fetching user data:', error);
       setIsLoggedIn(false);
-      return;
     }
+  }
+
+  const handleSignOut = async () => {
+    try 
+      {
+      const response = await fetch('http://localhost:8080/logout', {
+          method: 'GET',
+          credentials: 'include'
+      });
+  
+      if (!response.ok) {
+          throw new Error('Failed to log out');
+      }
+  
+      sessionStorage.removeItem('user');
+      navigate('/');
+      
+    } catch (error) {
+        console.error('Logout error:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData();
   }, [navigate]);
 
   const userLink = userType === 'petOwner' ? '/user/petowner' :

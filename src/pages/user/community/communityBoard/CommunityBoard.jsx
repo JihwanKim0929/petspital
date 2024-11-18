@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './CommunityBoard.scss';
-import { HStack, Stack, Text, Card, Box, Flex } from '@chakra-ui/react';
+import { HStack, VStack, Stack, Text, Card, Box, Flex, useBreakpointValue, Show, Separator } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import {
   PaginationItems,
@@ -18,6 +18,7 @@ const CommunityBoard = () => {
   const [items, setItems] = useState([]);
   const [count, setCount] = useState(0);
   const [currentUser, setCurrentUser] = useState(null); 
+  const isBelowLg = useBreakpointValue({ base: true, lg: false });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,6 +33,7 @@ const CommunityBoard = () => {
         }
 
         const userResponse = await fetch('http://localhost:8080/user', {
+          method: 'GET',
           credentials: 'include'
         });
         if (userResponse.ok) {
@@ -61,52 +63,96 @@ const CommunityBoard = () => {
   return (
     <div className="communityBoard">
       <Stack gap="4" w='100%' h='100%'>
-        <Stack h='100%'>
+        <Stack h='100%' overflow='auto'>
           {visibleItems.map((item) => (
-            <Card.Root key={item.id} w='100%'>
-              <Link 
-                key={item.id} 
-                to="./view" 
-                style={{ textDecoration: 'none' }}
-                onClick={() => handleItemClick(item.id)}
-              >
-                <Card.Body padding="4" borderBottom="1px solid gray">
-                  <Box justifyContent='space-between' display='flex'>
-                    <HStack>
-                      <Text fontFamily='Pretendard Variable'>{item.id}</Text>
-                      <Text fontFamily='Pretendard Variable' fontWeight="bold" ml='2rem'>{item.title}</Text>
-                    </HStack>
-                    <HStack>
-                      <Flex>
-                        <Text fontFamily='Pretendard Variable' mr='0.5rem'>작성자:</Text>
-                        <Text fontFamily='Pretendard Variable'>{item.author.username}</Text>
-                      </Flex>
-                      <Flex ml='1rem'>
-                        <Text fontFamily='Pretendard Variable' mr='0.5rem'>작성일자:</Text>
-                        <Text fontFamily='Pretendard Variable'>{new Date(item.createDate).toLocaleString()}</Text>
-                      </Flex>
-                      {currentUser && item.author.id === currentUser.id && (
-                        <HStack ml='1rem'>
-                          <Link 
-                            key={item.id}
-                            to="./edit" 
-                            style={{ textDecoration: 'none' }}
-                            onClick={() => handleItemClick(item.id)}
-                          >
-                            <Button margin="0.5rem" fontFamily='LINESeedKR-Bd' fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-                              편집
-                            </Button>
-                          </Link>
-                          <Link>
-                            <PostDeleteModalButton postID={item.id}/>
-                          </Link>
+            <Box>
+              <Show when={!isBelowLg}>
+                <Card.Root key={item.id} w='100%'>
+                  <Link 
+                    key={item.id} 
+                    to="./view" 
+                    style={{ textDecoration: 'none' }}
+                    onClick={() => handleItemClick(item.id)}
+                  >
+                    <Card.Body padding="4">
+                      <Box justifyContent='space-between' display='flex'>
+                        <HStack>
+                          <Text fontFamily='Pretendard Variable' whiteSpace='nowrap'>{item.id}</Text>
+                          <Text fontFamily='Pretendard Variable' fontWeight="bold" ml='2rem' whiteSpace='nowrap'>{item.title}</Text>
                         </HStack>
-                      )}
-                    </HStack>
-                  </Box>
-                </Card.Body>
-              </Link>
-            </Card.Root>
+                        <HStack>
+                          <Flex>
+                            <Text fontFamily='Pretendard Variable' mr='0.5rem' whiteSpace='nowrap'>작성자:</Text>
+                            <Text fontFamily='Pretendard Variable'>{item.author.username}</Text>
+                          </Flex>
+                          <Flex ml='1rem'>
+                            <Text fontFamily='Pretendard Variable' mr='0.5rem' whiteSpace='nowrap'>작성일자:</Text>
+                            <Text fontFamily='Pretendard Variable'>{new Date(item.createDate).toLocaleString()}</Text>
+                          </Flex>
+                          {currentUser && item.author.id === currentUser.id && (
+                            <HStack ml='1rem'>
+                              <Link 
+                                key={item.id}
+                                to="./edit" 
+                                style={{ textDecoration: 'none' }}
+                                onClick={() => handleItemClick(item.id)}
+                              >
+                                <Button margin="0.5rem" fontFamily='LINESeedKR-Bd' fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
+                                  편집
+                                </Button>
+                              </Link>
+                              <Link>
+                                <PostDeleteModalButton postID={item.id}/>
+                              </Link>
+                            </HStack>
+                          )}
+                        </HStack>
+                      </Box>
+                    </Card.Body>
+                  </Link>
+                </Card.Root>
+              </Show>
+              <Show when={isBelowLg}>
+                <Card.Root key={item.id} w='100%'>
+                  <Link 
+                    key={item.id} 
+                    to="./view" 
+                    style={{ textDecoration: 'none' }}
+                    onClick={() => handleItemClick(item.id)}
+                  >
+                    <Card.Body padding="4" borderBottom="1px solid gray">
+                      <VStack align='left'>
+                        <HStack>
+                          <Text fontFamily='Pretendard Variable' fontWeight="bold" ml='1rem' wordBreak='break-word'>{item.title}</Text>
+                        </HStack>
+                        <HStack width='100%' justifyContent='right'>
+                          <Text fontFamily='Pretendard Variable'>{item.author.username}</Text>
+                          <Separator orientation='vertical' height={4} border='0.5px solid lightgray' />
+                          <Text fontFamily='Pretendard Variable'>{new Date(item.createDate).toLocaleString()}</Text>
+                        </HStack>
+                        {currentUser && item.author.id === currentUser.id && (
+                          <HStack width='100%' justifyContent='right'>
+                            <Link 
+                              key={item.id}
+                              to="./edit" 
+                              style={{ textDecoration: 'none' }}
+                              onClick={() => handleItemClick(item.id)}
+                            >
+                              <Button margin="0.5rem" fontFamily='LINESeedKR-Bd' fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
+                                편집
+                              </Button>
+                            </Link>
+                            <Link>
+                              <PostDeleteModalButton postID={item.id}/>
+                            </Link>
+                          </HStack>
+                        )}
+                      </VStack>
+                    </Card.Body>
+                  </Link>
+                </Card.Root>
+              </Show>
+            </Box>
           ))}
         </Stack>
         <Box w='100%' display='flex' justifyContent='center'>

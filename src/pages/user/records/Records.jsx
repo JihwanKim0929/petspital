@@ -10,12 +10,14 @@ import { EmptyState } from "../../../components/ui/empty-state";
 import { Button } from '../../../components/ui/button';
 import DiagnosisRecordDeleteModalButton from '../../../components/diagnosisRecordDeleteModalButton/DiagnosisRecordDeleteModalButton';
 import { MdOutlinePets } from "react-icons/md";
+import { BiSearchAlt2 } from "react-icons/bi";
 
 const Records = () => {
 
   const [pets, setPets] = useState([]);
   const hasPets = () => { return pets.length > 0; };
   const [records, setRecords] = useState([]);
+  const [currentPet, setCurrentPet] = useState('');
   
   useEffect(() => {
     fetch("http://localhost:8080/user/pet", {
@@ -40,6 +42,7 @@ const Records = () => {
 
   const handlePetChange = (event) => {
     const selectedPetID = event.target.value;
+    setCurrentPet(selectedPetID);
     if (selectedPetID) {
       const url = `http://localhost:8080/pet/${selectedPetID}/diagnosis`;
       console.log("Diagnosis Records URL: " + url);
@@ -75,35 +78,56 @@ const Records = () => {
             animationTimingFunction: "ease-out"
         }}>
           <Card.Body>
-            <Show  when={hasPets()}>
+            <Show when={hasPets()}>
               <NativeSelectRoot>
-                <NativeSelectField placeholder="Select your pet" onChange={handlePetChange}>
+                <NativeSelectField placeholder="반려동물을 선택하세요." fontFamily='Pretendard Variable' onChange={handlePetChange}>
                   {pets.map(pet => (
-                    <option key={pet.id} value={pet.id}>
+                    <option key={pet.id} value={pet.id} style={{ fontFamily: 'Pretendard Variable' }}>
                       {pet.name}
                     </option>
                   ))}
                 </NativeSelectField>
               </NativeSelectRoot>
-              <Box mt={4}>
+              <Show when={currentPet !== ''}>
                 {records.length > 0 ? (
-                  records.map(record => (
-                    <Box key={record.id} p={4} borderWidth="1px" borderRadius="md" mb={4}>
-                      <Text fontWeight="bold">Diagnosis ID: {record.id}</Text>
-                      <Text>Part: {record.part}</Text>
-                      <Text>Create Date: {new Date(record.createDate).toLocaleString()}</Text>
-                      <Image src={record.image_url} boxSize="100px" objectFit="cover" />
-                      <Text>Disease:</Text>
-                      {record.disease ? 
-                      <Text>{record.disease.name}: {record.disease.symptoms} - {record.disease.description}</Text> :
-                      <Text>No disease.</Text>}
-                      <DiagnosisRecordDeleteModalButton diagnosisID={record.id}/>
-                    </Box>
-                  ))
+                  <Box mt={4}>
+                    {records.map(record => (
+                      <Box key={record.id} p={4} borderWidth="1px" borderRadius="md" mb={4}>
+                        <Text>진단일자: {new Date(record.createDate).toLocaleString()}</Text>
+                        <Text>진단 부위: {record.part}</Text>
+                        <Image src={record.image_url} boxSize="100px" objectFit="cover" />
+                        <Text>예상 질병:</Text>
+                        {record.disease ? 
+                        <Text>{record.disease.name}: {record.disease.symptoms} - {record.disease.description}</Text> :
+                        <Text>질병 없음.</Text>}
+                        <DiagnosisRecordDeleteModalButton diagnosisID={record.id}/>
+                      </Box>
+                    ))}
+                  </Box>
                 ) : (
-                  <Text>No records found.</Text>
+                  <Box w='100%' h='100%' display='flex' justifyContent='center' alignItems='center'>
+                    <EmptyState 
+                    title="진단 기록이 없어요."
+                    description="아래 버튼을 클릭해서 AI를 통한 진단을 해보세요." 
+                    icon={<BiSearchAlt2/>}
+                    >
+                      <Link to='/user/petowner/diagnosis'>
+                        <Button fontFamily='LINESeedKR-Bd'>진단하러 가기</Button>
+                      </Link>
+                    </EmptyState>
+                  </Box>
                 )}
-              </Box>
+              </Show>
+              <Show when={currentPet === ''}>
+                <Box w='100%' h='100%' display='flex' justifyContent='center' alignItems='center'>
+                  <EmptyState 
+                  title="반려동물을 선택해주세요."
+                  description="상단의 목록을 통해 진단 기록을 확인할 반려동물을 선택할 수 있어요." 
+                  icon={<MdOutlinePets/>}
+                  >
+                  </EmptyState>
+                </Box>
+              </Show>
             </Show>
             <Show when={!hasPets()}>
               <Box w='100%' h='100%' display='flex' justifyContent='center' alignItems='center'>

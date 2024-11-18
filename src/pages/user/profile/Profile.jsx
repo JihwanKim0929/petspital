@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Profile.scss';
 import { useNavigate } from 'react-router-dom';
-import { Card, Show, Box, Center, Text, useBreakpointValue, Flex, HStack, Separator } from '@chakra-ui/react';
+import { Card, Show, Box, Center, Text, useBreakpointValue, Flex, HStack, VStack, Separator } from '@chakra-ui/react';
 import { Avatar } from '../../../components/ui/avatar';
 import { Button } from '../../../components/ui/button';
 import { Editable, IconButton } from "@chakra-ui/react";
@@ -24,7 +24,7 @@ const Profile = () => {
   const [nextUserAddress, setNextUserAddress] = useState('');
 
   const navigate = useNavigate();
-
+  const isBelowMd = useBreakpointValue({ base: true, md: false });
   const toggleEditMode = () => {setIsEditMode(!isEditMode)};
 
   const cancelEditMode = () => {
@@ -83,21 +83,7 @@ const Profile = () => {
         console.log('Success:', data);
 
         setIsEditMode(false);
-        /*
-        const response2 = await fetch('http://localhost:8080/user', {
-            method: 'GET',
-            credentials: "include"
-        });
-
-        if (!response2.ok) {
-            throw new Error('Failed to fetch user data');
-        }
-
-        const userText = await response2.text();
-        const user = userText ? JSON.parse(userText) : {};
-
-        sessionStorage.setItem('user', JSON.stringify(user));
-        */
+        
         toaster.create({
             title: "Successfully changed",
             status: "success",
@@ -148,35 +134,66 @@ const Profile = () => {
             animationDuration: "300ms",
             animationTimingFunction: "ease-out"
         }}>
-          <Card.Body>
+          <Card.Body justifyContent='center'>
             <Show when={!isEditMode}>
-              <HStack>
-                <Box>
-                  <Avatar name={username} src={userImageURL} w='300px' h='300px' />
-                </Box>
-                <Box ml={10} w='100%'>
-                  <HStack mr={3} pb={1}>
-                    <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize='20px'>유저네임</Text>
-                    <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
-                    <Text fontFamily='Pretendard Variable' ml={2} fontSize='20px'>{username}</Text>
-                  </HStack>
-                  <HStack mt={10} mr={3} pb={1}>
-                    <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize='20px'>이메일</Text>
-                    <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
-                    <Text fontFamily='Pretendard Variable' ml={2} fontSize='20px'>{userEmail}</Text>
-                  </HStack>
-                  <HStack mt={10} mr={3} pb={1}>
-                    <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize='20px'>전화번호</Text>
-                    <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
-                    <Text fontFamily='Pretendard Variable' ml={2} fontSize='20px'>{userPhoneNumber}</Text>
-                  </HStack>
-                  <HStack mt={10} mr={3} pb={1}>
-                    <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize='20px'>주소</Text>
-                    <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
-                    <Text fontFamily='Pretendard Variable' ml={2} fontSize='20px'>{userAddress}</Text>
-                  </HStack>
-                </Box>
-              </HStack>
+              <Show when={!isBelowMd}>
+                <HStack>
+                  <Box>
+                    <Avatar name={username} src={userImageURL} w={{base:'150px', md:'200px', lg:'300px'}} h={{base:'150px', md:'200px', lg:'300px'}} />
+                  </Box>
+                  <Box ml={10} w='100%'>
+                    <HStack mr={3} pb={1}>
+                      <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">유저네임</Text>
+                      <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
+                      <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{username}</Text>
+                    </HStack>
+                    <HStack mt={10} mr={3} pb={1}>
+                      <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">이메일</Text>
+                      <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
+                      <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{userEmail}</Text>
+                    </HStack>
+                    <HStack mt={10} mr={3} pb={1}>
+                      <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">전화번호</Text>
+                      <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
+                      <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{userPhoneNumber}</Text>
+                    </HStack>
+                    <HStack mt={10} mr={3} pb={1}>
+                      <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">주소</Text>
+                      <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
+                      <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{userAddress}</Text>
+                    </HStack>
+                  </Box>
+                </HStack>
+              </Show>
+              <Show when={isBelowMd}>
+                <VStack>
+                  <Box>
+                    <Avatar name={username} src={userImageURL} w={{base:'150px', md:'200px', lg:'300px'}} h={{base:'150px', md:'200px', lg:'300px'}} />
+                  </Box>
+                  <Box w='100%'>
+                    <HStack mt={10} pb={1}>
+                      <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">유저네임</Text>
+                      <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
+                      <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{username}</Text>
+                    </HStack>
+                    <HStack mt={10} pb={1}>
+                      <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">이메일</Text>
+                      <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
+                      <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{userEmail}</Text>
+                    </HStack>
+                    <HStack mt={10} pb={1}>
+                      <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">전화번호</Text>
+                      <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
+                      <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{userPhoneNumber}</Text>
+                    </HStack>
+                    <HStack mt={10} pb={1}>
+                      <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">주소</Text>
+                      <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
+                      <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{userAddress}</Text>
+                    </HStack>
+                  </Box>
+                </VStack>
+              </Show>
               <Box width='100%' display='flex' justifyContent='right'>
                 <Button alignSelf="flex-start" mt={6} onClick={toggleEditMode} fontFamily='LINESeedKR-Bd'>
                   편집
@@ -284,7 +301,7 @@ const Profile = () => {
                   </Editable.Control>
                 </Editable.Root>
               </Flex>
-              <Button alignSelf="flex-start" mt={6} onClick={editUser}>
+              <Button alignSelf="flex-start" mt={6}>
                 Save
               </Button>
               <Button alignSelf="flex-start" mt={6} onClick={cancelEditMode}>

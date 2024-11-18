@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './PetOwnerAppointments.scss';
 import { Link } from 'react-router-dom';
-import { Card, Show, Text, Box, Image } from '@chakra-ui/react';
+import { Card, Show, Text, Box, Image, Flex } from '@chakra-ui/react';
 import { NativeSelectField, NativeSelectRoot } from '../../../../components/ui/native-select';
 import AppointmentViewModalButton from '../../../../components/appointmentViewModalButton/AppointmentViewModalButton';
 import AppointmentDeleteModalButton from '../../../../components/appointmentDeleteModalButton/AppointmentDeleteModalButton';
@@ -14,6 +14,7 @@ const PetOwnerAppointments = () => {
     const [pets, setPets] = useState([]);
     const hasPets = () => { return pets.length > 0; };
     const [appointments, setAppointments] = useState([]);
+    const [currentPet, setCurrentPet] = useState('');
 
     useEffect(() => {
         fetch("http://localhost:8080/user/pet", {
@@ -38,6 +39,7 @@ const PetOwnerAppointments = () => {
     
     const handlePetChange = (event) => {
         const selectedPetID = event.target.value;
+        setCurrentPet(selectedPetID);
         if (selectedPetID) {
             const url = `http://localhost:8080/pet/${selectedPetID}/reservation`;
             console.log("Appointments URL: " + url);
@@ -75,33 +77,45 @@ const PetOwnerAppointments = () => {
                     <Card.Body>
                         <Show when={hasPets()}>
                             <NativeSelectRoot>
-                                <NativeSelectField placeholder="Select your pet" onChange={handlePetChange}>
+                                <NativeSelectField placeholder="반려동물을 선택하세요." fontFamily='Pretendard Variable' onChange={handlePetChange}>
                                     {pets.map(pet => (
-                                    <option key={pet.id} value={pet.id}>
+                                    <option key={pet.id} value={pet.id} style={{ fontFamily: 'Pretendard Variable' }}>
                                         {pet.name}
                                     </option>
                                     ))}
                                 </NativeSelectField>
                             </NativeSelectRoot>
-                            <Box mt={4}>
-                                {appointments.length > 0 ? (
-                                    appointments.map(appointment => (
-                                        <Box key={appointment.id} p={4} borderWidth="1px" borderRadius="md" mb={4}>
-                                            <Text fontWeight="bold">Appointment ID: {appointment.id}</Text>
-                                            <Text>Pet: {appointment.pet.name} (Age: {appointment.pet.age}, Gender: {appointment.pet.gender})</Text>
-                                            <Image src={appointment.pet.image_url} boxSize="100px" objectFit="cover" />
-                                            
-                                            <Text mt={1}>Reservation Date: {new Date(appointment.reservationDate).toLocaleString()}</Text>
-                                            <Text>Create Date: {new Date(appointment.createDate).toLocaleString()}</Text>
-                                            <Text>Hospital: {appointment.hospitalAddress}</Text>
-                                            <AppointmentViewModalButton appointmentID={appointment.id}/>
-                                            <AppointmentDeleteModalButton appointmentID={appointment.id} />
-                                        </Box>
-                                    ))
-                                ) : (
-                                    <Text>No appointments found.</Text>
-                                )}
-                            </Box>
+                            <Show when={currentPet !== ''}>
+                                <Box mt={4}>
+                                    {appointments.length > 0 ? (
+                                        appointments.map(appointment => (
+                                            <Box key={appointment.id} p={4} borderWidth="1px" borderRadius="md" mb={4}>
+                                                <Box>
+                                                    <Text fontFamily='LINESeedKR-Bd'>예약 날짜</Text>
+                                                    <Text ml={3} fontFamily='Pretendard Variable'>{new Date(appointment.reservationDate).toLocaleString()}</Text>
+                                                    <Text mt={6} fontFamily='LINESeedKR-Bd'>병원 주소</Text>
+                                                    <Text ml={3} fontFamily='Pretendard Variable'> {appointment.hospitalAddress}</Text>
+                                                </Box>
+                                                <Box display='flex' justifyContent='right'>
+                                                    <AppointmentDeleteModalButton appointmentID={appointment.id}/>
+                                                </Box>
+                                            </Box>
+                                        ))
+                                    ) : (
+                                        <Text>No appointments found.</Text>
+                                    )}
+                                </Box>
+                            </Show>
+                            <Show when={currentPet === ''}>
+                                <Box w='100%' h='100%' display='flex' justifyContent='center' alignItems='center'>
+                                    <EmptyState 
+                                    title="반려동물을 선택해주세요."
+                                    description="상단의 목록을 통해 병원 예약을 확인할 반려동물을 선택할 수 있어요." 
+                                    icon={<MdOutlinePets/>}
+                                    >
+                                    </EmptyState>
+                                </Box>
+                            </Show>
                         </Show>
                         <Show when={!hasPets()}>
                             <Box w='100%' h='100%' display='flex' justifyContent='center' alignItems='center'>
