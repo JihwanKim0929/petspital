@@ -159,7 +159,7 @@ const UserNavbar = () => {
                   <DrawerHeader borderBottomWidth='1px'>
                     <Box h="60px" display='flex' alignItems='center'>
                       <Avatar name={username} src={userImageURL} w="60px" h="60px" mt="0.5rem" mr="1rem"/>
-                      <Text mt='0.5rem' fontSize='18px' fontWeight='600'>{username}</Text>
+                      <Text mt='0.5rem' fontSize='18px' fontWeight='600' fontFamily='LINESeedKR-Bd'>{username}</Text>
                     </Box>
                   </DrawerHeader>
                   <DrawerBody>

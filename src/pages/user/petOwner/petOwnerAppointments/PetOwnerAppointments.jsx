@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './PetOwnerAppointments.scss';
+import { Link } from 'react-router-dom';
 import { Card, Show, Text, Box, Image } from '@chakra-ui/react';
 import { NativeSelectField, NativeSelectRoot } from '../../../../components/ui/native-select';
 import AppointmentViewModalButton from '../../../../components/appointmentViewModalButton/AppointmentViewModalButton';
 import AppointmentDeleteModalButton from '../../../../components/appointmentDeleteModalButton/AppointmentDeleteModalButton';
+import { EmptyState } from '../../../../components/ui/empty-state';
+import { Button } from '../../../../components/ui/button';
+import { MdOutlinePets } from "react-icons/md";
 
 const PetOwnerAppointments = () => {
     
@@ -100,7 +104,17 @@ const PetOwnerAppointments = () => {
                             </Box>
                         </Show>
                         <Show when={!hasPets()}>
-                            <Text>There is no pet.</Text>
+                            <Box w='100%' h='100%' display='flex' justifyContent='center' alignItems='center'>
+                                <EmptyState 
+                                title="등록되어 있는 반려동물이 없어요."
+                                description="아래 버튼을 클릭해서 반려동물을 등록하세요." 
+                                icon={<MdOutlinePets/>}
+                                >
+                                    <Link to='/user/petowner/pets'>
+                                    <Button fontFamily='LINESeedKR-Bd'>반려동물 등록하러 가기</Button>
+                                    </Link>
+                                </EmptyState>
+                            </Box>
                         </Show>
                     </Card.Body>
                 </Card.Root>

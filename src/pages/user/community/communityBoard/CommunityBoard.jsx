@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './CommunityBoard.scss';
-import { HStack, Stack, Text } from '@chakra-ui/react';
+import { HStack, Stack, Text, Card, Box, Flex } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import {
   PaginationItems,
@@ -60,56 +60,74 @@ const CommunityBoard = () => {
 
   return (
     <div className="communityBoard">
-      <Stack gap="4">
-        <Stack backgroundColor='lightgray'>
+      <Stack gap="4" w='100%' h='100%'>
+        <Stack h='100%'>
           {visibleItems.map((item) => (
-            <Stack>
+            <Card.Root key={item.id} w='100%'>
               <Link 
                 key={item.id} 
                 to="./view" 
                 style={{ textDecoration: 'none' }}
                 onClick={() => handleItemClick(item.id)}
               >
-                <Stack key={item.id} padding="4" borderBottom="1px solid gray">
-                  <Text>ID: {item.id}</Text>
-                  <Text fontWeight="bold">{item.title}</Text>
-                  <Text>Author: {item.author.username}</Text>
-                  <Text>Date: {new Date(item.createDate).toLocaleString()}</Text>
-                </Stack>
+                <Card.Body padding="4" borderBottom="1px solid gray">
+                  <Box justifyContent='space-between' display='flex'>
+                    <HStack>
+                      <Text fontFamily='Pretendard Variable'>{item.id}</Text>
+                      <Text fontFamily='Pretendard Variable' fontWeight="bold" ml='2rem'>{item.title}</Text>
+                    </HStack>
+                    <HStack>
+                      <Flex>
+                        <Text fontFamily='Pretendard Variable' mr='0.5rem'>작성자:</Text>
+                        <Text fontFamily='Pretendard Variable'>{item.author.username}</Text>
+                      </Flex>
+                      <Flex ml='1rem'>
+                        <Text fontFamily='Pretendard Variable' mr='0.5rem'>작성일자:</Text>
+                        <Text fontFamily='Pretendard Variable'>{new Date(item.createDate).toLocaleString()}</Text>
+                      </Flex>
+                      {currentUser && item.author.id === currentUser.id && (
+                        <HStack ml='1rem'>
+                          <Link 
+                            key={item.id}
+                            to="./edit" 
+                            style={{ textDecoration: 'none' }}
+                            onClick={() => handleItemClick(item.id)}
+                          >
+                            <Button margin="0.5rem" fontFamily='LINESeedKR-Bd' fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
+                              편집
+                            </Button>
+                          </Link>
+                          <Link>
+                            <PostDeleteModalButton postID={item.id}/>
+                          </Link>
+                        </HStack>
+                      )}
+                    </HStack>
+                  </Box>
+                </Card.Body>
               </Link>
-              {currentUser && item.author.id === currentUser.id && (
-                <div>
-                  <Link 
-                    key={item.id}
-                    to="./edit" 
-                    style={{ textDecoration: 'none' }}
-                    onClick={() => handleItemClick(item.id)}
-                  >
-                    <Button margin="0.5rem" fontFamily='LINESeedKR-Bd' fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }}>
-                      편집
-                    </Button>
-                  </Link>
-                  <PostDeleteModalButton postID={item.id} />
-                </div>
-              )}
-            </Stack>
+            </Card.Root>
           ))}
         </Stack>
-        <PaginationRoot
-          page={page}
-          count={Math.ceil(count / pageSize)}
-          pageSize={pageSize}
-          onPageChange={(e) => setPage(e.page)}
-        >
-          <HStack>
-            <PaginationPrevTrigger />
-            <PaginationItems />
-            <PaginationNextTrigger />
-          </HStack>
-        </PaginationRoot>
-        <Link to="./post" style={{ textDecoration: "none" }}>
-          <Button fontFamily='LINESeedKR-Bd'>게시글 작성</Button>
-        </Link>
+        <Box w='100%' display='flex' justifyContent='center'>
+          <PaginationRoot
+            page={page}
+            count={count}
+            pageSize={pageSize}
+            onPageChange={(e) => setPage(e.page)}
+          >
+            <HStack>
+              <PaginationPrevTrigger />
+              <PaginationItems />
+              <PaginationNextTrigger />
+            </HStack>
+          </PaginationRoot>
+        </Box>
+        <Box w='100%' display='flex' justifyContent='right'>
+          <Link to="./post" style={{ textDecoration: "none" }}>
+            <Button fontFamily='LINESeedKR-Bd' mr='1rem'>게시글 작성</Button>
+          </Link>
+        </Box>
       </Stack>
     </div>
   );

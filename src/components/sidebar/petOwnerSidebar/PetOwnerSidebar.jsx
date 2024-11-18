@@ -38,7 +38,7 @@ const PetOwnerSidebar = () => {
             <ul className="sidebarComponents">
               <Center flexDirection='column' borderBottom="1.5px solid lightgray" marginLeft='0.75rem' marginRight='0.75rem' marginTop='1rem'>
                 <Avatar name={username} src={userImageURL} w='125px' h='125px' />
-                <Text mt='0.5rem' mb='0.5rem' fontWeight='bold' fontSize='18px'>{username}</Text>
+                <Text mt='0.5rem' mb='0.5rem' fontWeight='bold' fontSize='18px' fontFamily='LINESeedKR-Bd'>{username}</Text>
               </Center>
               <br />
               <SidebarCategory CategoryIcon={BiHome} categoryName='홈' categoryLink='/user/petowner'/>

@@ -3,7 +3,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import './Hospital.scss';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useForm, useWatch } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Show, Card, Box, Text, Fieldset, Stack, Flex } from '@chakra-ui/react';
 import { NativeSelectRoot, NativeSelectField } from '../../../components/ui/native-select';
 import { Field } from "../../../components/ui/field";
@@ -12,6 +12,8 @@ import HospitalSelectCard from '../../../components/hospitalSelectCard/HospitalS
 import DatePicker from 'react-datepicker';
 import { addDays } from 'date-fns';
 import { ko } from 'date-fns/locale';
+import { EmptyState } from '../../../components/ui/empty-state';
+import { MdOutlinePets } from "react-icons/md";
 
 const { kakao } = window;
 
@@ -196,7 +198,8 @@ const Hospital = () => {
                     <form onSubmit={handleSubmit(onSubmit)}>
                       <Fieldset.Root size="lg" maxW="md">
                         <Fieldset.Content>
-                          <Field label="Pet">
+                          <Field>
+                            <Text fontFamily='LINESeedKR-Bd'>반려동물 선택</Text>
                             <NativeSelectRoot>
                               <NativeSelectField placeholder="Select your pet" {...register('petID', { required: true })}>
                                 {pets.map(pet => (
@@ -208,7 +211,8 @@ const Hospital = () => {
                             </NativeSelectRoot>
                           </Field>
                           
-                          <Field label="Hospital">
+                          <Field>
+                            <Text fontFamily='LINESeedKR-Bd'>병원 선택</Text>
                             <Box
                             minH="240px"
                             overflowY="auto"
@@ -227,10 +231,14 @@ const Hospital = () => {
                                 ))}
                               </Stack>
                             </Box>
-                            {(!selectedHospitalAddress && <Text color="red.500">You must select a hospital.</Text>)}
+                            {(!selectedHospitalAddress &&
+                            <Text color="red.500" fontFamily='Pretendard Variable'>
+                              병원을 선택해주세요.
+                            </Text>)}
                           </Field>
 
-                          <Field label="Date">
+                          <Field>
+                            <Text fontFamily='LINESeedKR-Bd'>예약일자 선택</Text>
                             <DatePicker
                               showIcon
                               selected={appointmentDate}
@@ -241,8 +249,9 @@ const Hospital = () => {
                           </Field>
                         </Fieldset.Content>
 
-                        <Button type="submit" alignSelf="flex-start" mt={6} disabled={!selectedHospitalAddress || !petID}>
-                          Submit
+                        <Button type="submit" alignSelf="flex-start" mt={6} disabled={!selectedHospitalAddress || !petID}
+                        fontFamily='LINESeedKR-Bd'>
+                          예약하기
                         </Button>
                       </Fieldset.Root>
                     </form>
@@ -250,7 +259,17 @@ const Hospital = () => {
                 </Flex>
               </Show>
               <Show when={!hasPets()}>
-                <Text>There is no pet.</Text>
+                <Box w='100%' h='100%' display='flex' justifyContent='center' alignItems='center'>
+                  <EmptyState 
+                  title="등록되어 있는 반려동물이 없어요."
+                  description="아래 버튼을 클릭해서 반려동물을 등록하세요." 
+                  icon={<MdOutlinePets/>}
+                  >
+                    <Link to='/user/petowner/pets'>
+                      <Button fontFamily='LINESeedKR-Bd'>반려동물 등록하러 가기</Button>
+                    </Link>
+                  </EmptyState>
+                </Box>
               </Show>
             </Card.Body>
           </Card.Root>

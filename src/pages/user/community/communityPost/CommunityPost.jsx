@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CommunityPost.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { Text, VStack, Flex, Input, Textarea } from '@chakra-ui/react';
+import { Text, Stack, HStack, Input, Textarea } from '@chakra-ui/react';
 import { Button } from '../../../../components/ui/button';
 import {
   FileUploadList,
@@ -56,32 +56,32 @@ const CommunityPost = () => {
 
   return (
     <div className="communityPost">
-      <VStack w='100%'>
+      <Stack w='100%' justifyContent='center'>
         <form onSubmit={onSubmit} style={{ width: '100%' }}>
-          <Field w='60%' m={6}>
+          <Field w='100%'>
             <Text fontFamily='LINESeedKR-Bd'>제목</Text>
             <Input placeholder="제목을 입력하세요." onChange={(e) => setTitle(e.target.value)}
             fontFamily='Pretendard Variable'/>
           </Field>
-          <Field w='60%' m={6}>
+          <Field w='100%' mt={6}>
             <Text fontFamily='LINESeedKR-Bd'>내용</Text>
             <Textarea placeholder="내용을 입력하세요." onChange={(e) => setContent(e.target.value)} h='300px'
             fontFamily='Pretendard Variable'/>
           </Field>
-          <FileUploadRoot onChange={(e) => setImage(e.target.files[0])} accept={["image/*"]} m={6}>
+          <FileUploadRoot onChange={(e) => setImage(e.target.files[0])} accept={["image/*"]} mt={6}>
             <FileUploadTrigger>
               <Button fontFamily='LINESeedKR-Bd'>이미지 파일 업로드</Button>
             </FileUploadTrigger>
             <FileUploadList />
           </FileUploadRoot>
-          <Flex>
+          <HStack mt={6} w='100%' justifyContent='center' gap={4}>
             <Button type='submit' fontFamily='LINESeedKR-Bd'>작성</Button>
             <Link to="../" style={{ textDecoration: "none" }}>
               <Button fontFamily='LINESeedKR-Bd'>뒤로가기</Button>
             </Link>
-          </Flex>
+          </HStack>
         </form>
-      </VStack>
+      </Stack>
     </div>
   );
 };

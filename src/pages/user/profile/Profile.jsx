@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Profile.scss';
 import { useNavigate } from 'react-router-dom';
-import { Card, Show, Box, Center, Text, useBreakpointValue, Flex } from '@chakra-ui/react';
+import { Card, Show, Box, Center, Text, useBreakpointValue, Flex, HStack, Separator } from '@chakra-ui/react';
 import { Avatar } from '../../../components/ui/avatar';
 import { Button } from '../../../components/ui/button';
 import { Editable, IconButton } from "@chakra-ui/react";
@@ -150,18 +150,38 @@ const Profile = () => {
         }}>
           <Card.Body>
             <Show when={!isEditMode}>
-              <Box>
-                <Avatar name={username} src={userImageURL} w='125px' h='125px' />
+              <HStack>
+                <Box>
+                  <Avatar name={username} src={userImageURL} w='300px' h='300px' />
+                </Box>
+                <Box ml={10} w='100%'>
+                  <HStack mr={3} pb={1}>
+                    <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize='20px'>유저네임</Text>
+                    <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
+                    <Text fontFamily='Pretendard Variable' ml={2} fontSize='20px'>{username}</Text>
+                  </HStack>
+                  <HStack mt={10} mr={3} pb={1}>
+                    <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize='20px'>이메일</Text>
+                    <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
+                    <Text fontFamily='Pretendard Variable' ml={2} fontSize='20px'>{userEmail}</Text>
+                  </HStack>
+                  <HStack mt={10} mr={3} pb={1}>
+                    <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize='20px'>전화번호</Text>
+                    <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
+                    <Text fontFamily='Pretendard Variable' ml={2} fontSize='20px'>{userPhoneNumber}</Text>
+                  </HStack>
+                  <HStack mt={10} mr={3} pb={1}>
+                    <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize='20px'>주소</Text>
+                    <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
+                    <Text fontFamily='Pretendard Variable' ml={2} fontSize='20px'>{userAddress}</Text>
+                  </HStack>
+                </Box>
+              </HStack>
+              <Box width='100%' display='flex' justifyContent='right'>
+                <Button alignSelf="flex-start" mt={6} onClick={toggleEditMode} fontFamily='LINESeedKR-Bd'>
+                  편집
+                </Button>
               </Box>
-              <Box>
-                <Text>Username: {username}</Text>
-                <Text>Email: {userEmail}</Text>
-                <Text>Tel: {userPhoneNumber}</Text>
-                <Text>Address: {userAddress}</Text>
-              </Box>
-              <Button alignSelf="flex-start" mt={6} onClick={toggleEditMode}>
-                Edit
-              </Button>
             </Show>
             
             <Show when={isEditMode}>

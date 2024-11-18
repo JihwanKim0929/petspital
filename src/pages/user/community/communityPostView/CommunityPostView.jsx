@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Flex, Textarea, Stack, Text } from '@chakra-ui/react';
+import { Flex, Textarea, Stack, Text, VStack, HStack, Image, Box, Separator } from '@chakra-ui/react';
 import { Button } from '../../../../components/ui/button';
 import CommentBox from '../../../../components/commentBox/CommentBox';
 
@@ -122,21 +122,31 @@ const CommunityPostView = () => {
   }
 
   return (
-    <div className="communityPostView">
-      <h1>Title: {post.title}</h1>
-      <h3>Author: {post.author.username}</h3>
-      <p>Content: {post.content}</p>
-      <p>Date: {new Date(post.createDate).toLocaleString()}</p>
-      {post.image_url && <img src={post.image_url} alt="Post" />}
+    <div className="communityPostView" style={{ width: '100%' }}>
+      <Box w='100%'>
+        <VStack align='left'>
+          <Text fontFamily='LINESeedKR-Bd' fontSize='20px'>{post.title}</Text>
+          <HStack>
+            <Text fontFamily='Pretendard Variable'>{post.author.username}</Text>
+            <Separator orientation="vertical" height="4" />
+            <Text fontFamily='Pretendard Variable'>{new Date(post.createDate).toLocaleString()}</Text>
+          </HStack>
+        </VStack>
+        <Separator border='1px solid lightgray' mt={3} mb={3} />
+        <VStack>
+          <Text textAlign='left' width='100%' fontFamily='Pretendard Variable'>{post.content}</Text>
+          {post.image_url && <Image src={post.image_url} borderRadius='1rem' mt={6}/>}
+        </VStack>
+      </Box>
       
-      <Flex>
+      <Flex w='100%' mt={6} alignItems='center'>
         <Textarea
           placeholder="댓글 내용을 입력하세요."
           fontFamily='Pretendard Variable'
           value={comment}
           onChange={(e) => setComment(e.target.value)}
         />
-        <Button onClick={handleCommentSubmit} fontFamily='LINESeedKR-Bd'>작성</Button>
+        <Button onClick={handleCommentSubmit} fontFamily='LINESeedKR-Bd' ml={5}>작성</Button>
       </Flex>
 
       <Stack spacing={4} marginTop={4}>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './CommunityPostEdit.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { Text, VStack, Flex, Input, Textarea } from '@chakra-ui/react';
+import { Text, VStack, HStack, Input, Textarea } from '@chakra-ui/react';
 import { Button } from '../../../../components/ui/button';
 import { Field } from "../../../../components/ui/field";
 
@@ -67,22 +67,22 @@ const CommunityPostEdit = () => {
         <div className="communityPost">
             <VStack w='100%'>
                 <form onSubmit={onSubmit} style={{ width: '100%' }}>
-                    <Field w='60%' m={6}>
+                    <Field w='100%'>
                         <Text fontFamily='LINESeedKR-Bd'>제목</Text>
                         <Input placeholder="제목을 입력하세요." value={title} onChange={(e) => setTitle(e.target.value)}
                         fontFamily='Pretendard Variable'/>
                     </Field>
-                    <Field w='60%' m={6}>
+                    <Field w='100%' mt={6}>
                         <Text fontFamily='LINESeedKR-Bd'>내용</Text>
                         <Textarea placeholder="내용을 입력하세요." value={content} onChange={(e) => setContent(e.target.value)}
                         h='300px' fontFamily='Pretendard Variable'/>
                     </Field>
-                    <Flex>
+                    <HStack w='100%' justifyContent='center' mt={6} gap={4}>
                         <Button type='submit' fontFamily='LINESeedKR-Bd'>게시글 편집</Button>
                         <Link to="../" style={{ textDecoration: "none" }}>
                             <Button fontFamily='LINESeedKR-Bd'>뒤로가기</Button>
                         </Link>
-                    </Flex>
+                    </HStack>
                 </form>
             </VStack>
         </div>
