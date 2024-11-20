@@ -1,5 +1,6 @@
 package com.example.petcare.service;
 
+import com.example.petcare.dto.AnimalHospitalDto;
 import com.example.petcare.dto.CommentDto;
 import com.example.petcare.dto.ReservationDto;
 import com.example.petcare.entity.*;
@@ -24,6 +25,8 @@ public class ReservationService {
     private PetRepository petRepository;
     @Autowired
     private AnimalHospitalRepository animalHospitalRepository;
+    @Autowired
+    private AnimalHospitalService animalHospitalService;
 
     public ReservationDto getReservation(Long id) {
         Reservation reservation = reservationRepository.findById(id).orElse(null);
@@ -82,5 +85,13 @@ public class ReservationService {
             reservationRepository.save(target);
         }
         return target.getReservationDto();
+    }
+
+    public List<ReservationDto> getVetReservation(Long vetId) {
+        AnimalHospitalDto dto = animalHospitalService.getAnimalHospitalByUserId(vetId);
+        return reservationRepository.findByHospitalAddress(dto.getHospitalAddress())
+                        .stream()
+                        .map(reservation -> reservation.getReservationDto())
+                        .collect(Collectors.toList());
     }
 }

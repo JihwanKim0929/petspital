@@ -10,4 +10,7 @@ import java.util.List;
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     @Query(value="SELECT * FROM reservation WHERE pet_id = :petId",nativeQuery = true)
     List<Reservation> findByPetId(Long petId);
+
+    @Query(value="SELECT * FROM reservation WHERE hospital_address = :hospitalAddress",nativeQuery = true)
+    List<Reservation> findByHospitalAddress(String hospitalAddress);
 }
