@@ -43,6 +43,9 @@ const Pets = () => {
                     animationDuration: "300ms",
                     animationTimingFunction: "ease-out"
                 }}>
+                    <Card.Header>
+                        <Text fontFamily='LINESeedKR-Bd'>반려동물 목록</Text>
+                    </Card.Header>
                     <Card.Body>
                         <Show when={hasPets()}>
                             <Box>

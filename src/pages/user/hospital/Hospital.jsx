@@ -4,7 +4,7 @@ import './Hospital.scss';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useForm, useWatch } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
-import { Show, Card, Box, Text, Fieldset, Stack, Flex } from '@chakra-ui/react';
+import { Show, Card, Box, Text, Fieldset, Stack, Flex, useBreakpointValue } from '@chakra-ui/react';
 import { NativeSelectRoot, NativeSelectField } from '../../../components/ui/native-select';
 import { Field } from "../../../components/ui/field";
 import { Button } from '../../../components/ui/button';
@@ -30,6 +30,7 @@ const Hospital = () => {
   const [mapCenter, setMapCenter] = useState({ lat: null, lng: null });
   const [userLocation, setUserLocation] = useState(null);
   const [appointmentDate, setAppointmentDate] = useState(new Date());
+  const isBelowMd = useBreakpointValue({ base: true, md: false });
 
   const navigate = useNavigate();
   
@@ -164,44 +165,49 @@ const Hospital = () => {
               animationDuration: "300ms",
               animationTimingFunction: "ease-out"
           }}>
+            <Card.Header>
+              <Text fontFamily='LINESeedKR-Bd'>병원 예약하기</Text>
+            </Card.Header>
             <Card.Body>
               <Show when={hasPets()}>
-                <Flex justifyContent='center' alignItems='center'>
+                <Stack flexDirection={{ base:'column', md:'column', lg:'row' }} align='center'>
                   <Box m={6}>
-                    <Map 
-                    center={mapCenter}
-                    style={{ width: '400px', height: '400px', borderRadius: '0.5rem' }}
-                    level={7}>
-                      {hospitalLocations.map((location, index) => (
-                        <MapMarker 
-                          key={index} 
-                          position={{ lat: location.lat, lng: location.lng }} 
-                          title={location.address} 
-                        />
-                      ))}
-                      {userLocation && (
-                        <MapMarker
-                          position={{ lat: userLocation.lat, lng: userLocation.lng }} 
-                          title={userLocation.address}
-                          image={{
-                            src: process.env.PUBLIC_URL + "/assets/images/MapMarker.png",
-                            size: {
-                              width: 32,
-                              height: 32,
-                            }
-                          }}
-                        />
-                      )}
-                    </Map>
+                    <Box w={{ base:'280px', md:'300px', lg:'400px' }} h={{ base:'280px', md:'300px', lg:'400px' }}>
+                      <Map 
+                      center={mapCenter}
+                      style={{ width: '100%', height: '100%', borderRadius: '0.5rem' }}
+                      level={7}>
+                        {hospitalLocations.map((location, index) => (
+                          <MapMarker 
+                            key={index} 
+                            position={{ lat: location.lat, lng: location.lng }} 
+                            title={location.address} 
+                          />
+                        ))}
+                        {userLocation && (
+                          <MapMarker
+                            position={{ lat: userLocation.lat, lng: userLocation.lng }} 
+                            title={userLocation.address}
+                            image={{
+                              src: process.env.PUBLIC_URL + "/assets/images/MapMarker.png",
+                              size: {
+                                width: 32,
+                                height: 32,
+                              }
+                            }}
+                          />
+                        )}
+                      </Map>
+                    </Box>
                   </Box>
-                  <Box m={6}>
+                  <Box w='100%'>
                     <form onSubmit={handleSubmit(onSubmit)}>
-                      <Fieldset.Root size="lg" maxW="md">
+                      <Fieldset.Root>
                         <Fieldset.Content>
                           <Field>
                             <Text fontFamily='LINESeedKR-Bd'>반려동물 선택</Text>
                             <NativeSelectRoot>
-                              <NativeSelectField placeholder="Select your pet" {...register('petID', { required: true })}>
+                              <NativeSelectField placeholder="반려동물을 선택해주세요." fontFamily='Pretendard Variable' {...register('petID', { required: true })}>
                                 {pets.map(pet => (
                                   <option key={pet.id} value={pet.id}>
                                     {pet.name}
@@ -214,13 +220,12 @@ const Hospital = () => {
                           <Field>
                             <Text fontFamily='LINESeedKR-Bd'>병원 선택</Text>
                             <Box
-                            minH="240px"
+                            w='100%'
                             overflowY="auto"
                             border="1px solid #ccc"
                             borderRadius="md"
-                            p={2}
                             mt={2}>
-                              <Stack spacing={2}>
+                              <Stack spacing={2} w='100%'>
                                 {hospitals.map(hospital => (
                                   <HospitalSelectCard
                                     key={hospital.id}
@@ -256,7 +261,7 @@ const Hospital = () => {
                       </Fieldset.Root>
                     </form>
                   </Box>
-                </Flex>
+                </Stack>
               </Show>
               <Show when={!hasPets()}>
                 <Box w='100%' h='100%' display='flex' justifyContent='center' alignItems='center'>

@@ -134,6 +134,9 @@ const Profile = () => {
             animationDuration: "300ms",
             animationTimingFunction: "ease-out"
         }}>
+          <Card.Header>
+            <Text fontFamily='LINESeedKR-Bd'>프로필</Text>
+          </Card.Header>
           <Card.Body justifyContent='center'>
             <Show when={!isEditMode}>
               <Show when={!isBelowMd}>

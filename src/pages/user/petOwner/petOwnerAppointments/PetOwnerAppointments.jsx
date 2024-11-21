@@ -74,6 +74,9 @@ const PetOwnerAppointments = () => {
                     animationDuration: "300ms",
                     animationTimingFunction: "ease-out"
                 }}>
+                    <Card.Header>
+                        <Text fontFamily='LINESeedKR-Bd'>예약 확인하기</Text>
+                    </Card.Header>
                     <Card.Body>
                         <Show when={hasPets()}>
                             <NativeSelectRoot>
@@ -86,7 +89,7 @@ const PetOwnerAppointments = () => {
                                 </NativeSelectField>
                             </NativeSelectRoot>
                             <Show when={currentPet !== ''}>
-                                <Box mt={4}>
+                                <Box mt={4} h='100%'>
                                     {appointments.length > 0 ? (
                                         appointments.map(appointment => (
                                             <Box key={appointment.id} p={4} borderWidth="1px" borderRadius="md" mb={4}>
@@ -102,7 +105,14 @@ const PetOwnerAppointments = () => {
                                             </Box>
                                         ))
                                     ) : (
-                                        <Text>No appointments found.</Text>
+                                        <Box w='100%' h='100%' display='flex' justifyContent='center' alignItems='center'>
+                                            <EmptyState 
+                                            title="예약이 없어요."
+                                            description="해당 반려동물에 대한 병원 예약이 존재하지 않습니다." 
+                                            icon={<MdOutlinePets/>}
+                                            >
+                                            </EmptyState>
+                                        </Box>
                                     )}
                                 </Box>
                             </Show>

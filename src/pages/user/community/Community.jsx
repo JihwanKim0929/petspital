@@ -1,13 +1,16 @@
 import React from 'react';
 import './Community.scss';
 import { Outlet } from 'react-router-dom';
-import { Card, Box } from '@chakra-ui/react';
+import { Card, Box, Text } from '@chakra-ui/react';
 
 const Community = () => {
   return (
     <div className="community">
       <Box w='100%' h='100%' p={3}>
         <Card.Root w='100%' h='100%' overflow='auto'>
+          <Card.Header>
+            <Text fontFamily='LINESeedKR-Bd'>커뮤니티</Text>
+          </Card.Header>
           <Card.Body justifyContent='center' alignItems='center'
           data-state="open" 
           _open={{ 

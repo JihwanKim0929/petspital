@@ -1,6 +1,6 @@
 import React from 'react';
 import './Settings.scss';
-import { Card, Box } from '@chakra-ui/react';
+import { Card, Box, Text } from '@chakra-ui/react';
 import AccountDeleteModalButton from '../../../components/accountDeleteModalButton/AccountDeleteModalButton';
 
 const Settings = () => {
@@ -14,6 +14,9 @@ const Settings = () => {
           animationTimingFunction: "ease-out"
       }}>
         <Card.Root w='100%' h='100%'>
+          <Card.Header>
+            <Text fontFamily='LINESeedKR-Bd'>설정</Text>
+          </Card.Header>
           <Card.Body>
             <AccountDeleteModalButton />
           </Card.Body>

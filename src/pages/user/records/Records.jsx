@@ -78,6 +78,9 @@ const Records = () => {
             animationDuration: "300ms",
             animationTimingFunction: "ease-out"
         }}>
+          <Card.Header>
+            <Text fontFamily='LINESeedKR-Bd'>반려동물 AI 진단 기록</Text>
+          </Card.Header>
           <Card.Body>
             <Show when={hasPets()}>
               <NativeSelectRoot>
