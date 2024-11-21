@@ -24,6 +24,7 @@ public class AnimalHospital {
 
     String hospitalName;
 
+    @Column(unique=true)
     String hospitalAddress;
 
     @ManyToMany

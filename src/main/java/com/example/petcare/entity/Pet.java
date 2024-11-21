@@ -19,7 +19,6 @@ public class Pet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name="siteUser_id")
     private SiteUser siteUser;
