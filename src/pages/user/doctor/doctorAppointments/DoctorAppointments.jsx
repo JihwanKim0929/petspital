@@ -57,6 +57,10 @@ const DoctorAppointments = () => {
                 <Box key={appointment.id} p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
                   <Text>예약일자: {appointment.reservationDate}</Text>
                   <Text>예약생성일자: {appointment.createDate}</Text>
+                  <Text>유저 정보</Text>
+                  <Text>유저네임: {appointment.pet.siteUser.username}</Text>
+                  <Text>이메일: {appointment.pet.siteUser.email}</Text>
+                  <Text>전화번호: {appointment.pet.siteUser.phone_num}</Text>
                   <Text>반려동물 정보</Text>
                   <Image 
                       src={appointment.pet.image_url} 
