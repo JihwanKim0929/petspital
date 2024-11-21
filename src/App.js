@@ -28,6 +28,8 @@ import DiagnosisResult from "./pages/user/diagnosis/diagnosisResult/DiagnosisRes
 import CommunityPostView from "./pages/user/community/communityPostView/CommunityPostView.jsx";
 import CommunityPostEdit from "./pages/user/community/communityPostEdit/CommunityPostEdit.jsx";
 import Diary from "./pages/user/diary/Diary.jsx";
+import AppointmentPetDiagnosis from "./pages/user/doctor/doctorAppointments/appointmentPetDiagnosis/AppointmentPetDiagnosis.jsx";
+import AppointmentPetDiary from "./pages/user/doctor/doctorAppointments/appointmentPetDiary/AppointmentPetDiary.jsx";
 
 function App() {
   return (
@@ -76,6 +78,8 @@ function App() {
           <Route path="doctor" element={<DoctorSidebar />}>
             <Route index element={<DoctorMain />} />
             <Route path="appointments" element={<DoctorAppointments />} />
+            <Route path="appointments/diagnosisRecords" element={<AppointmentPetDiagnosis />} />
+            <Route path="appointments/diary" element={<AppointmentPetDiary />} />
             <Route path="community" element={<Community />}>
               <Route index element={<CommunityBoard />} />
               <Route path="post" element={<CommunityPost />} />

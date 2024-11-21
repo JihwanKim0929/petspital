@@ -1,31 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import './DoctorAppointments.scss';
+import { useNavigate } from 'react-router-dom';
 import { Card, Show, Text, Box, Image, VStack } from '@chakra-ui/react';
+import { Button } from '../../../../components/ui/button';
 
 const DoctorAppointments = () => {
-  const hasPets = () => { return pets.length > 0; };
-    const [pets, setPets] = useState([]);
+  const hasAppointments = () => { return appointments.length > 0; };
+  const [appointments, setAppointments] = useState([]);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        fetch("http://localhost:8080/vet/pet", {
-        method: 'GET',
-        credentials: 'include'
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                console.error('Pets not found 1');
-                throw new Error('Failed to fetch pets');
-            }
-        })
-        .then(parsedPets => {
-        setPets(parsedPets);
-        console.log('- Pets Successfully Loaded -');
-        console.log("Pets:", parsedPets);
-        })
-        .catch(error => console.error('Pets not found 2', error));
-    }, []);
+  useEffect(() => {
+    fetch("http://localhost:8080/reservation/vet", {
+    method: 'GET',
+    credentials: 'include'
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            console.error('Pets not found 1');
+            throw new Error('Failed to fetch pets');
+        }
+    })
+    .then(parsedAppointments => {
+    setAppointments(parsedAppointments);
+    console.log('- Appointments Successfully Loaded -');
+    console.log("Appointments:", parsedAppointments);
+    })
+    .catch(error => console.error('Appointments not found 2', error));
+  }, []);
+
+  const handleViewRecords = (petID) => {
+    sessionStorage.setItem("selectedAppointmentPetID", petID);
+    navigate('./diagnosisRecords');
+  }
+
+  const handleViewDiaries = (petID) => {
+    sessionStorage.setItem("selectedAppointmentPetID", petID);
+    navigate('./diary');
+  }
 
   return (
     <div className='doctorAppointments'>
@@ -38,28 +51,37 @@ const DoctorAppointments = () => {
             animationTimingFunction: "ease-out"
         }}>
           <Card.Body>
-            <Show when={hasPets()}>
+            <Show when={hasAppointments()}>
             <VStack spacing={4} align="stretch">
-              {pets.map(pet => (
-                <Box key={pet.id} p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
-                  <Text fontWeight="bold">{pet.name}</Text>
-                  <Text>Age: {pet.age}</Text>
-                  <Text>Gender: {pet.gender}</Text>
-                  <Text>Species: {pet.species}</Text>
-                  <Text>Weight: {pet.weight}</Text>
-                  <Text>Description: {pet.description}</Text>
+              {appointments.map(appointment => (
+                <Box key={appointment.id} p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
+                  <Text>예약일자: {appointment.reservationDate}</Text>
+                  <Text>예약생성일자: {appointment.createDate}</Text>
+                  <Text>반려동물 정보</Text>
                   <Image 
-                      src={pet.image_url} 
-                      alt={`Image of ${pet.name}`} 
+                      src={appointment.pet.image_url} 
+                      alt={`Image of ${appointment.pet.name}`} 
                       boxSize="100px" 
                       objectFit="cover" 
                   />
+                  <Text fontWeight="bold">{appointment.pet.name}</Text>
+                  <Text>나이: {appointment.pet.age}</Text>
+                  <Text>성별: {appointment.pet.gender}</Text>
+                  <Text>종: {appointment.pet.species}</Text>
+                  <Text>무게(kg): {appointment.pet.weight}</Text>
+                  <Text>설명: {appointment.pet.description}</Text>
+                  <Button fontFamily='LINESeedKR-Bd' onClick={() => handleViewRecords(appointment.pet.id)}>
+                    AI 진단 기록 살펴보기
+                  </Button>
+                  <Button fontFamily='LINESeedKR-Bd' onClick={() => handleViewDiaries(appointment.pet.id)}>
+                    수첩 살펴보기
+                  </Button>
                 </Box>
                 ))}
               </VStack>
             </Show>
-            <Show when={!hasPets()}>
-              <Text>There is no pet.</Text>
+            <Show when={!hasAppointments()}>
+              <Text>예약이 없습니다.</Text>
             </Show>
           </Card.Body>
         </Card.Root>

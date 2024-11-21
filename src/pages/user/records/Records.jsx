@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Records.scss';
 import { Link } from 'react-router-dom';
-import { Card, Show, Text, Box, VStack, Image } from '@chakra-ui/react';
+import { Card, Show, Text, Box, VStack, HStack, Image, useBreakpointValue } from '@chakra-ui/react';
 import {
   NativeSelectField,
   NativeSelectRoot,
@@ -18,6 +18,7 @@ const Records = () => {
   const hasPets = () => { return pets.length > 0; };
   const [records, setRecords] = useState([]);
   const [currentPet, setCurrentPet] = useState('');
+  const isBelowMd = useBreakpointValue({ base: true, md: false });
   
   useEffect(() => {
     fetch("http://localhost:8080/user/pet", {
@@ -92,16 +93,43 @@ const Records = () => {
                 {records.length > 0 ? (
                   <Box mt={4}>
                     {records.map(record => (
-                      <Box key={record.id} p={4} borderWidth="1px" borderRadius="md" mb={4}>
-                        <Text>진단일자: {new Date(record.createDate).toLocaleString()}</Text>
-                        <Text>진단 부위: {record.part}</Text>
-                        <Image src={record.image_url} boxSize="100px" objectFit="cover" />
-                        <Text>예상 질병:</Text>
-                        {record.disease ? 
-                        <Text>{record.disease.name}: {record.disease.symptoms} - {record.disease.description}</Text> :
-                        <Text>질병 없음.</Text>}
-                        <DiagnosisRecordDeleteModalButton diagnosisID={record.id}/>
-                      </Box>
+                      <Card.Root key={record.id} mb={4}>
+                        <Card.Body>
+                          <Show when={!isBelowMd}>
+                            <HStack>
+                              <Image src={record.image_url} boxSize={{base:"150px", md:"150px", lg:"200px"}} 
+                              borderRadius={{base:"0.5rem", md:"0.5rem", lg:"1rem"}} objectFit="cover" />
+                              <VStack align='left' ml='1rem'>
+                                <Text fontFamily='Pretendard Variable'>진단일자: {new Date(record.createDate).toLocaleString()}</Text>
+                                <Text fontFamily='Pretendard Variable'>진단 부위: {record.part}</Text>
+                                <Text fontFamily='Pretendard Variable'>예상 질병:</Text>
+                                {record.disease ? 
+                                <Text fontFamily='Pretendard Variable'>{record.disease.name}: {record.disease.symptoms} - {record.disease.description}</Text> :
+                                <Text fontFamily='Pretendard Variable'>질병 없음.</Text>}
+                              </VStack>
+                            </HStack>
+                            <Box width='100%' display='flex' justifyContent='right'>
+                              <DiagnosisRecordDeleteModalButton diagnosisID={record.id}/>
+                            </Box>
+                          </Show>
+                          <Show when={isBelowMd}>
+                            <VStack>
+                              <Image src={record.image_url} boxSize={{base:"150px", md:"150px", lg:"200px"}} borderRadius='0.5rem' objectFit="cover" />
+                              <VStack align='left' mt='1rem'>
+                                <Text fontFamily='Pretendard Variable'>진단일자: {new Date(record.createDate).toLocaleString()}</Text>
+                                <Text fontFamily='Pretendard Variable'>진단 부위: {record.part}</Text>
+                                <Text fontFamily='Pretendard Variable'>예상 질병:</Text>
+                                {record.disease ? 
+                                <Text fontFamily='Pretendard Variable'>{record.disease.name}: {record.disease.symptoms} - {record.disease.description}</Text> :
+                                <Text fontFamily='Pretendard Variable'>질병 없음.</Text>}
+                              </VStack>
+                              <Box width='100%' display='flex' justifyContent='right'>
+                                <DiagnosisRecordDeleteModalButton diagnosisID={record.id}/>
+                              </Box>
+                            </VStack>
+                          </Show>
+                        </Card.Body>
+                      </Card.Root>
                     ))}
                   </Box>
                 ) : (
