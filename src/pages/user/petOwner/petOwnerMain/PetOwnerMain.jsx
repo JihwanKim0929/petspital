@@ -20,7 +20,9 @@ const PetOwnerMain = () => {
           <Card.Body>
             <Box w='100%' h='100%' display='flex' alignItems='center' justifyContent='center'>
               <VStack w='100%'>
-                <Text fontFamily='Pretendard Variable' fontSize={{ base: '20px', lg: '24px' }}>Petspital에 오신걸 환영합니다!</Text>
+                <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{ base: '20px', lg: '24px' }}>
+                  Petspital에 오신걸 환영합니다!
+                </Text>
                 <Box m={4} />
                 <Icon fontSize="30px">
                   <MdOutlinePets />

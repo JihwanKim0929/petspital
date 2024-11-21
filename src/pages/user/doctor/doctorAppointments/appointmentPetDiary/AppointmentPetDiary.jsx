@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './AppointmentPetDiary.scss';
 import { Link } from 'react-router-dom';
-import { Card, Box, VStack, Text, Image } from '@chakra-ui/react';
+import { Card, Box, VStack, HStack, Stack, Text, Image, Separator, useBreakpointValue, Show } from '@chakra-ui/react';
 import { Button } from '../../../../../components/ui/button';
 import {
     NativeSelectField,
@@ -16,6 +16,7 @@ const AppointmentPetDiary = () => {
     const [diaries, setDiaries] = useState([]);
     const [selectedDiary, setSelectedDiary] = useState(null);
     const [diaryPages, setDiaryPages] = useState([]);
+    const isBelowMd = useBreakpointValue({ base: true, md: false });
 
     useEffect(() => {
         const petIDFromStorage = sessionStorage.getItem('selectedAppointmentPetID');
@@ -95,11 +96,23 @@ const AppointmentPetDiary = () => {
                         {selectedDiary !== null ? (
                             <VStack w='100%'>
                                 {diaryPages.map(page => (
-                                    <Card.Root w='100%' key={page.id}>
+                                    <Card.Root key={page.id} w='100%' h='auto' mb='1rem'>
                                         <Card.Body>
-                                            <Text>{new Date(page.createDate).toLocaleString()}</Text>
-                                            <Image src={page.image_url} />
-                                            <Text>{page.content}</Text>
+                                            <VStack align='left'>
+                                                <Text fontFamily='LINESeedKR-Bd' fontSize={{ base:'16px', lg:'18px' }}>
+                                                {new Date(page.createDate).toLocaleString()}
+                                                </Text>
+                                                <Separator mt={{ base:'2', md:'4' }} mb={{ base:'2', md:'4' }} />
+                                                <Stack flexDirection={{ base:'column', md:'row' }} align='center'>
+                                                    {page.image_url && <Image src={page.image_url} boxSize={{ base:'200px', md:'150px', lg:'200px' }} borderRadius={{ base:'0.5rem', lg:'1rem' }}/>}
+                                                    <Show when={isBelowMd}><Separator mt={2} mb={2} /></Show>
+                                                    <Card.Root ml={{ base:'0', md:'6' }} minH={{ base:'150px', lg:'200px' }} height='auto' w='100%'>
+                                                        <Card.Body>
+                                                        <Text h='100%' fontFamily='Pretendard Variable'>{page.content}</Text>
+                                                        </Card.Body>
+                                                    </Card.Root>
+                                                </Stack>
+                                            </VStack>                 
                                         </Card.Body>
                                     </Card.Root>
                                 ))}
