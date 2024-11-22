@@ -33,7 +33,7 @@ const DoctorMain = () => {
                   반려동물 보유자들의 병원 예약 정보를 확인할 수 있어요.
                 </Text>
                 <Link to='./appointments'>
-                  <Button fontFamily='LINESeedKR-Bd'>
+                  <Button fontFamily='LINESeedKR-Bd' colorPalette='teal'>
                     예약 정보 확인하기
                   </Button>
                 </Link>
@@ -52,7 +52,7 @@ const DoctorMain = () => {
                   커뮤니티 게시판을 둘러보세요.
                 </Text>
                 <Link to='./community'>
-                  <Button fontFamily='LINESeedKR-Bd'>
+                  <Button fontFamily='LINESeedKR-Bd' colorPalette='teal'>
                     커뮤니티 게시판 둘러보기
                   </Button>
                 </Link>
@@ -71,7 +71,7 @@ const DoctorMain = () => {
                   프로필 설정을 확인할 수 있어요.
                 </Text>
                 <Link to='./profile'>
-                  <Button fontFamily='LINESeedKR-Bd'>
+                  <Button fontFamily='LINESeedKR-Bd' colorPalette='teal'>
                     프로필 확인하기
                   </Button>
                 </Link>

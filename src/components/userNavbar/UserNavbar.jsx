@@ -201,7 +201,7 @@ const UserNavbar = () => {
             <div className="item">
               <DrawerRoot placement='start'>
                 <DrawerTrigger asChild>
-                  <IconButton colorScheme='black' variant='ghost' className="mobileMenuButton">
+                  <IconButton colorPalette='teal' variant='ghost' className="mobileMenuButton">
                     <IoMenu />
                   </IconButton>
                 </DrawerTrigger>
@@ -226,7 +226,7 @@ const UserNavbar = () => {
                     </ul>
                   </DrawerBody>
                   <DrawerFooter>
-                    <SignOutButton className="signOutButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그아웃</SignOutButton>
+                    <SignOutButton className="signOutButton" colorPalette='teal' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그아웃</SignOutButton>
                   </DrawerFooter>
                 </DrawerContent>
               </DrawerRoot>
@@ -255,13 +255,15 @@ const UserNavbar = () => {
           <div className="desktopItems">
             <div className="item">
               <Link to="/about" style={{ textDecoration: "none" }}>
-                <div className="abtPetspital" fontFamily='Pretendard Variable' fontWeight='600'>
+                <Text className="abtPetspital" fontFamily='Pretendard Variable' fontWeight='600'>
                   About
-                </div>
+                </Text>
               </Link>
             </div>
             <div className="item">
-              <SignOutButton className="signOutButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그아웃</SignOutButton>
+              <SignOutButton className="signOutButton" colorPalette='teal' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>
+                로그아웃
+              </SignOutButton>
             </div>
           </div>
         </Box>

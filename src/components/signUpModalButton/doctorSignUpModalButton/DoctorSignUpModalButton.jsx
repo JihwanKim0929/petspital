@@ -112,7 +112,7 @@ const DoctorSignUpModalButton = () => {
     return (
       <DialogRoot minH='1000px'>
         <DialogTrigger>
-          <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
+          <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd' colorPalette='teal'>
             의사 계정 생성하기
           </Button>
         </DialogTrigger>

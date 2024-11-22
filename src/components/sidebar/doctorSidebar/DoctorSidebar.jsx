@@ -34,9 +34,11 @@ const DoctorSidebar = () => {
         <Show when={isMdOrMore}>
           <Box className="sidebar" hideBelow='md'>
             <ul className="sidebarComponents">
-              <Center flexDirection='column' borderBottom="1.5px solid lightgray" marginLeft='0.75rem' marginRight='0.75rem' marginTop='1rem'>
-                <Avatar name={username} src={userImageURL} w='125px' h='125px' />
-                <Text mt='0.5rem' mb='0.5rem' fontWeight='bold' fontSize='18px' fontFamily='LINESeedKR-Bd'>{username}</Text>
+              <Center flexDirection='column' backgroundColor='gray.100' pt='1rem' pb='1rem'>
+                <Avatar name={username} src={userImageURL} w='150px' h='150px' borderColor='white' borderWidth='0.25rem' />
+              </Center>
+              <Center width='100%' display='flex' backgroundColor='teal.600' borderBottomRadius='1rem'>
+                  <Text mt='0.75rem' mb='0.5rem' fontWeight='bold' fontSize='18px' fontFamily='LINESeedKR-Bd' color='white'>{username}</Text>
               </Center>
               <br />
               <SidebarCategory CategoryIcon={BiHome} categoryName='홈' categoryLink='/user/doctor'/>

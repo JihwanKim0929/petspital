@@ -8,15 +8,15 @@
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
-    background-color: rgb(253, 253, 254);
+    background-color: rgb(253, 254, 254);
 }
   
 ::-webkit-scrollbar-thumb {
-background-color: rgb(182, 184, 186);
-border-radius: 3px;
+background-color: #1e6056;
+border-radius: 1px;
 }
 
 
 ::-webkit-scrollbar-thumb:hover {
-background-color: rgb(164, 166, 168);;
+background-color: #39a593;
 }

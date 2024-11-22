@@ -32,6 +32,7 @@ import AppointmentPetDiagnosis from "./pages/user/doctor/doctorAppointments/appo
 import AppointmentPetDiary from "./pages/user/doctor/doctorAppointments/appointmentPetDiary/AppointmentPetDiary.jsx";
 
 function App() {
+  
   return (
     <Provider>
       <Routes>
