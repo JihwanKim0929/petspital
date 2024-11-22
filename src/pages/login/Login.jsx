@@ -122,7 +122,7 @@ const Login = () => {
                         <Text className="desc">패스워드</Text>
                         <PasswordInput className='input' placeholder='비밀번호를 입력하세요.' onChange={(e) => setPassword(e.target.value)}/>
                     </div>
-                    <Button className="loginButton" colorScheme='gray' variant='solid'
+                    <Button className="loginButton" colorPalette='teal' variant='solid'
                     h={{ base: '50px', md: '53px', lg: '55px' }}
                     w={{ base: '200px', md: '225px', lg: '250px' }}
                     fontSize={{ base: '16px', md: '18px', lg: '20px' }}

@@ -96,8 +96,10 @@ const PetOwnerAppointments = () => {
                                                 <Box>
                                                     <Text fontFamily='LINESeedKR-Bd'>예약 날짜</Text>
                                                     <Text ml={3} fontFamily='Pretendard Variable'>{new Date(appointment.reservationDate).toLocaleString()}</Text>
+                                                    <Text mt={6} fontFamily='LINESeedKR-Bd'>병원 이름</Text>
+                                                    <Text ml={3} fontFamily='Pretendard Variable'> {appointment.animalHospital.hospitalName}</Text>
                                                     <Text mt={6} fontFamily='LINESeedKR-Bd'>병원 주소</Text>
-                                                    <Text ml={3} fontFamily='Pretendard Variable'> {appointment.hospitalAddress}</Text>
+                                                    <Text ml={3} fontFamily='Pretendard Variable'> {appointment.animalHospital.hospitalAddress}</Text>
                                                 </Box>
                                                 <Box display='flex' justifyContent='right'>
                                                     <AppointmentDeleteModalButton appointmentID={appointment.id}/>

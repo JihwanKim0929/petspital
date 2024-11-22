@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import './Navbar.scss';
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { Show, Box, IconButton, useBreakpointValue } from "@chakra-ui/react";
+import { Show, Box, IconButton, useBreakpointValue, Text } from "@chakra-ui/react";
 import { IoMenu } from "react-icons/io5";
 import { IoIosArrowForward } from "react-icons/io";
 import { MenuContent, MenuItem, MenuRoot, MenuSeparator, MenuTrigger } from "../ui/menu";
@@ -88,25 +88,25 @@ const Navbar = () => {
           <div className="desktopItems">
             <div className="item">
               <Link to="/about" style={{ textDecoration: "none" }}>
-                <div className="abtPetspital">
+                <Text className="abtPetspital" fontFamily='Pretendard Variable' fontWeight='600'>
                   About
-                </div>
+                </Text>
               </Link>
             </div>
             { isLoggedIn && 
             (<div className="item">
-              <SignOutButton className="signOutButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그아웃</SignOutButton>
+              <SignOutButton className="signOutButton" colorPalette='teal' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그아웃</SignOutButton>
             </div>)}
             { !isLoggedIn && 
             (<div className="item">
                 <Link to="/signup" style={{ textDecoration: "none" }}>
-                  <Button className="signInButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>회원가입</Button>
+                  <Button className="signInButton" colorPalette='teal' variant="subtle" fontFamily='Pretendard Variable' fontWeight='600'>회원가입</Button>
                 </Link>
             </div>)}
             { !isLoggedIn && 
             (<div className="item">
                 <Link to="/login" style={{ textDecoration: "none" }}>
-                  <Button className="signUpButton" colorScheme='gray' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그인</Button>
+                  <Button className="signUpButton" colorPalette='teal' variant='solid' fontFamily='Pretendard Variable' fontWeight='600'>로그인</Button>
                 </Link>
             </div>)}
           </div>

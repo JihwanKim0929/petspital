@@ -198,9 +198,7 @@ const Profile = () => {
                 </VStack>
               </Show>
               <Box width='100%' display='flex' justifyContent='right'>
-                <Button alignSelf="flex-start" mt={6} onClick={toggleEditMode} fontFamily='LINESeedKR-Bd'>
-                  편집
-                </Button>
+                
               </Box>
             </Show>
             

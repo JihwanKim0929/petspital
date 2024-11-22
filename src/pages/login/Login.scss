@@ -27,6 +27,7 @@
                 filter: brightness(0%);
                 width: 4rem;
                 height: 4rem;
+                filter: invert(60%) sepia(49%) saturate(632%) hue-rotate(131deg) brightness(93%) contrast(86%);
             }
 
             .inputContainer{

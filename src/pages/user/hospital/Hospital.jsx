@@ -23,7 +23,7 @@ const Hospital = () => {
 
   const [pets, setPets] = useState([]);
   const [hospitals, setHospitals] = useState([]);
-  const [selectedHospitalAddress, setSelectedHospitalAddress] = useState(null);
+  const [selectedHospitalID, setSelectedHospitalID] = useState(null);
   const hasPets = () => { return pets.length > 0; };
   const petID = useWatch({ control, name: 'petID' });
   const [hospitalLocations, setHospitalLocations] = useState([]);
@@ -114,7 +114,7 @@ const Hospital = () => {
 
 
   const handleHospitalSelect = (hospital) => {
-    setSelectedHospitalAddress(hospital.hospitalAddress);
+    setSelectedHospitalID(hospital.id);
     const selectedLocation = hospitalLocations.find(loc => loc.address === hospital.hospitalAddress);
     if (selectedLocation) {
       setMapCenter({ lat: selectedLocation.lat, lng: selectedLocation.lng });
@@ -124,15 +124,14 @@ const Hospital = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    if (!selectedHospitalAddress) {
+    if (!selectedHospitalID) {
       console.log("You must select hospital.");
       return;
     }
 
-    const url = `http://localhost:8080/pet/${data.petID}/reservation`;
+    const url = `http://localhost:8080/pet/${petID}/${selectedHospitalID}/reservation`;
     const appointmentData = {
-      reservationDate: appointmentDate,
-      hospitalAddress: selectedHospitalAddress
+      reservationDate: appointmentDate
     }
     console.log('Sending appointment data:', appointmentData);
     fetch(url,{
@@ -230,13 +229,13 @@ const Hospital = () => {
                                   <HospitalSelectCard
                                     key={hospital.id}
                                     hospital={hospital}
-                                    isSelected={selectedHospitalAddress === hospital.hospitalAddress}
+                                    isSelected={selectedHospitalID === hospital.id}
                                     onSelect={() => handleHospitalSelect(hospital)}
                                   />
                                 ))}
                               </Stack>
                             </Box>
-                            {(!selectedHospitalAddress &&
+                            {(!selectedHospitalID &&
                             <Text color="red.500" fontFamily='Pretendard Variable'>
                               병원을 선택해주세요.
                             </Text>)}
@@ -254,7 +253,7 @@ const Hospital = () => {
                           </Field>
                         </Fieldset.Content>
 
-                        <Button type="submit" alignSelf="flex-start" mt={6} disabled={!selectedHospitalAddress || !petID}
+                        <Button type="submit" alignSelf="flex-start" mt={6} disabled={!selectedHospitalID || !petID}
                         fontFamily='LINESeedKR-Bd'>
                           예약하기
                         </Button>
