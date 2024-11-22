@@ -36,10 +36,9 @@ public class ReservationController {
         return ResponseEntity.ok().body(dtos);
     }
 
-
-    @PostMapping("/pet/{petId}/reservation")
-    public ResponseEntity<ReservationDto> createReservation(@PathVariable Long petId, @RequestBody ReservationDto reservationDto) {
-           ReservationDto createdDto = reservationService.createReservation(petId,reservationDto);
+    @PostMapping("/pet/{petId}/{hospitalId}/reservation")
+    public ResponseEntity<ReservationDto> createReservation(@PathVariable Long petId, @PathVariable Long hospitalId, @RequestBody ReservationDto reservationDto) {
+           ReservationDto createdDto = reservationService.createReservation(petId,hospitalId,reservationDto);
            return ResponseEntity.ok().body(createdDto);
     }
 

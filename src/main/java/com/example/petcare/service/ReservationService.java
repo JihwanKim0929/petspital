@@ -40,38 +40,21 @@ public class ReservationService {
                 .collect(Collectors.toList());
     }
 
-    public ReservationDto createReservation(Long petId, ReservationDto reservationDto) {
+    public ReservationDto createReservation(Long petId, Long hospitalId, ReservationDto reservationDto) {
         Pet pet = petRepository.findById(petId).orElse(null);
         reservationDto.setPet(pet);
         reservationDto.setCreateDate(LocalDateTime.now());
+        AnimalHospital animalHospital = animalHospitalRepository.findById(hospitalId).orElse(null);
+        reservationDto.setAnimalHospital(animalHospital);
         Reservation created = reservationRepository.save(reservationDto.getReservation());
-
-        String hospitalAddress = reservationDto.getHospitalAddress();
-        AnimalHospital animalHospital = animalHospitalRepository.findByHospitalAddress(hospitalAddress).orElse(null);
-        if (animalHospital.getPetList().stream().noneMatch(existingPet -> existingPet.getId().equals(pet.getId()))) {
-            animalHospital.getPetList().add(pet);
-            animalHospitalRepository.save(animalHospital);
-        }
         return created.getReservationDto();
     }
 
     public ReservationDto deleteReservation(Long reservationId) {
         Reservation target = reservationRepository.findById(reservationId).orElse(null);
         if(target != null){
-
             ReservationDto dto =target.getReservationDto();
             reservationRepository.delete(target);
-
-            //예약 삭제시 해당 동물의 예약 기록에 더 이상 해당 동물병원에 대한 예약이 존재하지 않을 경우 동물병원-동물 연관 끊음.
-            Long petId = target.getPet().getId();
-            List<ReservationDto> reservationDtos = getReservations(petId);
-            if(reservationDtos.stream().noneMatch(existingReservation -> existingReservation.getHospitalAddress().equals(target.getHospitalAddress()))) {
-                AnimalHospital animalHospital = animalHospitalRepository.findByHospitalAddress(target.getHospitalAddress()).orElse(null);
-                animalHospital.getPetList().remove(target.getPet());
-                animalHospitalRepository.save(animalHospital);
-            }
-
-
             return dto;
         }
         else
@@ -89,7 +72,7 @@ public class ReservationService {
 
     public List<ReservationDto> getVetReservation(Long vetId) {
         AnimalHospitalDto dto = animalHospitalService.getAnimalHospitalByUserId(vetId);
-        return reservationRepository.findByHospitalAddress(dto.getHospitalAddress())
+        return reservationRepository.findByAnimalHospital(dto.getAnimalHospital())
                         .stream()
                         .map(reservation -> reservation.getReservationDto())
                         .collect(Collectors.toList());

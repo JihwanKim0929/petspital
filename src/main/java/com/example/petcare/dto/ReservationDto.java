@@ -1,5 +1,6 @@
 package com.example.petcare.dto;
 
+import com.example.petcare.entity.AnimalHospital;
 import com.example.petcare.entity.Pet;
 import com.example.petcare.entity.Reservation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,7 +22,8 @@ public class ReservationDto {
 
     private LocalDateTime createDate;
 
-    private String hospitalAddress;
+    private AnimalHospital animalHospital;
+
 
     @JsonIgnore
     public Reservation getReservation() {
@@ -30,7 +32,7 @@ public class ReservationDto {
                 .pet(pet)
                 .reservationDate(reservationDate)
                 .createDate(createDate)
-                .hospitalAddress(hospitalAddress)
+                .animalHospital(animalHospital)
                 .build();
     }
 }

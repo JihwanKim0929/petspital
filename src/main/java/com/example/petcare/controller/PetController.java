@@ -64,16 +64,6 @@ public class PetController {
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
     }
 
-    @PreAuthorize("hasRole('ROLE_VET')")
-    @GetMapping("/vet/pet")
-    public ResponseEntity<List<PetDto>> getPets_Vet() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
-        Long userId = userService.get_user_by_username(username).getId();
-        List<PetDto> dtos = animalHospitalService.getPets_vet(userId);
-        return ResponseEntity.status(HttpStatus.OK).body(dtos);
-    }
-
     @GetMapping("/pet/{id}")
     public ResponseEntity<PetDto> getPet(@PathVariable Long id) {
         PetDto dto = petService.get_pet(id);

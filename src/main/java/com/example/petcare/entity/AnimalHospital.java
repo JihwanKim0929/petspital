@@ -27,15 +27,7 @@ public class AnimalHospital {
     @Column(unique=true)
     String hospitalAddress;
 
-    @ManyToMany
-    @JoinTable(
-            name="animal_hospital_pet",
-            joinColumns = @JoinColumn(name = "ANIMAL_HOSPITAL_ID"),
-            inverseJoinColumns = @JoinColumn(name="PET_ID")
-    )
     @JsonIgnore
-    private List<Pet> petList = new ArrayList<>();
-
     public AnimalHospitalDto getAnimalHospitalDto() {
         return AnimalHospitalDto.builder()
                 .id(id)

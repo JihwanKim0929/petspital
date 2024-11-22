@@ -45,17 +45,6 @@ public class AnimalHospitalService {
         return animalHospital!=null ? animalHospital.getAnimalHospitalDto() : null;
     }
 
-    public List<PetDto> getPets_vet(Long userId){
-        AnimalHospital animalHospital = animalHospitalRepository.findBySiteUserId(userId).orElse(null);
-        if(animalHospital == null){
-            return null;
-        }
-        return animalHospital.getPetList()
-                .stream()
-                .map(pet->pet.get_PetDto())
-                .collect(Collectors.toList());
-    }
-
     public List<AnimalHospitalDto> getAnimalHospitalList(){
         return animalHospitalRepository.findAll()
                 .stream()
