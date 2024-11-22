@@ -23,7 +23,7 @@ const AccountDeleteModalButton = () => {
 
     const handleDeleteAccount = async () => {
         try {
-            const response = await fetch(`http://${SERVER_URL}/user`, {
+            const response = await fetch(`${SERVER_URL}/user`, {
                 method: 'DELETE',
                 credentials: 'include'
             });
