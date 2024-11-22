@@ -19,6 +19,7 @@ import {
   NativeSelectField,
   NativeSelectRoot,
 } from "../ui/native-select";
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 
 const PetEditModalButton = ({petID, petName, age, gender, species, weight, description}) => {
@@ -36,7 +37,7 @@ const PetEditModalButton = ({petID, petName, age, gender, species, weight, descr
             description: data.description
         };
         console.log(petDto);
-        const url = `http://localhost:8080/updatePet/${petID}`;
+        const url = `${SERVER_URL}/updatePet/${petID}`;
         fetch(url,{
             method: 'POST',
             body: JSON.stringify(petDto),

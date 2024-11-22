@@ -14,6 +14,7 @@ import {
 import { Text } from '@chakra-ui/react';
 import { Button } from "../ui/button";
 import { toaster } from '../ui/toaster';
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 
 const AccountDeleteModalButton = () => {
@@ -22,7 +23,7 @@ const AccountDeleteModalButton = () => {
 
     const handleDeleteAccount = async () => {
         try {
-            const response = await fetch('http://localhost:8080/user', {
+            const response = await fetch(`http://${SERVER_URL}/user`, {
                 method: 'DELETE',
                 credentials: 'include'
             });

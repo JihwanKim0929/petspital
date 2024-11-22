@@ -23,6 +23,7 @@ import { useForm } from 'react-hook-form';
 import { toaster } from '../../ui/toaster';
 import { Text, Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import { SERVER_URL } from '../../../utils/GlobalConstants';
 
 const DoctorSignUpModalButton = () => {
 
@@ -60,7 +61,7 @@ const DoctorSignUpModalButton = () => {
     const animalHospitalBlob = new Blob([animalHospitalJson],{type: "application/json"});
     formData.append("animalHospitalDto", animalHospitalBlob);
 
-    const url = "http://localhost:8080/vet";
+    const url = `${SERVER_URL}/vet`;
     fetch(url,{
       method: 'POST',
       body: formData,

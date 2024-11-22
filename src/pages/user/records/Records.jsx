@@ -11,6 +11,7 @@ import { Button } from '../../../components/ui/button';
 import DiagnosisRecordDeleteModalButton from '../../../components/diagnosisRecordDeleteModalButton/DiagnosisRecordDeleteModalButton';
 import { MdOutlinePets } from "react-icons/md";
 import { BiSearchAlt2 } from "react-icons/bi";
+import { SERVER_URL } from '../../../utils/GlobalConstants';
 
 const Records = () => {
 
@@ -21,7 +22,7 @@ const Records = () => {
   const isBelowMd = useBreakpointValue({ base: true, md: false });
   
   useEffect(() => {
-    fetch("http://localhost:8080/user/pet", {
+    fetch(`${SERVER_URL}/user/pet`, {
       method: 'GET',
       credentials: 'include'
     })
@@ -45,7 +46,7 @@ const Records = () => {
     const selectedPetID = event.target.value;
     setCurrentPet(selectedPetID);
     if (selectedPetID) {
-      const url = `http://localhost:8080/pet/${selectedPetID}/diagnosis`;
+      const url = `${SERVER_URL}/pet/${selectedPetID}/diagnosis`;
       console.log("Diagnosis Records URL: " + url);
       fetch(url, {
         method: 'GET',

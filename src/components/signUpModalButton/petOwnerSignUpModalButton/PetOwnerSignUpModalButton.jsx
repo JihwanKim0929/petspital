@@ -23,6 +23,7 @@ import { useForm } from 'react-hook-form';
 import { toaster } from '../../ui/toaster';
 import { Text, Flex } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
+import { SERVER_URL } from '../../../utils/GlobalConstants';
 
 
 const PetOwnerSignUpModalButton = () => {
@@ -49,7 +50,7 @@ const PetOwnerSignUpModalButton = () => {
     const json = JSON.stringify(userDto);
     const blob = new Blob([json],{type: "application/json"});
     formData.append("userDto",blob);
-    const url = "http://localhost:8080/user";
+    const url = `${SERVER_URL}/user`;
     fetch(url,{
         method: 'POST',
         body: formData,

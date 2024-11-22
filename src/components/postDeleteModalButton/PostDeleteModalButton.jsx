@@ -14,6 +14,7 @@ import {
 import { Text } from '@chakra-ui/react';
 import { Button } from "../ui/button";
 import { toaster } from '../ui/toaster';
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 
 const PostDeleteModalButton = ({postID}) => {
@@ -22,7 +23,7 @@ const PostDeleteModalButton = ({postID}) => {
 
     const handleDeletePost = async () => {
         try {
-            const url = `http://localhost:8080/board/${postID}`;
+            const url = `${SERVER_URL}/board/${postID}`;
             const response = await fetch(url, {
                 method: 'DELETE',
                 credentials: 'include'

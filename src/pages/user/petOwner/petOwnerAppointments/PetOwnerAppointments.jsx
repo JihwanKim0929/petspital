@@ -8,6 +8,7 @@ import AppointmentDeleteModalButton from '../../../../components/appointmentDele
 import { EmptyState } from '../../../../components/ui/empty-state';
 import { Button } from '../../../../components/ui/button';
 import { MdOutlinePets } from "react-icons/md";
+import { SERVER_URL } from '../../../../utils/GlobalConstants';
 
 const PetOwnerAppointments = () => {
     
@@ -17,7 +18,7 @@ const PetOwnerAppointments = () => {
     const [currentPet, setCurrentPet] = useState('');
 
     useEffect(() => {
-        fetch("http://localhost:8080/user/pet", {
+        fetch(`${SERVER_URL}/user/pet`, {
         method: 'GET',
         credentials: 'include'
         })
@@ -41,7 +42,7 @@ const PetOwnerAppointments = () => {
         const selectedPetID = event.target.value;
         setCurrentPet(selectedPetID);
         if (selectedPetID) {
-            const url = `http://localhost:8080/pet/${selectedPetID}/reservation`;
+            const url = `${SERVER_URL}/pet/${selectedPetID}/reservation`;
             console.log("Appointments URL: " + url);
             fetch(url, {
                 method: 'GET',

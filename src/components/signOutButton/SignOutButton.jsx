@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from '../ui/button';
 import { toaster } from '../ui/toaster';
 import { useNavigate } from "react-router-dom";
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 const SignOutButton = React.forwardRef((props, ref) => {
 
@@ -10,7 +11,7 @@ const SignOutButton = React.forwardRef((props, ref) => {
     const handleSignOut = async () => {
         try 
         {
-        const response = await fetch('http://localhost:8080/logout', {
+        const response = await fetch(`${SERVER_URL}/logout`, {
             method: 'GET',
             credentials: 'include'
         });

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Box, Text, Button, Input } from "@chakra-ui/react";
 import { PasswordInput } from '../../components/ui/password-input';
 import { toaster } from "../../components/ui/toaster";
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 const Login = () => {
 
@@ -31,7 +32,7 @@ const Login = () => {
             const formData = new FormData();
             formData.append('username', username);
             formData.append('password', password);
-            const response = await fetch('http://localhost:8080/loginProc', {
+            const response = await fetch(`${SERVER_URL}/loginProc`, {
                 method: 'POST',
                 headers: {},
                 body: formData,
@@ -56,7 +57,7 @@ const Login = () => {
             {
                 console.log("JSON to store: " + JSON.stringify(loginSuccess));
 
-                const response2 = await fetch('http://localhost:8080/user', {
+                const response2 = await fetch(`${SERVER_URL}/user`, {
                     method: 'GET',
                     credentials: "include"
                 });

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Flex, Textarea, Stack, Text, VStack, HStack, Image, Box, Separator } from '@chakra-ui/react';
 import { Button } from '../../../../components/ui/button';
 import CommentBox from '../../../../components/commentBox/CommentBox';
+import { SERVER_URL } from '../../../../utils/GlobalConstants';
 
 const CommunityPostView = () => {
   const [post, setPost] = useState(null);
@@ -22,7 +23,7 @@ const CommunityPostView = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:8080/board/${postID}`, {
+        const response = await fetch(`${SERVER_URL}/board/${postID}`, {
           method: 'GET',
           credentials: 'include'
         });
@@ -43,7 +44,7 @@ const CommunityPostView = () => {
 
     const fetchUser = async () => {
       try {
-        const userResponse = await fetch('http://localhost:8080/user', {
+        const userResponse = await fetch(`${SERVER_URL}/user`, {
           method: 'GET',
           credentials: 'include'
         });
@@ -64,7 +65,7 @@ const CommunityPostView = () => {
 
   const fetchComments = async (postID) => {
     try {
-      const response = await fetch(`http://localhost:8080/board/${postID}/comment`, {
+      const response = await fetch(`${SERVER_URL}/board/${postID}/comment`, {
         method: 'GET',
         credentials: 'include'
       });
@@ -93,7 +94,7 @@ const CommunityPostView = () => {
     };
 
     try {
-      const response = await fetch(`http://localhost:8080/board/${postID}/comment`, {
+      const response = await fetch(`${SERVER_URL}/board/${postID}/comment`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -135,7 +136,7 @@ const CommunityPostView = () => {
         <Separator border='1px solid lightgray' mt={3} mb={3} />
         <VStack>
           <Text textAlign='left' width='100%' fontFamily='Pretendard Variable'>{post.content}</Text>
-          {post.image_url && <Image src={post.image_url} borderRadius='1rem' mt={6}/>}
+          {post.image_url && <Image src={post.image_url} borderRadius='1rem' mt={6} boxSize={{ base:'200px', md:'250px', lg:'300px' }} />}
         </VStack>
       </Box>
       

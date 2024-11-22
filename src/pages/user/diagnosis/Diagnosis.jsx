@@ -16,6 +16,7 @@ import {
   FileUploadRoot,
 } from "../../../components/ui/file-button";
 import { MdOutlinePets } from "react-icons/md";
+import { SERVER_URL } from '../../../utils/GlobalConstants';
 
 const Diagnosis = () => {
 
@@ -26,7 +27,7 @@ const Diagnosis = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:8080/user/pet", {
+    fetch(`${SERVER_URL}/user/pet`, {
       method: 'GET',
       credentials: 'include'
     })
@@ -65,7 +66,7 @@ const Diagnosis = () => {
       formData.append("image", diagnosisImage);
     }
   
-    const url = `http://localhost:8080/pet/${data.petID}/diagnosis`;
+    const url = `${SERVER_URL}/pet/${data.petID}/diagnosis`;
   
     try {
       const response = await fetch(url, {

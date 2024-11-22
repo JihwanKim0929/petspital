@@ -7,6 +7,7 @@ import { Button } from '../../../components/ui/button';
 import { Editable, IconButton } from "@chakra-ui/react";
 import { LuCheck, LuPencilLine, LuX } from "react-icons/lu";
 import { toaster } from "../../../components/ui/toaster";
+import { SERVER_URL } from '../../../utils/GlobalConstants';
 
 const Profile = () => {
 
@@ -66,7 +67,7 @@ const Profile = () => {
     };
 
     try {
-        const response = await fetch("http://localhost:8080/updateUser", {
+        const response = await fetch(`${SERVER_URL}/updateUser`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userDto),

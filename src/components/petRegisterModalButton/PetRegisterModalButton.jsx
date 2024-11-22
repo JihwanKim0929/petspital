@@ -24,6 +24,7 @@ import {
   NativeSelectField,
   NativeSelectRoot,
 } from "../ui/native-select"
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 
 const PetRegisterModalButton = () => {
@@ -48,7 +49,7 @@ const PetRegisterModalButton = () => {
     if (dataImage) {
       formData.append("image", dataImage);
     }
-    const url = "http://localhost:8080/user/pet";
+    const url = `${SERVER_URL}/user/pet`;
     fetch(url,{
       method: 'POST',
       body: formData,

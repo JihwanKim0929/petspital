@@ -13,6 +13,7 @@ import {
 import { Text } from '@chakra-ui/react';
 import { Field } from "../ui/field";
 import { Button } from "../ui/button";
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 
 const PetViewModalButton = ({petID}) => {
@@ -21,7 +22,7 @@ const PetViewModalButton = ({petID}) => {
 
     useEffect(() => {
 
-        const petUrl = `http://localhost:8080/pet/${petID}`;
+        const petUrl = `${SERVER_URL}/pet/${petID}`;
 
         fetch(petUrl, {
             method: 'GET',

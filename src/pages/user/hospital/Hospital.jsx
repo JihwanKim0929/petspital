@@ -14,6 +14,7 @@ import { addDays } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { EmptyState } from '../../../components/ui/empty-state';
 import { MdOutlinePets } from "react-icons/md";
+import { SERVER_URL } from '../../../utils/GlobalConstants';
 
 const { kakao } = window;
 
@@ -35,7 +36,7 @@ const Hospital = () => {
   const navigate = useNavigate();
   
   useEffect(() => {
-    fetch("http://localhost:8080/user/pet", {
+    fetch(`${SERVER_URL}/user/pet`, {
       method: 'GET',
       credentials: 'include'
     })
@@ -56,7 +57,7 @@ const Hospital = () => {
     
 
 
-    fetch("http://localhost:8080/animalHospitalList", {
+    fetch(`${SERVER_URL}/animalHospitalList`, {
       method: 'GET',
       credentials: 'include'
     })
@@ -129,7 +130,7 @@ const Hospital = () => {
       return;
     }
 
-    const url = `http://localhost:8080/pet/${petID}/${selectedHospitalID}/reservation`;
+    const url = `${SERVER_URL}/pet/${petID}/${selectedHospitalID}/reservation`;
     const appointmentData = {
       reservationDate: appointmentDate
     }

@@ -7,6 +7,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { MenuContent, MenuItem, MenuRoot, MenuSeparator, MenuTrigger } from "../ui/menu";
 import { Button } from '../ui/button';
 import SignOutButton from '../signOutButton/SignOutButton';
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 const Navbar = () => {
 
@@ -17,7 +18,7 @@ const Navbar = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch('http://localhost:8080/user', {
+      const response = await fetch(`${SERVER_URL}/user`, {
         method: 'GET',
         credentials: "include"
       });
@@ -51,7 +52,7 @@ const Navbar = () => {
   const handleSignOut = async () => {
     try 
       {
-      const response = await fetch('http://localhost:8080/logout', {
+      const response = await fetch(`${SERVER_URL}/logout`, {
           method: 'GET',
           credentials: 'include'
       });

@@ -14,6 +14,7 @@ import {
 import { Text } from '@chakra-ui/react';
 import { Button } from "../ui/button";
 import { toaster } from '../ui/toaster';
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 
 const CommentDeleteModalButton = ({commentID}) => {
@@ -22,7 +23,7 @@ const CommentDeleteModalButton = ({commentID}) => {
 
     const handleDeleteComment = async () => {
         try {
-            const url = `http://localhost:8080/comment/${commentID}`;
+            const url = `${SERVER_URL}/comment/${commentID}`;
             const response = await fetch(url, {
                 method: 'DELETE',
                 credentials: 'include'

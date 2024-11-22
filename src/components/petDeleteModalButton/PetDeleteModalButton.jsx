@@ -14,6 +14,7 @@ import {
 import { Text } from '@chakra-ui/react';
 import { Button } from "../ui/button";
 import { toaster } from '../ui/toaster';
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 
 const PetDeleteModalButton = ({petID}) => {
@@ -22,7 +23,7 @@ const PetDeleteModalButton = ({petID}) => {
 
     const handleDeletePet = async () => {
         try {
-            const url = `http://localhost:8080/pet/${petID}`;
+            const url = `${SERVER_URL}/pet/${petID}`;
             const response = await fetch(url, {
                 method: 'DELETE',
                 credentials: 'include'

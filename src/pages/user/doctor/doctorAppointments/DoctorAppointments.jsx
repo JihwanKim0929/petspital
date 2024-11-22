@@ -5,6 +5,7 @@ import { Card, Show, Text, Box, Image, VStack, HStack, Stack, useBreakpointValue
 import { Button } from '../../../../components/ui/button';
 import { EmptyState } from '../../../../components/ui/empty-state';
 import { FaNotesMedical } from "react-icons/fa6";
+import { SERVER_URL } from '../../../../utils/GlobalConstants';
 
 const DoctorAppointments = () => {
   const hasAppointments = () => { return appointments.length > 0; };
@@ -12,7 +13,7 @@ const DoctorAppointments = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:8080/reservation/vet", {
+    fetch(`${SERVER_URL}/reservation/vet`, {
     method: 'GET',
     credentials: 'include'
     })

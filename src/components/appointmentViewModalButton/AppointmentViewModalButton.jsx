@@ -13,6 +13,7 @@ import {
 import { Text, Image } from '@chakra-ui/react';
 import { Field } from "../ui/field";
 import { Button } from "../ui/button";
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 
 const AppointmentViewModalButton = ({appointmentID}) => {
@@ -21,7 +22,7 @@ const AppointmentViewModalButton = ({appointmentID}) => {
 
     useEffect(() => {
 
-        const petUrl = `http://localhost:8080/reservation/${appointmentID}`;
+        const petUrl = `${SERVER_URL}/reservation/${appointmentID}`;
 
         fetch(petUrl, {
             method: 'GET',

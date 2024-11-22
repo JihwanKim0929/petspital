@@ -9,6 +9,7 @@ import {
 } from "../../../../../components/ui/native-select";
 import { EmptyState } from '../../../../../components/ui/empty-state';
 import { BiSearchAlt2 } from "react-icons/bi";
+import { SERVER_URL } from '../../../../../utils/GlobalConstants';
 
 const AppointmentPetDiary = () => {
 
@@ -27,7 +28,7 @@ const AppointmentPetDiary = () => {
 
     useEffect(() => {
         if (petID) {
-            fetch(`http://localhost:8080/pet/${petID}/diary`, {
+            fetch(`${SERVER_URL}/pet/${petID}/diary`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ const AppointmentPetDiary = () => {
 
     useEffect(() => {
         if (selectedDiary) {
-            fetch(`http://localhost:8080/diary/${selectedDiary.id}/page`, {
+            fetch(`${SERVER_URL}/diary/${selectedDiary.id}/page`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

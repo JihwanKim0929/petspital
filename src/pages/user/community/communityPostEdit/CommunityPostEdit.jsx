@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Text, VStack, HStack, Input, Textarea } from '@chakra-ui/react';
 import { Button } from '../../../../components/ui/button';
 import { Field } from "../../../../components/ui/field";
+import { SERVER_URL } from '../../../../utils/GlobalConstants';
 
 const CommunityPostEdit = () => {
     const navigate = useNavigate();
@@ -13,7 +14,7 @@ const CommunityPostEdit = () => {
     useEffect(() => {
         const postID = sessionStorage.getItem('postID');
 
-        fetch(`http://localhost:8080/board/${postID}`, {
+        fetch(`${SERVER_URL}/board/${postID}`, {
             method: 'GET',
             credentials: 'include'
         })
@@ -43,7 +44,7 @@ const CommunityPostEdit = () => {
         
         const postID = sessionStorage.getItem('postID');
         console.log(boardDto);
-        const url = `http://localhost:8080/updateBoard/${postID}`;
+        const url = `${SERVER_URL}/updateBoard/${postID}`;
         try {
         const response = await fetch(url, {
             method: 'POST',

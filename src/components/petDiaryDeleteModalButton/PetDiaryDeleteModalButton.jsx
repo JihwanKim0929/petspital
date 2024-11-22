@@ -14,6 +14,7 @@ import {
 import { Text } from '@chakra-ui/react';
 import { Button } from "../ui/button";
 import { toaster } from '../ui/toaster';
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 
 const PetDiaryDeleteModalButton = ({whenDisable, diaryID}) => {
@@ -22,7 +23,7 @@ const PetDiaryDeleteModalButton = ({whenDisable, diaryID}) => {
 
     const handleDeleteDiary = async () => {
         try {
-            const url = `http://localhost:8080/diary/${diaryID}`;
+            const url = `${SERVER_URL}/diary/${diaryID}`;
             const response = await fetch(url, {
                 method: 'DELETE',
                 credentials: 'include'

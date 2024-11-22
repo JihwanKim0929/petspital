@@ -10,6 +10,7 @@ import {
 } from "../../../../components/ui/pagination";
 import { Button } from '../../../../components/ui/button';
 import PostDeleteModalButton from '../../../../components/postDeleteModalButton/PostDeleteModalButton';
+import { SERVER_URL } from '../../../../utils/GlobalConstants';
 
 const pageSize = 10;
 
@@ -23,7 +24,7 @@ const CommunityBoard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/board');
+        const response = await fetch(`${SERVER_URL}/board`);
         if (response.ok) {
           const data = await response.json();
           setItems(data);
@@ -32,7 +33,7 @@ const CommunityBoard = () => {
           console.error('Failed to fetch board data:', response.statusText);
         }
 
-        const userResponse = await fetch('http://localhost:8080/user', {
+        const userResponse = await fetch(`${SERVER_URL}/user`, {
           method: 'GET',
           credentials: 'include'
         });

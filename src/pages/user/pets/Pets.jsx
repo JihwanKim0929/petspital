@@ -5,6 +5,7 @@ import { EmptyState } from '../../../components/ui/empty-state';
 import PetRegisterModalButton from '../../../components/petRegisterModalButton/PetRegisterModalButton';
 import { MdOutlinePets } from "react-icons/md";
 import PetInfoCard from '../../../components/petInfoCard/PetInfoCard';
+import { SERVER_URL } from '../../../utils/GlobalConstants';
 
 const Pets = () => {
     
@@ -13,7 +14,7 @@ const Pets = () => {
 
     useEffect(() => {
 
-        fetch("http://localhost:8080/user/pet", {
+        fetch(`${SERVER_URL}/user/pet`, {
           method: 'GET',
           credentials: 'include'
         })

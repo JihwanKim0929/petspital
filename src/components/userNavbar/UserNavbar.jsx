@@ -26,6 +26,7 @@ import {
 } from "../ui/drawer";
 import { Avatar } from "../ui/avatar";
 import SignOutButton from '../signOutButton/SignOutButton';
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 const UserNavbar = () => {
 
@@ -37,7 +38,7 @@ const UserNavbar = () => {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch('http://localhost:8080/user', {
+      const response = await fetch(`${SERVER_URL}/user`, {
         method: 'GET',
         credentials: "include"
       });
@@ -86,7 +87,7 @@ const UserNavbar = () => {
   const handleSignOut = async () => {
     try 
       {
-      const response = await fetch('http://localhost:8080/logout', {
+      const response = await fetch(`${SERVER_URL}/logout`, {
           method: 'GET',
           credentials: 'include'
       });

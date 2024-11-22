@@ -5,6 +5,7 @@ import { Card, Show, Text, Box, VStack, HStack, Image, useBreakpointValue } from
 import { EmptyState } from '../../../../../components/ui/empty-state';
 import { Button } from '../../../../../components/ui/button';
 import { BiSearchAlt2 } from "react-icons/bi";
+import { SERVER_URL } from '../../../../../utils/GlobalConstants';
 
 
 const AppointmentPetDiagnosis = () => {
@@ -15,7 +16,7 @@ const AppointmentPetDiagnosis = () => {
     useEffect(() => {
         const petID = sessionStorage.getItem('selectedAppointmentPetID');
         if (petID) {
-            const url = `http://localhost:8080/pet/${petID}/diagnosis`;
+            const url = `${SERVER_URL}/pet/${petID}/diagnosis`;
             fetch(url, {
             method: 'GET',
             credentials: 'include'

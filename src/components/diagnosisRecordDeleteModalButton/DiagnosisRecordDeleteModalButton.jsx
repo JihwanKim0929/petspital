@@ -14,6 +14,7 @@ import {
 import { Text } from '@chakra-ui/react';
 import { Button } from "../ui/button";
 import { toaster } from '../ui/toaster';
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 
 const DiagnosisRecordDeleteModalButton = ({diagnosisID}) => {
@@ -22,7 +23,7 @@ const DiagnosisRecordDeleteModalButton = ({diagnosisID}) => {
 
     const handleDeleteDiagnosisRecord = async () => {
         try {
-            const url = `http://localhost:8080/diagnosis/${diagnosisID}`;
+            const url = `${SERVER_URL}/diagnosis/${diagnosisID}`;
             const response = await fetch(url, {
                 method: 'DELETE',
                 credentials: 'include'

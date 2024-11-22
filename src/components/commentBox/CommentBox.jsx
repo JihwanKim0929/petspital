@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Stack, Text, Show, Textarea } from '@chakra-ui/react';
 import CommentDeleteModalButton from '../commentDeleteModalButton/CommentDeleteModalButton';
 import { Button } from '../ui/button';
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 const CommentBox = ({comment, currentUser, postID, fetchComments}) => {
 
@@ -22,7 +23,7 @@ const CommentBox = ({comment, currentUser, postID, fetchComments}) => {
         };
     
         try {
-            const response = await fetch(`http://localhost:8080/updateComment/${comment.id}`, {
+            const response = await fetch(`${SERVER_URL}/updateComment/${comment.id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

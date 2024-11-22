@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './DiagnosisResult.scss';
 import { Box, Card, Flex, Text, Image, useBreakpointValue, VStack, HStack, Show, Button } from '@chakra-ui/react';
+import { SERVER_URL } from '../../../../utils/GlobalConstants';
 
 const DiagnosisResult = () => {
   const [diagnosisResult, setDiagnosisResult] = useState(null);
@@ -12,7 +13,7 @@ const DiagnosisResult = () => {
     if (!diagnosisResult) {
       const diagnosisID = sessionStorage.getItem('diagnosisID');
       if (diagnosisID) {
-        const url = `http://localhost:8080/diagnosis/${diagnosisID}`;
+        const url = `${SERVER_URL}/diagnosis/${diagnosisID}`;
         console.log("Diagnosis Records URL: " + url);
         
         fetch(url, {

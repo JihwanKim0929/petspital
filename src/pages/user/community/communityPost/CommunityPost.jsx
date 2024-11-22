@@ -9,6 +9,7 @@ import {
   FileUploadTrigger,
 } from "../../../../components/ui/file-button";
 import { Field } from "../../../../components/ui/field";
+import { SERVER_URL } from '../../../../utils/GlobalConstants';
 
 const CommunityPost = () => {
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const CommunityPost = () => {
       formData.append("image", image);
     }
   
-    const url = "http://localhost:8080/board";
+    const url = `${SERVER_URL}/board`;
     try {
       const response = await fetch(url, {
         method: 'POST',
