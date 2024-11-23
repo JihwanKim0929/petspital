@@ -43,6 +43,10 @@ public class UserService {
     private AnimalHospitalRepository animalHospitalRepository;
     @Autowired
     private S3Service s3Service;
+    @Autowired
+    private ReservationService reservationService;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     public SiteUserDto createUser(MultipartFile image, SiteUserDto userDto) throws IOException {
         if(!image.isEmpty()){
@@ -83,6 +87,10 @@ public class UserService {
                 AnimalHospitalDto animalHospitalDto = animalHospitalService.getAnimalHospitalByUserId(target.getId());
                 if(animalHospitalDto!=null){
                     AnimalHospital animalHospital = animalHospitalDto.getAnimalHospital();
+                    List<Reservation> reservations = reservationRepository.findByAnimalHospital(animalHospital);
+                    for(Reservation reservation : reservations){
+                        reservationService.deleteReservation(reservation.getId());
+                    }
                     animalHospitalRepository.delete(animalHospital);
                 }
             }
