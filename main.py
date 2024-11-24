@@ -1,3 +1,5 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
 import io
 import torch
 import torch.nn as nn
@@ -19,7 +21,6 @@ def prediction(image_url,spec,part):
     url = image_url
     res = request.urlopen(url).read()
     img = Image.open(io.BytesIO(res))
-
     data_transform = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.ToTensor(),
@@ -46,6 +47,17 @@ def prediction(image_url,spec,part):
     #print(outputs_ovo)
     return class_names[specpart][preds_ovo[0]]
 
-start = time.time()
-print(prediction("https://petspital-bucket.s3.amazonaws.com/76ffba67f7674c31884a7cf827a16d55_img.jpg",'dog','eye'))
-print(time.time()-start)
+class Item(BaseModel):
+    image_url: str
+    species: str
+    part: str
+
+app = FastAPI()
+
+@app.post("/getDisease")
+def file_read(item: Item):
+    
+    return prediction(item.image_url,item.species,item.part)
+    
+
+#uvicorn main:app --reload
