@@ -53,7 +53,7 @@ public class BoardService {
     }
 
     public BoardDto createBoard(BoardDto boardDto, Long userId, MultipartFile image)throws IOException {
-        if(!image.isEmpty()){
+        if(image != null){
             String fileName = s3Service.uploadFile(image);
             boardDto.setImage_url(fileName);
         }

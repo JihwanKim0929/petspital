@@ -39,7 +39,7 @@ public class BoardController {
     }
 
     @PostMapping("/board")
-    public ResponseEntity<BoardDto> create(@RequestPart("image") MultipartFile image,  @RequestPart("boardDto") BoardDto boardDto) throws IOException {
+    public ResponseEntity<BoardDto> create(@RequestPart(value = "image", required = false) MultipartFile image,  @RequestPart("boardDto") BoardDto boardDto) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         Long userId = userService.get_user_by_username(username).getId();

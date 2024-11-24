@@ -40,7 +40,7 @@ public class DiaryPageService {
     }
 
     public DiaryPageDto create(MultipartFile image, DiaryPageDto dto, Long diaryId) throws IOException {
-        if(!image.isEmpty()){
+        if(image != null){
             String fileName = s3Service.uploadFile(image);
             dto.setImage_url(fileName);
         }

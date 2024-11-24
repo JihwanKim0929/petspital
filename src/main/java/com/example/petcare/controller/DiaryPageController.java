@@ -25,7 +25,7 @@ public class DiaryPageController {
     }
 
     @PostMapping("/diary/{diaryId}/page")
-    public ResponseEntity<DiaryPageDto> create_diary_page(@PathVariable Long diaryId, @RequestPart("image") MultipartFile image, @RequestPart("DiaryPageDto") DiaryPageDto dto)throws IOException {
+    public ResponseEntity<DiaryPageDto> create_diary_page(@PathVariable Long diaryId, @RequestPart(value = "image", required = false) MultipartFile image, @RequestPart("DiaryPageDto") DiaryPageDto dto)throws IOException {
         DiaryPageDto createdDto = diaryPageService.create(image, dto,diaryId);
         return ResponseEntity.ok().body(createdDto);
     }
