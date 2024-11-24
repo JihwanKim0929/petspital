@@ -90,6 +90,11 @@ public class BoardService {
                 BeanUtils.copyProperties(newBoardDto, board, "id","author","createDate");
                 boardRepository.save(board);
             }
+        }else{
+            if(board != null){
+                BeanUtils.copyProperties(newBoardDto, board, "id","author","createDate");
+                boardRepository.save(board);
+            }
         }
 
         return board.getBoardDto();
