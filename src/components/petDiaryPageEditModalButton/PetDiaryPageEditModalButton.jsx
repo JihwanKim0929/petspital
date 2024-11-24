@@ -2,35 +2,45 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Input, Flex, Text } from "@chakra-ui/react";
 import {
-  DialogActionTrigger,
-  DialogBody,
-  DialogCloseTrigger,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogRoot,
-  DialogTitle,
-  DialogTrigger,
+    DialogActionTrigger,
+    DialogBody,
+    DialogCloseTrigger,
+    DialogContent,
+    DialogFooter,
+    DialogHeader,
+    DialogRoot,
+    DialogTitle,
+    DialogTrigger,
 } from "../ui/dialog";
 import { Field } from "../ui/field";
 import { Button } from "../ui/button";
+import {
+    FileUploadList,
+    FileUploadRoot,
+    FileUploadTrigger,
+} from "../ui/file-button";
 
 const PetDiaryPageEditModalButton = ({ pageID, pageContent }) => {
     const { register, handleSubmit, reset, setValue, watch } = useForm();
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const contentValue = watch('content');
 
     const onSubmit = async (data) => {
+        const formData = new FormData();
         const diaryPageDto = {
-            content: data.content,
+            content: data.content
         };
+        const json = JSON.stringify(diaryPageDto);
+        const blob = new Blob([json],{type: "application/json"});
+        formData.append("DiaryPageDto",blob);
+        if (selectedFile) {
+            formData.append('image', selectedFile);
+        }
         try {
             const response = await fetch(`/updateDiaryPage/${pageID}`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(diaryPageDto),
+                body: formData,
                 credentials: 'include'
             });
 
@@ -42,6 +52,12 @@ const PetDiaryPageEditModalButton = ({ pageID, pageContent }) => {
         } catch (error) {
             console.error('Error:', error);
         }
+    };
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setSelectedFile(file);
+        setValue('image', file);
     };
 
     const resetForm = () => {
@@ -73,6 +89,17 @@ const PetDiaryPageEditModalButton = ({ pageID, pageContent }) => {
                                 {...register('content', { required: true })}
                                 fontFamily='Pretendard Variable'
                             />
+                        </Field>
+                        <Field mt={4}>
+                            <Text fontFamily='LINESeedKR-Bd'>이미지</Text>
+                            <FileUploadRoot onChange={handleFileChange}>
+                                <FileUploadTrigger asChild>
+                                <Button variant="outline" size="sm" fontFamily='LINESeedKR-Bd'>
+                                    이미지 파일 업로드
+                                </Button>
+                                </FileUploadTrigger>
+                                <FileUploadList />
+                            </FileUploadRoot>
                         </Field>
                     </DialogBody>
 

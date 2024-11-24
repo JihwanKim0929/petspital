@@ -26,7 +26,7 @@ import {
 } from "../ui/drawer";
 import { Avatar } from "../ui/avatar";
 import SignOutButton from '../signOutButton/SignOutButton';
-import { SERVER_URL } from '../../utils/GlobalConstants';
+import { SERVER_URL, LOGO_URL } from '../../utils/GlobalConstants';
 
 const UserNavbar = () => {
 
@@ -237,7 +237,7 @@ const UserNavbar = () => {
 
         <Show when={isBelowMd}>
           <Link to="/" style={{ textDecoration: "none" }} className="mobileLogoContainer">
-            <img src={process.env.PUBLIC_URL + "/assets/images/logo1.png"} alt="LOGO" className="logo" />
+            <img src={LOGO_URL} alt="LOGO" className="logo" />
             <span className="logoTitle">Petspital</span>
           </Link>
         </Show>
@@ -247,7 +247,7 @@ const UserNavbar = () => {
         <Box hideBelow='md'>
           <Link to={userLink}
           style={{ textDecoration: "none" }} className="desktopLogoContainer">
-            <img src={process.env.PUBLIC_URL + "/assets/images/logo1.png"} alt="LOGO" className="logo" />
+            <img src={LOGO_URL} alt="LOGO" className="logo" />
             <span className="logoTitle">Petspital</span>
           </Link>
         </Box>

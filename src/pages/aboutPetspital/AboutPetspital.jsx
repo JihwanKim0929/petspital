@@ -1,6 +1,7 @@
 import React from 'react';
 import './AboutPetspital.scss';
 import { Card, Box, Image, VStack, Text, HStack, Separator } from '@chakra-ui/react';
+import { LOGO_URL } from '../../utils/GlobalConstants';
 
 const AboutPetspital = () => {
   return (
@@ -17,7 +18,7 @@ const AboutPetspital = () => {
           <Card.Body>
             <VStack h='100%'>
               <HStack>
-                <Image src={process.env.PUBLIC_URL + "/assets/images/logo1.png"} className='logo' boxSize={{ base:'40px', md:'50px', lg:'60px' }} />
+                <Image src={LOGO_URL} className='logo' boxSize={{ base:'40px', md:'50px', lg:'60px' }} />
                 <Text fontFamily='poppins' fontWeight='700' fontSize={{ base:'30px', md:'40px', lg:'50px' }}>Petspital</Text>
               </HStack>
               <Separator borderWidth='1px' />

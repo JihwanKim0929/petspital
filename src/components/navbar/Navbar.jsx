@@ -7,7 +7,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { MenuContent, MenuItem, MenuRoot, MenuSeparator, MenuTrigger } from "../ui/menu";
 import { Button } from '../ui/button';
 import SignOutButton from '../signOutButton/SignOutButton';
-import { SERVER_URL } from '../../utils/GlobalConstants';
+import { LOGO_URL, SERVER_URL } from '../../utils/GlobalConstants';
 
 const Navbar = () => {
 
@@ -81,7 +81,7 @@ const Navbar = () => {
     <Fragment>
       <div className="navbar">
         <Link to={userLink} style={{ textDecoration: "none" }} className="logoContainer">
-          <img src={process.env.PUBLIC_URL + "/assets/images/logo1.png"} alt="LOGO" className="logo" />
+          <img src={LOGO_URL} alt="LOGO" className="logo" />
           <span className="logoTitle">Petspital</span>
         </Link>
 

@@ -5,11 +5,22 @@ import { Text, VStack, HStack, Input, Textarea } from '@chakra-ui/react';
 import { Button } from '../../../../components/ui/button';
 import { Field } from "../../../../components/ui/field";
 import { SERVER_URL } from '../../../../utils/GlobalConstants';
+import {
+    FileUploadList,
+    FileUploadRoot,
+    FileUploadTrigger,
+} from "../../../../components/ui/file-button";
 
 const CommunityPostEdit = () => {
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setSelectedFile(file);
+    };
 
     useEffect(() => {
         const postID = sessionStorage.getItem('postID');
@@ -36,20 +47,25 @@ const CommunityPostEdit = () => {
 
     const onSubmit = async (event) => {
         event.preventDefault();
-        
+
+        const formData = new FormData();
         const boardDto = {
         title: title,
         content: content
         };
-        
+        const json = JSON.stringify(boardDto);
+        const blob = new Blob([json],{type: "application/json"});
+        formData.append("boardDto",blob);
+        if (selectedFile) {
+            formData.append('image', selectedFile);
+        }
         const postID = sessionStorage.getItem('postID');
         console.log(boardDto);
         const url = `${SERVER_URL}/updateBoard/${postID}`;
         try {
         const response = await fetch(url, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(boardDto),
+            body: formData,
             credentials: 'include'
         });
     
@@ -77,6 +93,17 @@ const CommunityPostEdit = () => {
                         <Text fontFamily='LINESeedKR-Bd'>내용</Text>
                         <Textarea placeholder="내용을 입력하세요." value={content} onChange={(e) => setContent(e.target.value)}
                         h='300px' fontFamily='Pretendard Variable'/>
+                    </Field>
+                    <Field mt={4}>
+                        <Text fontFamily='LINESeedKR-Bd'>이미지</Text>
+                        <FileUploadRoot onChange={handleFileChange}>
+                            <FileUploadTrigger asChild>
+                            <Button variant="outline" size="sm" fontFamily='LINESeedKR-Bd'>
+                                이미지 파일 업로드
+                            </Button>
+                            </FileUploadTrigger>
+                            <FileUploadList />
+                        </FileUploadRoot>
                     </Field>
                     <HStack w='100%' justifyContent='center' mt={6} gap={4}>
                         <Button type='submit' fontFamily='LINESeedKR-Bd'>게시글 편집</Button>

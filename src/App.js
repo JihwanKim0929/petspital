@@ -30,68 +30,74 @@ import CommunityPostEdit from "./pages/user/community/communityPostEdit/Communit
 import Diary from "./pages/user/diary/Diary.jsx";
 import AppointmentPetDiagnosis from "./pages/user/doctor/doctorAppointments/appointmentPetDiagnosis/AppointmentPetDiagnosis.jsx";
 import AppointmentPetDiary from "./pages/user/doctor/doctorAppointments/appointmentPetDiary/AppointmentPetDiary.jsx";
+import { Theme } from '@chakra-ui/react';
+import { ColorModeProvider } from "./components/ui/color-mode.jsx";
 
 function App() {
   
   return (
     <Provider>
-      <Routes>
-        <Route path="/" element={<Navbar />} >
-          <Route index element={<Home />} />
+      <ColorModeProvider forcedTheme="light">
+        <Theme appearance="light">
+          <Routes>
+            <Route path="/" element={<Navbar />} >
+              <Route index element={<Home />} />
 
-          <Route path="/login">
-            <Route index element={<Login />} />
-          </Route>
+              <Route path="/login">
+                <Route index element={<Login />} />
+              </Route>
 
-          <Route path="/signup">
-            <Route index element={<Signup />} />
-          </Route>
+              <Route path="/signup">
+                <Route index element={<Signup />} />
+              </Route>
 
-          <Route path="/about">
-            <Route index element={<AboutPetspital />} />
-          </Route>
+              <Route path="/about">
+                <Route index element={<AboutPetspital />} />
+              </Route>
 
-          <Route path="/notifications">
-            <Route index element={<Notifications />} />
-          </Route>
-        </Route>
-
-        <Route path="/user" element={<UserNavbar />}>
-          <Route path="petowner" element={<PetOwnerSidebar />}>
-            <Route index element={<PetOwnerMain />} />
-            <Route path="pets" element={<Pets />} />
-            <Route path="pets/diary" element={<Diary />} />
-            <Route path="diagnosis" element={<Diagnosis />} />
-            <Route path="diagnosis/result" element={<DiagnosisResult />} />
-            <Route path="records" element={<Records />} />
-            <Route path="hospital" element={<Hospital />} />
-            <Route path="appointments" element={<PetOwnerAppointments />} />
-            <Route path="community" element={<Community />}>
-              <Route index element={<CommunityBoard />} />
-              <Route path="post" element={<CommunityPost />} />
-              <Route path="view" element={<CommunityPostView />} />
-              <Route path="edit" element={<CommunityPostEdit />} />
+              <Route path="/notifications">
+                <Route index element={<Notifications />} />
+              </Route>
             </Route>
-            <Route path="profile" element={<Profile />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
 
-          <Route path="doctor" element={<DoctorSidebar />}>
-            <Route index element={<DoctorMain />} />
-            <Route path="appointments" element={<DoctorAppointments />} />
-            <Route path="appointments/diagnosisRecords" element={<AppointmentPetDiagnosis />} />
-            <Route path="appointments/diary" element={<AppointmentPetDiary />} />
-            <Route path="community" element={<Community />}>
-              <Route index element={<CommunityBoard />} />
-              <Route path="post" element={<CommunityPost />} />
-              <Route path="view" element={<CommunityPostView />} />
+            <Route path="/user" element={<UserNavbar />}>
+              <Route path="petowner" element={<PetOwnerSidebar />}>
+                <Route index element={<PetOwnerMain />} />
+                <Route path="pets" element={<Pets />} />
+                <Route path="pets/diary" element={<Diary />} />
+                <Route path="diagnosis" element={<Diagnosis />} />
+                <Route path="diagnosis/result" element={<DiagnosisResult />} />
+                <Route path="records" element={<Records />} />
+                <Route path="hospital" element={<Hospital />} />
+                <Route path="appointments" element={<PetOwnerAppointments />} />
+                <Route path="community" element={<Community />}>
+                  <Route index element={<CommunityBoard />} />
+                  <Route path="post" element={<CommunityPost />} />
+                  <Route path="view" element={<CommunityPostView />} />
+                  <Route path="edit" element={<CommunityPostEdit />} />
+                </Route>
+                <Route path="profile" element={<Profile />} />
+                <Route path="settings" element={<Settings />} />
+              </Route>
+
+              <Route path="doctor" element={<DoctorSidebar />}>
+                <Route index element={<DoctorMain />} />
+                <Route path="appointments" element={<DoctorAppointments />} />
+                <Route path="appointments/diagnosisRecords" element={<AppointmentPetDiagnosis />} />
+                <Route path="appointments/diary" element={<AppointmentPetDiary />} />
+                <Route path="community" element={<Community />}>
+                  <Route index element={<CommunityBoard />} />
+                  <Route path="post" element={<CommunityPost />} />
+                  <Route path="view" element={<CommunityPostView />} />
+                </Route>
+                <Route path="profile" element={<Profile />} />
+                <Route path="settings" element={<Settings />} />
+              </Route>
             </Route>
-            <Route path="profile" element={<Profile />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
-        </Route>
-      </Routes>
-      <Toaster />
+          </Routes>
+          <Toaster />
+        </Theme>
+      </ColorModeProvider>
     </Provider>
   );
 }

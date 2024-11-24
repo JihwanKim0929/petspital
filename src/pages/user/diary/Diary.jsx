@@ -104,7 +104,7 @@ const Diary = () => {
                     </VStack>                 
                   </Card.Body>
                   <Card.Footer>
-                    <PetDiaryPageEditModalButton pageID={page.id} pageContent={page.content}/>
+                    <PetDiaryPageEditModalButton pageID={page.id} pageContent={page.content} />
                     <PetDiaryPageDeleteModalButton pageID={page.id} />
                   </Card.Footer>
                 </Card.Root>

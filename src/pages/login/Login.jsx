@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Box, Text, Button, Input } from "@chakra-ui/react";
 import { PasswordInput } from '../../components/ui/password-input';
 import { toaster } from "../../components/ui/toaster";
-import { SERVER_URL } from '../../utils/GlobalConstants';
+import { LOGO_URL, SERVER_URL } from '../../utils/GlobalConstants';
 
 const Login = () => {
 
@@ -113,7 +113,7 @@ const Login = () => {
                     animationDuration: "300ms",
                     animationTimingFunction: "ease-out"
                 }}>
-                    <img src={process.env.PUBLIC_URL + "/assets/images/logo1.png"} alt="" className="logo" />
+                    <img src={LOGO_URL} alt="" className="logo" />
                     <Text fontSize={{ base: '1.5rem', md: '2rem', lg: '2rem' }} fontFamily='poppins' fontWeight='700' m='0.5rem'>Petspital</Text>
                     <div className="inputContainer">
                         <Text className="desc">아이디</Text>
