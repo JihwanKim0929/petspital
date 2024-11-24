@@ -41,8 +41,8 @@ public class DiaryPageController {
     }
 
     @PostMapping("/updateDiaryPage/{id}")
-    public ResponseEntity<DiaryPageDto> updateDiaryPage(@PathVariable Long id, @RequestBody DiaryPageDto dto) {
-        DiaryPageDto updatedDto = diaryPageService.updateDiaryPage(id, dto);
+    public ResponseEntity<DiaryPageDto> updateDiaryPage(@PathVariable Long id, @RequestPart(value = "image", required = false) MultipartFile image, @RequestPart("DiaryPageDto") DiaryPageDto dto)throws IOException  {
+        DiaryPageDto updatedDto = diaryPageService.updateDiaryPage(id, image, dto);
         if(updatedDto != null)
             return ResponseEntity.status(HttpStatus.OK).body(updatedDto);
         else

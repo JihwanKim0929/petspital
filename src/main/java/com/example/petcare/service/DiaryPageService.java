@@ -64,12 +64,22 @@ public class DiaryPageService {
             return null;
     }
 
-    public DiaryPageDto updateDiaryPage(Long id, DiaryPageDto dto) {
+    public DiaryPageDto updateDiaryPage(Long id, MultipartFile image, DiaryPageDto dto) throws IOException {
         DiaryPage target = diaryPageRepository.findById(id).orElse(null);
-        if(target != null){
-            BeanUtils.copyProperties(dto, target, "id","diary","createDate","image_url");
-            diaryPageRepository.save(target);
+        if(image != null){
+            String fileName = s3Service.uploadFile(image);
+            dto.setImage_url(fileName);
+            if(target != null){
+                BeanUtils.copyProperties(dto, target, "id","diary","createDate");
+                diaryPageRepository.save(target);
+            }
+        }else{
+            if(target != null){
+                BeanUtils.copyProperties(dto, target, "id","diary","createDate");
+                diaryPageRepository.save(target);
+            }
         }
+
         return target.getDiaryPageDto();
     }
 }
