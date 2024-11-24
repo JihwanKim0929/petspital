@@ -80,14 +80,18 @@ public class BoardService {
             return null;
     }
 
-    public BoardDto updateBoard(BoardDto newBoardDto, Long boardId) {
+    public BoardDto updateBoard(MultipartFile image ,BoardDto newBoardDto, Long boardId) throws IOException{
         Board board = boardRepository.findById(boardId).orElse(null);
         newBoardDto.setModifyDate(LocalDateTime.now());
-
-        if(board != null){
-            BeanUtils.copyProperties(newBoardDto, board, "id","image_url","author","createDate");
-            boardRepository.save(board);
+        if(image!= null){
+            String fileName = s3Service.uploadFile(image);
+            newBoardDto.setImage_url(fileName);
+            if(board != null){
+                BeanUtils.copyProperties(newBoardDto, board, "id","author","createDate");
+                boardRepository.save(board);
+            }
         }
+
         return board.getBoardDto();
     }
 }

@@ -57,8 +57,9 @@ public class BoardController {
     }
 
     @PostMapping("/updateBoard/{id}")
-    public ResponseEntity<BoardDto> updateBoard(@RequestBody BoardDto boardDto, @PathVariable Long id) {
-        BoardDto updatedDto = boardService.updateBoard(boardDto, id);
+    public ResponseEntity<BoardDto> updateBoard
+            (@PathVariable Long id,@RequestPart(value = "image", required = false) MultipartFile image,  @RequestPart("boardDto") BoardDto boardDto) throws IOException {
+        BoardDto updatedDto = boardService.updateBoard(image, boardDto, id);
         if(updatedDto != null)
             return ResponseEntity.status(HttpStatus.OK).body(updatedDto);
         else
