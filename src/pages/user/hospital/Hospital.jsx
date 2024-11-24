@@ -14,7 +14,7 @@ import { addDays } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { EmptyState } from '../../../components/ui/empty-state';
 import { MdOutlinePets } from "react-icons/md";
-import { SERVER_URL } from '../../../utils/GlobalConstants';
+import { SERVER_URL, MAPMARKER_URL } from '../../../utils/GlobalConstants';
 
 const { kakao } = window;
 
@@ -189,7 +189,7 @@ const Hospital = () => {
                             position={{ lat: userLocation.lat, lng: userLocation.lng }} 
                             title={userLocation.address}
                             image={{
-                              src: process.env.PUBLIC_URL + "/assets/images/MapMarker.png",
+                              src: MAPMARKER_URL,
                               size: {
                                 width: 32,
                                 height: 32,
