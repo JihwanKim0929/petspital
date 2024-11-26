@@ -37,8 +37,8 @@ def prediction(image_url,spec,part):
     #각 모델별 클래스 이름
     class_names = {'dogeye': ['2', '3', '1', '4', '5', '6', '7', '8', '9', '10'],
                    'cateye': ['11', '12', '13', '1', '14', '15'],
-                   'dogskin': ['17', '18', '19', '20', '21', '22', '1'],
-                   'catskin': ['23', '24', '25', '1']}
+                   'dogskin': ['16', '17', '18', '19', '20', '21', '1'],
+                   'catskin': ['22', '23', '24', '1']}
     model = torch.load(model_names[specpart],map_location=device)
     model.eval()
     outputs_ovo = model(img)
