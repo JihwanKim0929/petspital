@@ -22,6 +22,8 @@ public class Disease {
 
     private String description;
 
+    private String image_url;
+
     @JsonIgnore
     public DiseaseDto getDiseaseDto(){
         return DiseaseDto.builder()
@@ -29,6 +31,7 @@ public class Disease {
                 .name(name)
                 .symptoms(symptoms)
                 .description(description)
+                .image_url(image_url)
                 .build();
     }
 }
