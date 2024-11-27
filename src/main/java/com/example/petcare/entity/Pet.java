@@ -33,6 +33,7 @@ public class Pet {
 
     private int weight;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     private String image_url;

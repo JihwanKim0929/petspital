@@ -19,7 +19,7 @@ public class S3Service {
     private String bucket;
 
     public String uploadFile(MultipartFile image) throws IOException {
-        String fileName = UUID.randomUUID().toString().replace("-", "")+"_"+image.getOriginalFilename();
+        String fileName = UUID.randomUUID().toString().replace("-", "");
         String fileUrl = "https://" + bucket + ".s3.amazonaws.com/" + fileName;
         ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentType(image.getContentType());

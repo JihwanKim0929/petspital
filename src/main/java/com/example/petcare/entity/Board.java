@@ -21,6 +21,7 @@ public class Board {
 
     private String title;
 
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private LocalDateTime createDate;

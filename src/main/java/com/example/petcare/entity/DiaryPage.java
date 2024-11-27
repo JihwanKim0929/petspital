@@ -21,7 +21,8 @@ public class DiaryPage {
 
     @ManyToOne
     private Diary diary;
-
+    
+    @Column(columnDefinition = "TEXT")
     private String content;
 
     private LocalDateTime createDate;

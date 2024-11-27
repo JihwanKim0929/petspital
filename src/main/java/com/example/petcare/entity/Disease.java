@@ -2,6 +2,7 @@ package com.example.petcare.entity;
 
 import com.example.petcare.dto.DiseaseDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
@@ -20,6 +21,7 @@ public class Disease {
 
     private String symptoms;
 
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     private String image_url;
