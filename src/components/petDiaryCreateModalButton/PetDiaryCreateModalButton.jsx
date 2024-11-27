@@ -14,6 +14,7 @@ import {
 } from "../ui/dialog";
 import { Field } from "../ui/field";
 import { Button } from "../ui/button";
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 const PetDiaryCreateModalButton = ({ petID, petName }) => {
 
@@ -25,7 +26,7 @@ const PetDiaryCreateModalButton = ({ petID, petName }) => {
 
     try {
 
-      const response = await fetch(`/pet/${petID}/diary`, {
+      const response = await fetch(`${SERVER_URL}/pet/${petID}/diary`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

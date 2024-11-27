@@ -104,26 +104,36 @@ const Records = () => {
                               <Image src={record.image_url} boxSize={{base:"150px", md:"150px", lg:"200px"}} 
                               borderRadius={{base:"0.5rem", md:"0.5rem", lg:"1rem"}} objectFit="cover" />
                               <VStack align='left' ml='1rem'>
-                                <HStack>
+                                <HStack align='flex-start'>
                                   <Text fontFamily='Pretendard Variable' fontWeight='700' whiteSpace='nowrap'>진단 일자: </Text>
-                                  <Text fontFamily='Pretendard Variable' wordBreak='break-word'>{new Date(record.createDate).toLocaleString()}</Text>
+                                  <Text fontFamily='Pretendard Variable' wordBreak='break-word'>
+                                    {new Date(new Date(record.createDate).getTime() + 9 * 60 * 60 * 1000).toLocaleString('ko-KR', {
+                                        timeZone: 'Asia/Seoul',
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: true
+                                    })}
+                                  </Text>
                                 </HStack>
-                                <HStack>
+                                <HStack align='flex-start'>
                                   <Text fontFamily='Pretendard Variable' fontWeight='700' whiteSpace='nowrap'>진단 부위: </Text>
                                   <Text fontFamily='Pretendard Variable' wordBreak='break-word'>{record.part}</Text>
                                 </HStack>
                                 <Text fontFamily='Pretendard Variable' fontWeight='700' whiteSpace='nowrap'>예상 질병:</Text>
                                 {record.disease ? 
                                 <VStack align='left'>
-                                  <HStack>
+                                  <HStack align='flex-start'>
                                     <Text fontFamily='Pretendard Variable' whiteSpace='nowrap'>질병명: </Text>
                                     <Text fontFamily='Pretendard Variable' wordBreak='break-word'>{record.disease.name}</Text>
                                   </HStack>
-                                  <HStack>
+                                  <HStack align='flex-start'>
                                     <Text fontFamily='Pretendard Variable' whiteSpace='nowrap'>증상: </Text>
                                     <Text fontFamily='Pretendard Variable' wordBreak='break-word'>{record.disease.symptoms}</Text>
                                   </HStack>
-                                  <HStack>
+                                  <HStack align='flex-start'>
                                     <Text fontFamily='Pretendard Variable' whiteSpace='nowrap'>설명: </Text>
                                     <Text fontFamily='Pretendard Variable' wordBreak='break-word'>{record.disease.description}</Text>
                                   </HStack>
@@ -141,26 +151,36 @@ const Records = () => {
                               <Image src={record.image_url} boxSize={{base:"150px", md:"150px", lg:"200px"}} borderRadius='0.5rem' objectFit="cover" />
                               <Separator m={4} borderWidth='1.5px' />
                               <VStack align='left' w='100%'>
-                                <HStack>
+                                <HStack align='flex-start'>
                                   <Text fontFamily='Pretendard Variable' fontWeight='700' whiteSpace='nowrap'>진단 일자: </Text>
-                                  <Text fontFamily='Pretendard Variable' wordBreak='break-word'>{new Date(record.createDate).toLocaleString()}</Text>
+                                  <Text fontFamily='Pretendard Variable' wordBreak='break-word'>
+                                    {new Date(new Date(record.createDate).getTime() + 9 * 60 * 60 * 1000).toLocaleString('ko-KR', {
+                                        timeZone: 'Asia/Seoul',
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: true
+                                    })}
+                                  </Text>
                                 </HStack>
-                                <HStack>
+                                <HStack align='flex-start'>
                                   <Text fontFamily='Pretendard Variable' fontWeight='700' whiteSpace='nowrap'>진단 부위: </Text>
                                   <Text fontFamily='Pretendard Variable' wordBreak='break-word'>{record.part}</Text>
                                 </HStack>
                                 <Text fontFamily='Pretendard Variable' fontWeight='700' whiteSpace='nowrap'>예상 질병:</Text>
                                 {record.disease ? 
                                 <VStack align='left'>
-                                  <HStack>
+                                  <HStack align='flex-start'>
                                     <Text fontFamily='Pretendard Variable' whiteSpace='nowrap'>질병명: </Text>
                                     <Text fontFamily='Pretendard Variable' wordBreak='break-word'>{record.disease.name}</Text>
                                   </HStack>
-                                  <HStack>
+                                  <HStack align='flex-start'>
                                     <Text fontFamily='Pretendard Variable' whiteSpace='nowrap'>증상: </Text>
                                     <Text fontFamily='Pretendard Variable' wordBreak='break-word'>{record.disease.symptoms}</Text>
                                   </HStack>
-                                  <HStack>
+                                  <HStack align='flex-start'>
                                     <Text fontFamily='Pretendard Variable' whiteSpace='nowrap'>설명: </Text>
                                     <Text fontFamily='Pretendard Variable' wordBreak='break-word'>{record.disease.description}</Text>
                                   </HStack>

@@ -64,7 +64,7 @@ const DiagnosisResult = () => {
               <Text fontFamily='LINESeedKR-Bd' fontSize={{base:'20px', md:'20px', lg:'30px'}} w='100%' textAlign='left'>진단 결과</Text>
               <Show when={!isBelowMd}>
                 <Box display='flex' align='left' w='100%' mt={6}>
-                  <Image src={diagnosisResult.image_url} alt="Diagnosis" borderRadius='1rem' 
+                  <Image src={diagnosisResult.image_url} borderRadius='1rem' 
                   boxSize={{base:'100px', md:'150px', lg:'200px'}} mr={10} />
                   <Box>
                     <Flex>
@@ -82,31 +82,32 @@ const DiagnosisResult = () => {
                   </Box>
                 </Box>
                 <Separator mt={4} mb={4} borderWidth='1.5px'/>
-                <Box display='flex' align='left' w='100%'>
-                  <Box>
-                    <Text mt={3} fontFamily='Pretendard Variable' fontWeight='700' fontSize={{base:'16px', md:'16px', lg:'20px'}} whiteSpace='nowrap'>예상 질병 :</Text>
-                    {diagnosisResult.disease ? 
-                    <HStack mt={3}>
-                      <Image src={diagnosisResult.disease.image_url} alt="Diagnosis" borderRadius='1rem' 
-                     boxSize={{base:'100px', md:'150px', lg:'200px'}} mr={10} />
-                      <VStack align='left'>
-                        <Flex>
-                          <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} fontWeight='700' whiteSpace='nowrap'>질병명:</Text>
-                          <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} ml={2} wordBreak='break-word'>{diagnosisResult.disease.name}</Text>
-                        </Flex>
-                        <Flex mt={3}>
-                          <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} fontWeight='700' whiteSpace='nowrap'>증상:</Text>
-                          <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} ml={2} wordBreak='break-word'>{diagnosisResult.disease.symptoms}</Text>
-                        </Flex>
-                        <Flex mt={3}>
-                          <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} fontWeight='700' whiteSpace='nowrap'>설명:</Text>
-                          <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} ml={2} wordBreak='break-word'>{diagnosisResult.disease.description}</Text>
-                        </Flex>
-                      </VStack>
-                    </HStack> : 
-                    <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} wordBreak='break-word'>예상되는 질병이 없습니다.</Text>}
-                  </Box>
-                </Box>
+                <VStack w='100%' align='left'>
+                  <Text mt={3} fontFamily='Pretendard Variable' fontWeight='700' fontSize={{base:'16px', md:'16px', lg:'20px'}} whiteSpace='nowrap'>예상 질병 :</Text>
+                  {diagnosisResult.disease ? 
+                  <HStack mt={3} align='flex-start'>
+                    <VStack mr={10}>
+                      <Image src={diagnosisResult.disease.image_url} borderRadius='1rem' 
+                      boxSize={{base:'150px', md:'150px', lg:'200px'}} />
+                      <Text fontFamily='Pretendard Variable' fontSize={{base:'10px', md:'10px', lg:'14px'}} wordBreak='break-word'>(상기 질병을 대표하는 이미지입니다)</Text>
+                    </VStack>
+                    <VStack align='left' flex="1">
+                      <Flex>
+                        <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} fontWeight='700' whiteSpace='nowrap'>질병명:</Text>
+                        <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} ml={2} wordBreak='break-word'>{diagnosisResult.disease.name}</Text>
+                      </Flex>
+                      <Flex mt={3}>
+                        <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} fontWeight='700' whiteSpace='nowrap'>증상:</Text>
+                        <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} ml={2} wordBreak='break-word'>{diagnosisResult.disease.symptoms}</Text>
+                      </Flex>
+                      <Flex mt={3}>
+                        <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} fontWeight='700' whiteSpace='nowrap'>설명:</Text>
+                        <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} ml={2} wordBreak='break-word'>{diagnosisResult.disease.description}</Text>
+                      </Flex>
+                    </VStack>
+                  </HStack> : 
+                  <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} wordBreak='break-word'>예상되는 질병이 없습니다.</Text>}
+                </VStack>
               </Show>
               <Show when={isBelowMd}>
                 <VStack w='100%'>
@@ -133,7 +134,8 @@ const DiagnosisResult = () => {
                       {diagnosisResult.disease ? 
                       <VStack w='100%' align='center'>
                         <Image src={diagnosisResult.disease.image_url} borderRadius='1rem' 
-                        w={{base:'150px', md:'200px', lg:'300px'}} h={{base:'150px', md:'200px', lg:'300px'}} m={6} />
+                        boxSize={{base:'150px', md:'200px', lg:'300px'}} mt={6} />
+                        <Text fontFamily='Pretendard Variable' fontSize={{base:'10px', md:'10px', lg:'14px'}}>(상기 질병을 대표하는 이미지입니다)</Text>
                         <VStack w='100%' align='left'>
                           <Flex>
                             <Text fontFamily='Pretendard Variable' fontSize={{base:'16px', md:'16px', lg:'20px'}} fontWeight='700' whiteSpace='nowrap'>질병명:</Text>

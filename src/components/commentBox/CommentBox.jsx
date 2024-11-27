@@ -51,7 +51,15 @@ const CommentBox = ({comment, currentUser, postID, fetchComments}) => {
                         <Text fontWeight="bold" fontFamily='LINESeedKR-Bd'>{comment.author.username}</Text>
                         <Text fontFamily='Pretendard Variable' wordBreak='break-word'>{comment.content}</Text>
                         <Text fontSize="sm" color="gray.500" fontFamily='Pretendard Variable'>
-                            {new Date(comment.createDate).toLocaleString()}
+                            {new Date(new Date(comment.createDate).getTime() + 9 * 60 * 60 * 1000).toLocaleString('ko-KR', {
+                                timeZone: 'Asia/Seoul',
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                hour12: true
+                            })}
                         </Text>
                     </VStack>
                     {currentUser && comment.author.id === currentUser.id && (

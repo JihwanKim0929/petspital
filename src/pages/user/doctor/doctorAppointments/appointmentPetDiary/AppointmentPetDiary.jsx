@@ -10,6 +10,7 @@ import {
 import { EmptyState } from '../../../../../components/ui/empty-state';
 import { BiSearchAlt2 } from "react-icons/bi";
 import { SERVER_URL } from '../../../../../utils/GlobalConstants';
+import Diary from '../../../diary/Diary';
 
 const AppointmentPetDiary = () => {
 
@@ -88,7 +89,7 @@ const AppointmentPetDiary = () => {
                                 fontFamily='Pretendard Variable'>
                                 {diaries.map(diary => (
                                     <option key={diary.id} value={diary.id} style={{ fontFamily: 'Pretendard Variable' }}>
-                                        {diary.title} - {new Date(diary.createDate).toLocaleString()}
+                                        {diary.title}
                                     </option>
                                 ))}
                             </NativeSelectField>

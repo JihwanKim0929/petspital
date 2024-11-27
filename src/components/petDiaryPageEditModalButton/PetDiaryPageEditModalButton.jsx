@@ -19,6 +19,7 @@ import {
     FileUploadRoot,
     FileUploadTrigger,
 } from "../ui/file-button";
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 const PetDiaryPageEditModalButton = ({ pageID, pageContent }) => {
     const { register, handleSubmit, reset, setValue, watch } = useForm();
@@ -38,7 +39,7 @@ const PetDiaryPageEditModalButton = ({ pageID, pageContent }) => {
             formData.append('image', selectedFile);
         }
         try {
-            const response = await fetch(`/updateDiaryPage/${pageID}`, {
+            const response = await fetch(`${SERVER_URL}/updateDiaryPage/${pageID}`, {
                 method: 'POST',
                 body: formData,
                 credentials: 'include'

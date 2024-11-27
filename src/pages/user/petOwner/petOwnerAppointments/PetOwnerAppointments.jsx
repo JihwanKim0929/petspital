@@ -96,7 +96,17 @@ const PetOwnerAppointments = () => {
                                             <Box key={appointment.id} p={4} borderWidth="1px" borderRadius="md" mb={4}>
                                                 <Box>
                                                     <Text fontFamily='LINESeedKR-Bd'>예약 날짜</Text>
-                                                    <Text ml={3} fontFamily='Pretendard Variable'>{new Date(appointment.reservationDate).toLocaleString()}</Text>
+                                                    <Text ml={3} fontFamily='Pretendard Variable'>
+                                                        {new Date(new Date(appointment.reservationDate).getTime() + 9 * 60 * 60 * 1000).toLocaleString('ko-KR', {
+                                                            timeZone: 'Asia/Seoul',
+                                                            year: 'numeric',
+                                                            month: 'long',
+                                                            day: 'numeric',
+                                                            hour: '2-digit',
+                                                            minute: '2-digit',
+                                                            hour12: true
+                                                        })}
+                                                    </Text>
                                                     <Text mt={6} fontFamily='LINESeedKR-Bd'>병원 이름</Text>
                                                     <Text ml={3} fontFamily='Pretendard Variable'> {appointment.animalHospital.hospitalName}</Text>
                                                     <Text mt={6} fontFamily='LINESeedKR-Bd'>병원 주소</Text>

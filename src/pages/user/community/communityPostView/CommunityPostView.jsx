@@ -130,7 +130,17 @@ const CommunityPostView = () => {
           <HStack>
             <Text fontFamily='Pretendard Variable'>{post.author.username}</Text>
             <Separator orientation="vertical" height="4" />
-            <Text fontFamily='Pretendard Variable'>{new Date(post.createDate).toLocaleString()}</Text>
+            <Text fontFamily='Pretendard Variable'>
+              {new Date(new Date(post.createDate).getTime() + 9 * 60 * 60 * 1000).toLocaleString('ko-KR', {
+                  timeZone: 'Asia/Seoul',
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: true
+              })}
+            </Text>
           </HStack>
         </VStack>
         <Separator border='1px solid lightgray' mt={3} mb={3} />

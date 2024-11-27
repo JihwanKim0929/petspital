@@ -15,6 +15,7 @@ import {
   } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { toaster } from '../ui/toaster';
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 const PetDiaryEditModalButton = ({whenDisable, diaryID, petName}) => {
 
@@ -26,7 +27,7 @@ const PetDiaryEditModalButton = ({whenDisable, diaryID, petName}) => {
     
         try {
     
-            const response = await fetch(`/updateDiary/${diaryID}`, {
+            const response = await fetch(`${SERVER_URL}/updateDiary/${diaryID}`, {
                 method: 'POST',
                 headers: {
                 'Content-Type': 'application/json',

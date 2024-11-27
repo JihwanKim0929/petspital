@@ -58,37 +58,53 @@ const DoctorAppointments = () => {
             <VStack spacing={4} align="stretch">
               {appointments.map(appointment => (
                 <Box key={appointment.id} p={4} borderWidth="1px" borderRadius="md" boxShadow="md">
-                  <HStack>
+                  <HStack align='flex-start'>
                     <Text whiteSpace='nowrap' fontFamily='LINESeedKR-Bd' fontSize={{ base:'14px', md:'16px', lg:'17px' }}>예약일자</Text>
                     <Separator orientation='vertical' height={4} />
                     <Text fontFamily='LINESeedKR-Bd' fontSize={{ base:'14px', md:'16px', lg:'17px' }} wordBreak='break-word'>
-                      {new Date(appointment.reservationDate).toLocaleString()}
+                      {new Date(new Date(appointment.reservationDate).getTime() + 9 * 60 * 60 * 1000).toLocaleString('ko-KR', {
+                          timeZone: 'Asia/Seoul',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          hour12: true
+                      })}
                     </Text>
                   </HStack>
-                  <HStack>
+                  <HStack align='flex-start'>
                     <Text whiteSpace='nowrap' fontFamily='LINESeedKR-Bd' fontSize={{ base:'14px', md:'16px', lg:'17px' }}>생성일자</Text>
                     <Separator orientation='vertical' height={4} />
                     <Text fontFamily='LINESeedKR-Bd' fontSize={{ base:'14px', md:'16px', lg:'17px' }} wordBreak='break-word'>
-                      {new Date(appointment.createDate).toLocaleString()}
+                      {new Date(new Date(appointment.createDate).getTime() + 9 * 60 * 60 * 1000).toLocaleString('ko-KR', {
+                          timeZone: 'Asia/Seoul',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                          hour12: true
+                      })}
                     </Text>
                   </HStack>
                   <Separator mt={2} mb={2}/>
                   <Text whiteSpace='nowrap' fontFamily='LINESeedKR-Bd' fontSize={{ base:'14px', md:'16px', lg:'17px' }}>유저 정보</Text>
-                  <HStack>
+                  <HStack align='flex-start'>
                     <Text whiteSpace='nowrap' fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }}>유저네임</Text>
                     <Separator orientation='vertical' height={4} />
                     <Text fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }} wordBreak='break-word'>
                       {appointment.pet.siteUser.username}
                     </Text>
                   </HStack>
-                  <HStack>
+                  <HStack align='flex-start'>
                     <Text whiteSpace='nowrap' fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }}>이메일</Text>
                     <Separator orientation='vertical' height={4} />
                     <Text fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }} wordBreak='break-word'>
                       {appointment.pet.siteUser.email}
                     </Text>
                   </HStack>
-                  <HStack>
+                  <HStack align='flex-start'>
                     <Text whiteSpace='nowrap' fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }}>전화번호</Text>
                     <Separator orientation='vertical' height={4} />
                     <Text fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }} wordBreak='break-word'>
@@ -105,42 +121,42 @@ const DoctorAppointments = () => {
                         objectFit="cover" 
                     />
                     <VStack align='left' w='100%'>
-                      <HStack>
+                      <HStack align='flex-start'>
                         <Text whiteSpace='nowrap' fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }}>이름</Text>
                         <Separator orientation='vertical' height={4} />
                         <Text fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }} wordBreak='break-word'>
                           {appointment.pet.name}
                         </Text>
                       </HStack>
-                      <HStack>
+                      <HStack align='flex-start'>
                         <Text whiteSpace='nowrap' fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }}>나이</Text>
                         <Separator orientation='vertical' height={4} />
                         <Text fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }} wordBreak='break-word'>
                           {appointment.pet.age}
                         </Text>
                       </HStack>
-                      <HStack>
+                      <HStack align='flex-start'>
                         <Text whiteSpace='nowrap' fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }}>성별</Text>
                         <Separator orientation='vertical' height={4} />
                         <Text fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }} wordBreak='break-word'>
                           {appointment.pet.gender}
                         </Text>
                       </HStack>
-                      <HStack>
+                      <HStack align='flex-start'>
                         <Text whiteSpace='nowrap' fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }}>종</Text>
                         <Separator orientation='vertical' height={4} />
                         <Text fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }} wordBreak='break-word'>
                           {appointment.pet.species}
                         </Text>
                       </HStack>
-                      <HStack>
+                      <HStack align='flex-start'>
                         <Text whiteSpace='nowrap' fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }}>무게(kg)</Text>
                         <Separator orientation='vertical' height={4} />
                         <Text fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }} wordBreak='break-word'>
                           {appointment.pet.weight}
                         </Text>
                       </HStack>
-                      <HStack>
+                      <HStack align='flex-start'>
                         <Text whiteSpace='nowrap' fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }}>설명</Text>
                         <Separator orientation='vertical' height={4} />
                         <Text fontFamily='Pretendard Variable' fontSize={{ base:'14px', md:'16px', lg:'17px' }} wordBreak='break-word'>

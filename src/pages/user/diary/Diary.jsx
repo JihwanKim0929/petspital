@@ -8,6 +8,7 @@ import PetDiaryPageEditModalButton from '../../../components/petDiaryPageEditMod
 import { EmptyState } from '../../../components/ui/empty-state';
 import { Button } from '../../../components/ui/button';
 import { FaBook } from "react-icons/fa";
+import { SERVER_URL } from '../../../utils/GlobalConstants';
 
 const Diary = () => {
   const [pages, setPages] = useState([]);
@@ -28,7 +29,7 @@ const Diary = () => {
 
     const fetchDiaryPages = async () => {
       try {
-        const response = await fetch(`/diary/${selectedDiaryID}/page`, {
+        const response = await fetch(`${SERVER_URL}/diary/${selectedDiaryID}/page`, {
           method: 'GET',
           credentials: 'include'
         });
@@ -89,7 +90,15 @@ const Diary = () => {
                   <Card.Body>
                     <VStack align='left'>
                       <Text fontFamily='LINESeedKR-Bd' fontSize={{ base:'16px', lg:'18px' }}>
-                        {new Date(page.createDate).toLocaleString()}
+                        {new Date(new Date(page.createDate).getTime() + 9 * 60 * 60 * 1000).toLocaleString('ko-KR', {
+                            timeZone: 'Asia/Seoul',
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            hour12: true
+                        })}
                       </Text>
                       <Separator mt={{ base:'2', md:'4' }} mb={{ base:'2', md:'4' }} />
                       <Stack flexDirection={{ base:'column', md:'row' }} align='center'>

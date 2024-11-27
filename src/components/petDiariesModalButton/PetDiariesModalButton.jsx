@@ -19,7 +19,7 @@ import {
 import PetDiaryCreateModalButton from '../petDiaryCreateModalButton/PetDiaryCreateModalButton';
 import PetDiaryDeleteModalButton from '../petDiaryDeleteModalButton/PetDiaryDeleteModalButton';
 import PetDiaryEditModalButton from '../petDiaryEditModalButton/PetDiaryEditModalButton';
-
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 const PetDiariesModalButton = ({petID, petName}) => {
 
@@ -30,7 +30,7 @@ const PetDiariesModalButton = ({petID, petName}) => {
   useEffect(() => {
     const fetchDiaries = async () => {
       try {
-        const response = await fetch(`/pet/${petID}/diary`, {
+        const response = await fetch(`${SERVER_URL}/pet/${petID}/diary`, {
           method: 'GET',
           credentials: 'include'
         });

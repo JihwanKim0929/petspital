@@ -4,13 +4,13 @@ import './Hospital.scss';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import { useForm, useWatch } from 'react-hook-form';
 import { useNavigate, Link } from 'react-router-dom';
-import { Show, Card, Box, Text, Fieldset, Stack, Flex, useBreakpointValue } from '@chakra-ui/react';
+import { Show, Card, Box, Text, Fieldset, Stack, Flex, useBreakpointValue, Input } from '@chakra-ui/react';
 import { NativeSelectRoot, NativeSelectField } from '../../../components/ui/native-select';
 import { Field } from "../../../components/ui/field";
 import { Button } from '../../../components/ui/button';
 import HospitalSelectCard from '../../../components/hospitalSelectCard/HospitalSelectCard';
 import DatePicker from 'react-datepicker';
-import { addDays } from 'date-fns';
+import { addDays, setHours, setMinutes } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { EmptyState } from '../../../components/ui/empty-state';
 import { MdOutlinePets } from "react-icons/md";
@@ -21,6 +21,11 @@ const { kakao } = window;
 const Hospital = () => {
 
   const { register, handleSubmit, reset, control } = useForm();
+  const getNextAvailableTime = () => {
+    const now = new Date();
+    const nextQuarter = new Date(Math.ceil(now.getTime() / 900000) * 900000);
+    return nextQuarter;
+  };
 
   const [pets, setPets] = useState([]);
   const [hospitals, setHospitals] = useState([]);
@@ -30,11 +35,11 @@ const Hospital = () => {
   const [hospitalLocations, setHospitalLocations] = useState([]);
   const [mapCenter, setMapCenter] = useState({ lat: null, lng: null });
   const [userLocation, setUserLocation] = useState(null);
-  const [appointmentDate, setAppointmentDate] = useState(new Date());
+  const [appointmentDate, setAppointmentDate] = useState(getNextAvailableTime());
   const isBelowMd = useBreakpointValue({ base: true, md: false });
 
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     fetch(`${SERVER_URL}/user/pet`, {
       method: 'GET',
@@ -244,13 +249,29 @@ const Hospital = () => {
 
                           <Field>
                             <Text fontFamily='LINESeedKR-Bd'>예약일자 선택</Text>
-                            <DatePicker
-                              showIcon
-                              selected={appointmentDate}
-                              onChange={(date) => setAppointmentDate(date)}
-                              minDate={new Date()}
-                              locale={ko}
-                            />
+                            <Box w='100%'>
+                              <DatePicker
+                                selected={appointmentDate}
+                                onChange={(date) => setAppointmentDate(date)}
+                                showTimeSelect
+                                minDate={new Date()}
+                                timeIntervals={15}
+                                locale={ko}
+                                timeCaption="시간"
+                                dateFormat="yyyy년 MM월 dd일, aa h시 mm분"
+                                filterTime={(time) => {
+                                  const currentDate = new Date();
+                                  const selectedDate = new Date(appointmentDate);
+                                  const timeToCheck = new Date(time);
+                                  
+                                  if (selectedDate.toDateString() === currentDate.toDateString()) {
+                                    return timeToCheck >= currentDate;
+                                  }
+                                  
+                                  return true;
+                                }}
+                              />
+                            </Box>
                           </Field>
                         </Fieldset.Content>
 

@@ -146,22 +146,22 @@ const Profile = () => {
                     <Avatar name={username} src={userImageURL} w={{base:'150px', md:'200px', lg:'300px'}} h={{base:'150px', md:'200px', lg:'300px'}} />
                   </Box>
                   <Box ml={10} w='100%'>
-                    <HStack mr={3} pb={1}>
+                    <HStack mr={3} pb={1} align='flex-start'>
                       <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">유저네임</Text>
                       <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
                       <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{username}</Text>
                     </HStack>
-                    <HStack mt={10} mr={3} pb={1}>
+                    <HStack mt={10} mr={3} pb={1} align='flex-start'>
                       <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">이메일</Text>
                       <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
                       <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{userEmail}</Text>
                     </HStack>
-                    <HStack mt={10} mr={3} pb={1}>
+                    <HStack mt={10} mr={3} pb={1} align='flex-start'>
                       <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">전화번호</Text>
                       <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
                       <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{userPhoneNumber}</Text>
                     </HStack>
-                    <HStack mt={10} mr={3} pb={1}>
+                    <HStack mt={10} mr={3} pb={1} align='flex-start'>
                       <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">주소</Text>
                       <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
                       <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{userAddress}</Text>
@@ -175,22 +175,22 @@ const Profile = () => {
                     <Avatar name={username} src={userImageURL} w={{base:'150px', md:'200px', lg:'300px'}} h={{base:'150px', md:'200px', lg:'300px'}} />
                   </Box>
                   <Box w='100%'>
-                    <HStack mt={10} pb={1}>
+                    <HStack mt={10} pb={1} align='flex-start'>
                       <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">유저네임</Text>
                       <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
                       <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{username}</Text>
                     </HStack>
-                    <HStack mt={10} pb={1}>
+                    <HStack mt={10} pb={1} align='flex-start'>
                       <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">이메일</Text>
                       <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
                       <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{userEmail}</Text>
                     </HStack>
-                    <HStack mt={10} pb={1}>
+                    <HStack mt={10} pb={1} align='flex-start'>
                       <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">전화번호</Text>
                       <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
                       <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{userPhoneNumber}</Text>
                     </HStack>
-                    <HStack mt={10} pb={1}>
+                    <HStack mt={10} pb={1} align='flex-start'>
                       <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{base: '16px', md:'16px', lg:'20px'}} whiteSpace="nowrap">주소</Text>
                       <Separator orientation='vertical' border='0.25px solid lightgray' ml={2} height={6}/>
                       <Text fontFamily='Pretendard Variable' ml={2} fontSize={{base: '16px', md:'16px', lg:'20px'}} wordBreak='break-word'>{userAddress}</Text>

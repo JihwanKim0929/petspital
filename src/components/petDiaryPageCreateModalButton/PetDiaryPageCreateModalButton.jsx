@@ -19,6 +19,7 @@ import {
 } from "../ui/file-button";
 import { Field } from "../ui/field";
 import { Button } from "../ui/button";
+import { SERVER_URL } from '../../utils/GlobalConstants';
 
 const PetDiaryPageCreateModalButton = ({ diaryID }) => {
   const { register, handleSubmit, reset, setValue, watch } = useForm();
@@ -39,7 +40,7 @@ const PetDiaryPageCreateModalButton = ({ diaryID }) => {
     }
 
     try {
-      const response = await fetch(`/diary/${diaryID}/page`, {
+      const response = await fetch(`${SERVER_URL}/diary/${diaryID}/page`, {
         method: 'POST',
         body: formData,
         credentials: 'include'

@@ -88,7 +88,17 @@ const CommunityBoard = () => {
                           </Flex>
                           <Flex ml='1rem'>
                             <Text fontFamily='Pretendard Variable' mr='0.5rem' whiteSpace='nowrap'>작성일자:</Text>
-                            <Text fontFamily='Pretendard Variable'>{new Date(item.createDate).toLocaleString()}</Text>
+                            <Text fontFamily='Pretendard Variable'>
+                            {new Date(new Date(item.createDate).getTime() + 9 * 60 * 60 * 1000).toLocaleString('ko-KR', {
+                                timeZone: 'Asia/Seoul',
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                hour12: true
+                            })}
+                            </Text>
                           </Flex>
                           {currentUser && item.author.id === currentUser.id && (
                             <HStack ml='1rem'>

@@ -8,7 +8,31 @@
     background-color: rgb(241, 241, 241);
 }
 
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
 .react-datepicker__input-container {
     border: 1px solid rgb(211, 211, 211) !important;
     border-radius: 3px;
+    width: 100%;
+    display: block;
+}
+
+.react-datepicker__input-container input {
+    width: 100%;
+    padding: 8px 12px;
+    font-family: 'Pretendard Variable';
+    border: none;
+    background-color: transparent;
+}
+
+.react-datepicker {
+    font-family: 'Pretendard Variable';
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.react-datepicker__day-name {
+    font-family: 'Pretendard Variable';
 }

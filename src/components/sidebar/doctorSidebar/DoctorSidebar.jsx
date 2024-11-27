@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import '../Sidebar.scss';
 import { Outlet } from "react-router-dom";
-import { Show, Box, Center, Text, useBreakpointValue } from '@chakra-ui/react';
+import { Show, Box, Center, Text, useBreakpointValue, HStack, Icon } from '@chakra-ui/react';
 import { BiHome } from "react-icons/bi";
 import { FaUsers } from "react-icons/fa6";
 import { BiUserCircle } from "react-icons/bi";
@@ -9,6 +9,7 @@ import { BiCog } from "react-icons/bi";
 import { FaNotesMedical } from "react-icons/fa6";
 import { Avatar } from "../../ui/avatar";
 import SidebarCategory from '../../sidebarCategory/SidebarCategory';
+import { FaUserDoctor } from "react-icons/fa6";
 
 const DoctorSidebar = () => {
 
@@ -38,7 +39,12 @@ const DoctorSidebar = () => {
                 <Avatar name={username} src={userImageURL} w='150px' h='150px' borderColor='white' borderWidth='0.25rem' />
               </Center>
               <Center width='100%' display='flex' backgroundColor='teal.600' borderBottomRadius='1rem'>
+                <HStack>
+                  <Icon w="18px" h="18px" color='white'>
+                    <FaUserDoctor />
+                  </Icon>
                   <Text mt='0.75rem' mb='0.5rem' fontWeight='bold' fontSize='18px' fontFamily='LINESeedKR-Bd' color='white'>{username}</Text>
+                </HStack>
               </Center>
               <br />
               <SidebarCategory CategoryIcon={BiHome} categoryName='홈' categoryLink='/user/doctor'/>
