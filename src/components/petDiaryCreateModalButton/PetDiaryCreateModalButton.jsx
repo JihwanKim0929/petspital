@@ -55,7 +55,7 @@ const PetDiaryCreateModalButton = ({ petID, petName }) => {
   return (
     <DialogRoot minH='1000px'>
       <DialogTrigger>
-        <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
+        <Button fontFamily='LINESeedKR-Bd' w='100%'>
             새로운 수첩 만들기
         </Button>
       </DialogTrigger>

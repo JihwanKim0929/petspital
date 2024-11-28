@@ -54,7 +54,7 @@ const PetInfoCard = ({pet}) => {
                     </Box>
                 </Flex>
                 <Box mt={3}>
-                    <Flex>
+                    <Flex spaceX='0.75rem'>
                         <PetViewModalButton petID={pet.id} />
                         <PetDiariesModalButton petID={pet.id} petName={pet.name} />
                         <PetEditModalButton 
@@ -113,11 +113,11 @@ const PetInfoCard = ({pet}) => {
                 </VStack>
                 <Box mt={3}>
                     <VStack align='left'>
-                        <Flex>
+                        <Flex spaceX='0.5rem'>
                             <PetViewModalButton petID={pet.id} />
                             <PetDiariesModalButton petID={pet.id} petName={pet.name} />
                         </Flex>
-                        <Flex>
+                        <Flex spaceX='0.5rem'>
                             <PetEditModalButton 
                             petID={pet.id} 
                             petName={pet.name} 

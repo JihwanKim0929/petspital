@@ -55,33 +55,31 @@ const PetDiaryDeleteModalButton = ({whenDisable, diaryID}) => {
     };
 
     return (
-        <div className="petDiaryDeleteModalButton">
-            <DialogRoot minH='1000px'>
-                <DialogTrigger>
-                    <Button disabled={whenDisable} margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
-                        삭제
-                    </Button>
-                </DialogTrigger>
-                <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
-                    <DialogCloseTrigger />
-                    <DialogHeader>
-                    <DialogTitle fontFamily='LINESeedKR-Bd'>수첩 삭제하기</DialogTitle>
-                    </DialogHeader>
-                    <DialogBody pb={6}>
-                        <Text fontFamily='Pretendard Variable'>선택한 수첩을 삭제하시겠습니까?</Text>
-                    </DialogBody>
+        <DialogRoot minH='1000px'>
+            <DialogTrigger>
+                <Button disabled={whenDisable} fontFamily='LINESeedKR-Bd' w='100%'>
+                    삭제
+                </Button>
+            </DialogTrigger>
+            <DialogContent marginLeft='0.5rem' marginRight='0.5rem'>
+                <DialogCloseTrigger />
+                <DialogHeader>
+                <DialogTitle fontFamily='LINESeedKR-Bd'>수첩 삭제하기</DialogTitle>
+                </DialogHeader>
+                <DialogBody pb={6}>
+                    <Text fontFamily='Pretendard Variable'>선택한 수첩을 삭제하시겠습니까?</Text>
+                </DialogBody>
 
-                    <DialogFooter>
-                        <DialogActionTrigger asChild>
-                            <Button onClick={handleDeleteDiary} fontFamily='LINESeedKR-Bd'>삭제</Button>
-                        </DialogActionTrigger>
-                        <DialogActionTrigger asChild>
-                            <Button variant="outline" fontFamily='LINESeedKR-Bd'>취소</Button>
-                        </DialogActionTrigger>
-                    </DialogFooter>
-                </DialogContent>
-            </DialogRoot>
-        </div>
+                <DialogFooter>
+                    <DialogActionTrigger asChild>
+                        <Button onClick={handleDeleteDiary} fontFamily='LINESeedKR-Bd'>삭제</Button>
+                    </DialogActionTrigger>
+                    <DialogActionTrigger asChild>
+                        <Button variant="outline" fontFamily='LINESeedKR-Bd'>취소</Button>
+                    </DialogActionTrigger>
+                </DialogFooter>
+            </DialogContent>
+        </DialogRoot>
     )
 }
 

@@ -20,6 +20,7 @@ import PetDiaryCreateModalButton from '../petDiaryCreateModalButton/PetDiaryCrea
 import PetDiaryDeleteModalButton from '../petDiaryDeleteModalButton/PetDiaryDeleteModalButton';
 import PetDiaryEditModalButton from '../petDiaryEditModalButton/PetDiaryEditModalButton';
 import { SERVER_URL } from '../../utils/GlobalConstants';
+import { Stack } from '@chakra-ui/react';
 
 const PetDiariesModalButton = ({petID, petName}) => {
 
@@ -60,7 +61,7 @@ const PetDiariesModalButton = ({petID, petName}) => {
   return (
     <DialogRoot minH='1000px'>
       <DialogTrigger>
-        <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
+        <Button fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
           수첩 조회하기
         </Button>
       </DialogTrigger>
@@ -81,13 +82,15 @@ const PetDiariesModalButton = ({petID, petName}) => {
           </NativeSelectRoot>
         </DialogBody>
         <DialogFooter>
-          <Button variant="solid" disabled={!selectedDiaryID} onClick={handleClickViewButton} fontFamily='LINESeedKR-Bd'>선택한 수첩 조회하기</Button>
-          <PetDiaryEditModalButton whenDisable={!selectedDiaryID} diaryID={selectedDiaryID} petName={petName} />
-          <PetDiaryDeleteModalButton whenDisable={!selectedDiaryID} diaryID={selectedDiaryID} />
-          <PetDiaryCreateModalButton petID={petID} petName={petName} />
-          <DialogActionTrigger asChild>
-            <Button variant="solid" fontFamily='LINESeedKR-Bd'>닫기</Button>
-          </DialogActionTrigger>
+          <Stack flexDirection={{ base:'column', md:'row' }} w='100%'>
+            <Button variant="solid" disabled={!selectedDiaryID} onClick={handleClickViewButton} fontFamily='LINESeedKR-Bd'>선택한 수첩 조회하기</Button>
+            <PetDiaryEditModalButton whenDisable={!selectedDiaryID} diaryID={selectedDiaryID} petName={petName} />
+            <PetDiaryDeleteModalButton whenDisable={!selectedDiaryID} diaryID={selectedDiaryID} />
+            <PetDiaryCreateModalButton petID={petID} petName={petName} />
+            <DialogActionTrigger asChild>
+              <Button variant="solid" fontFamily='LINESeedKR-Bd'>닫기</Button>
+            </DialogActionTrigger>
+          </Stack>
         </DialogFooter>
       </DialogContent>
     </DialogRoot>

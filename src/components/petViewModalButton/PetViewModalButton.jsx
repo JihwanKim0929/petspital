@@ -47,7 +47,7 @@ const PetViewModalButton = ({petID}) => {
     return (
         <DialogRoot minH='1000px'>
             <DialogTrigger>
-                <Button margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
+                <Button fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} fontFamily='LINESeedKR-Bd'>
                 상세 정보
                 </Button>
             </DialogTrigger>

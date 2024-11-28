@@ -48,8 +48,7 @@ const PetDiaryEditModalButton = ({whenDisable, diaryID, petName}) => {
     return (
         <DialogRoot minH='1000px'>
             <DialogTrigger>
-                <Button disabled={whenDisable} margin="0.5rem" fontSize={{ base: '0.75rem', md: '0.75rem', lg: '0.9rem' }} 
-                fontFamily='LINESeedKR-Bd'>
+                <Button disabled={whenDisable} fontFamily='LINESeedKR-Bd' w='100%'>
                     편집
                 </Button>
             </DialogTrigger>
