@@ -31,7 +31,7 @@ public class AnimalHospitalController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         Long userId = userService.get_user_by_username(username).getId();
-        AnimalHospitalDto dto = animalHospitalService.getAnimalHospital(userId);
+        AnimalHospitalDto dto = animalHospitalService.getAnimalHospitalByUserId(userId);
         return ResponseEntity.ok().body(dto);
     }
 
