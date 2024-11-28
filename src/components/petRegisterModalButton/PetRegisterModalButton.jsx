@@ -32,32 +32,44 @@ const PetRegisterModalButton = () => {
   const { register, handleSubmit, errors, reset, setValue } = useForm();
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    const petDto = {
-    name: data.petName,
-    age: data.age,
-    gender: data.gender,
-    species: data.species,
-    weight: data.weight,
-    description: data.description
-    };
-    const dataImage = data.image;
-    const formData = new FormData();
-    const json = JSON.stringify(petDto);
-    const blob = new Blob([json],{type: "application/json"});
-    formData.append("petDto",blob);
-    if (dataImage) {
-      formData.append("image", dataImage);
+  const handleCreatePet = async (data) => {
+    try {
+      const petDto = {
+        name: data.petName,
+        age: data.age,
+        gender: data.gender,
+        species: data.species,
+        weight: data.weight,
+        description: data.description
+      };
+      const dataImage = data.image;
+      const formData = new FormData();
+      const json = JSON.stringify(petDto);
+      const blob = new Blob([json],{type: "application/json"});
+      formData.append("petDto",blob);
+      if (dataImage) {
+        formData.append("image", dataImage);
+      }
+      const url = `${SERVER_URL}/user/pet`;
+      const response = await fetch(url,{
+        method: 'POST',
+        body: formData,
+        headers: {},
+        credentials: 'include'
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create pet.');
+      }
+      reset();
+      navigate(0);
+    } catch (error) {
+      console.error('Error:', error);
     }
-    const url = `${SERVER_URL}/user/pet`;
-    fetch(url,{
-      method: 'POST',
-      body: formData,
-      headers: {},
-      credentials: 'include'
-    });
-    reset();
-    navigate(0);
+  };
+
+  const onSubmit = (data) => {
+    handleCreatePet(data);
   };
 
   const handleFileChange = (e) => {

@@ -1,12 +1,13 @@
 import React from 'react';
 import './DoctorMain.scss';
 import { Link } from 'react-router-dom';
-import { Card, Text, Box, VStack, Icon } from '@chakra-ui/react';
+import { Card, Text, Box, VStack, Icon, Center } from '@chakra-ui/react';
 import Dashboard from '../../../../components/dashboard/Dashboard';
 import { Button } from '../../../../components/ui/button';
 import { FaUsers } from "react-icons/fa6";
 import { FaNotesMedical } from "react-icons/fa6";
 import { BiUserCircle } from "react-icons/bi";
+import { FaRegHospital } from "react-icons/fa6";
 
 const DoctorMain = () => {
 
@@ -16,9 +17,14 @@ const DoctorMain = () => {
         <Card.Root height="250px">
           <Card.Body>
             <Box w='100%' h='100%' display='flex' alignItems='center' justifyContent='center'>
-              <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{ base: '20px', lg: '25px' }}>
-                Petspital에 오신걸 환영합니다!
-              </Text>
+              <VStack w='fit-content'>
+                <Icon fontSize="50px" color='teal.600'>
+                    <FaRegHospital />
+                </Icon>
+                <Text fontFamily='Pretendard Variable' fontWeight='600' fontSize={{ base: '20px', lg: '25px' }}>
+                  Petspital에 오신걸 환영합니다!
+                </Text>
+              </VStack>
             </Box>
           </Card.Body>
         </Card.Root>
