@@ -35,7 +35,7 @@
 
 -API 명세 노션 페이지 작성 (각자 작성한 API에 관하여 명세)
 
-# 개인 기여 사항
+# 개인 기여 사항 (김지환)
 ## 활용 기술 스택
 ![Generic badge](https://img.shields.io/badge/jdk-17-orange.svg)
 
