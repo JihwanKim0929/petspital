@@ -35,7 +35,7 @@
 
 # 개인 기여 사항
 ## 활용 기술 스택
-Spring Boot, Spring Security, Spring Data JPA, H2 DB, FastApi, AWS s3/rds(MySql)/ec2
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white) ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)  Spring Security, Spring Data JPA, H2 DB,  AWS s3/rds(MySql)/ec2
 
 - 유저, 애완동물, 질병, 진단, 예약, 수첩, 게시글, 댓글, 동물병원 엔티티 구현 및 테이블 생성(Spring Data JPA를 활용)
 
