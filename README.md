@@ -24,7 +24,7 @@
 ## 수의사
 -소유한 동물병원에 대한 일반유저들의 예약 현황, 예약한 동물에 대한 진단기록, 수첩기록을 확인할 수 있습니다.
 
-#시스템 구성도
+# 시스템 구성도
 <img src="https://github.com/user-attachments/assets/f28f2fb2-e5dc-4a96-8183-9c26fcc46d4b">
 
 &nbsp;
