@@ -65,7 +65,7 @@
 
 - Spring Security를 활용하여 유저 로그인 구현, 일반유저와 수의사 구분
 
-- 진단기능을 위한 AI모델 서빙을 위해 RestTemplate을 활용한 Post요청 구현 및 FastApi코드 작성
+- 진단기능용 AI모델 서빙을 위해 RestTemplate을 활용한 Post요청 구현 및 FastApi코드 작성
   
 - AWS s3를 이미지 저장소로 활용하도록 구현
 
