@@ -31,14 +31,14 @@
 -API 명세 노션 페이지 작성 (각자 작성한 API에 관하여 명세)
 
 # 개인 기여 사항
-> 유저, 애완동물, 질병, 진단, 예약, 수첩, 게시글, 댓글, 동물병원 엔티티 구현 및 테이블 생성(Spring Data JPA를 활용)
+- 유저, 애완동물, 질병, 진단, 예약, 수첩, 게시글, 댓글, 동물병원 엔티티 구현 및 테이블 생성(Spring Data JPA를 활용)
 
-> 각 엔티티 Create, Read, Delete 관련 service, controller, dto, repository 메소드 작성
+- 각 엔티티 Create, Read, Delete 관련 service, controller, dto, repository 메소드 작성
 
-> Spring Security를 활용하여 유저 로그인 구현, 일반유저와 수의사 구분
+- Spring Security를 활용하여 유저 로그인 구현, 일반유저와 수의사 구분
 
-> 진단기능을 위한 AI모델 서빙을 위해 RestTemplate을 활용한 Post요청 구현 및 FastApi코드 작성
+- 진단기능을 위한 AI모델 서빙을 위해 RestTemplate을 활용한 Post요청 구현 및 FastApi코드 작성
+  
+- AWS s3를 이미지 저장소로 활용하도록 구현, 개발 단계에서는 인메모리방식 h2 DB사용, 이후 배포 단계에서는 AWS rds mysql로 DB 변경
 
-> AWS s3를 이미지 저장소로 활용하도록 구현, 개발 단계에서는 인메모리방식 h2 DB사용, 이후 배포 단계에서는 AWS rds mysql로 DB 변경
-
-> AWS ec2 ubuntu 인스턴스를 생성하여 프론트엔드,백엔드,AI서버 배포 및 nginx를 활용한 https와 도메인 적용(petspital.shop)
+- AWS ec2 ubuntu 인스턴스를 생성하여 프론트엔드,백엔드,AI서버 배포 및 nginx를 활용한 https와 도메인 적용(petspital.shop)
