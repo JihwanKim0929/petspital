@@ -1,0 +1,18 @@
+.sidebarCategory {
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    padding-left: 0.7rem;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    padding-left: 0.7rem;
+    font-family: 'Pretendard Variable';
+}
+.sidebarCategory:hover {
+    background-color: rgb(125, 195, 186);
+    // border-top-right-radius: 0.5rem;
+    // border-bottom-right-radius: 0.5rem;
+    transition-duration: 0.1s;
+    transition-timing-function: ease-in-out;
+    color: white
+}

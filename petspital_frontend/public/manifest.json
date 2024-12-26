@@ -1,0 +1,25 @@
+{
+  "short_name": "Petspital",
+  "name": "Petspital",
+  "icons": [
+    {
+      "src": "https://petspital-bucket.s3.us-east-1.amazonaws.com/logo1.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "https://petspital-bucket.s3.us-east-1.amazonaws.com/logo1.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://petspital-bucket.s3.us-east-1.amazonaws.com/logo1.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
