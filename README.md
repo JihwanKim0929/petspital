@@ -1,4 +1,5 @@
 # petspital
+<img src="https://github.com/user-attachments/assets/dc294e23-7b8b-4edd-8341-f69cd8ee6afc">
 반려동물 안구/피부질환 진단 및 동물병원 예약 웹사이트 프로젝트
 
 # 프로젝트 기간
