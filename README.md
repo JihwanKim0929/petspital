@@ -53,7 +53,9 @@
 
 ![Generic badge](https://img.shields.io/badge/h2-1.4.200-blue.svg)
 
-(AWS RDS) <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+![AWS RDS](https://img.shields.io/badge/AWS%20RDS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+
 
 ![JPA](https://img.shields.io/badge/JPA-hibernate-orange)
 
