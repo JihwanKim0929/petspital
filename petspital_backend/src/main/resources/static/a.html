@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <input type="text" id="username">
+        <input type="text" id="password">
+        <input type="text" id="email">
+        <input type="text" id="address">
+        <input type="text" id="phone_num">
+        <input type="text" id="role">
+        <input type="file" id="image" accept="image/*">
+        <button type="button" id="createbtn">create user</button>
+
+    </form>
+<script>
+    {
+        const btn = document.querySelector("#createbtn");
+        btn.addEventListener("click",function(){
+            const userDto = {
+                username: document.querySelector("#username").value,
+                password: document.querySelector("#password").value,
+                email: document.querySelector("#email").value,
+                address: document.querySelector("#address").value,
+                phone_num: document.querySelector("#phone_num").value,
+                role: document.querySelector("#role").value
+            };
+            const image = document.querySelector("#image").files[0];
+            const formData = new FormData();
+            const json = JSON.stringify(userDto);
+            const blob = new Blob([json],{type: "application/json"});
+            formData.append("userDto",blob);
+            formData.append("image",image)
+            const url = "http://localhost:8080/user";
+            fetch(url,{
+                method: 'POST',
+                body: formData,
+                headers: {}
+            });
+        })
+    }
+</script>
+</body>
+</html>

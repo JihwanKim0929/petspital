@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<body>
+<form>
+    <input type="text" id="name">
+    <input type="number" id="age">
+    <input type="text" id="gender">
+    <input type="text" id="species">
+    <input type="number" id="weight">
+    <input type="text" id="description">
+    <input type="file" id="image" accept="image/*">
+    <button type="button" id="createbtn">create pet</button>
+
+</form>
+<script>
+    {
+        const btn = document.querySelector("#createbtn");
+        btn.addEventListener("click",function(){
+            const petDto = {
+                name: document.querySelector("#name").value,
+                age: document.querySelector("#age").value,
+                gender: document.querySelector("#gender").value,
+                species: document.querySelector("#species").value,
+                weight: document.querySelector("#weight").value,
+                description: document.querySelector("#description").value
+            };
+            const image = document.querySelector("#image").files[0];
+            const formData = new FormData();
+            const json = JSON.stringify(petDto);
+            const blob = new Blob([json],{type: "application/json"});
+            formData.append("petDto",blob);
+            formData.append("image",image)
+            const url = "http://localhost:8080/user/pet";
+            fetch(url,{
+                method: 'POST',
+                body: formData,
+                headers: {}
+            });
+        })
+    }
+</script>
+</body>
+</html>
