@@ -24,6 +24,9 @@
 ## 수의사
 -소유한 동물병원에 대한 일반유저들의 예약 현황, 예약한 동물에 대한 진단기록, 수첩기록을 확인할 수 있습니다.
 
+#시스템 구성도
+<img src="https://github.com/user-attachments/assets/f28f2fb2-e5dc-4a96-8183-9c26fcc46d4b">
+
 &nbsp;
 # 백엔드 공통구현 사항
 -DB 테이블 속성 설계
@@ -31,6 +34,9 @@
 -API 명세 노션 페이지 작성 (각자 작성한 API에 관하여 명세)
 
 # 개인 기여 사항
+## 활용 기술 스택
+Spring Boot, Spring Security, Spring Data JPA, H2 DB, FastApi, AWS s3/rds(MySql)/ec2
+
 - 유저, 애완동물, 질병, 진단, 예약, 수첩, 게시글, 댓글, 동물병원 엔티티 구현 및 테이블 생성(Spring Data JPA를 활용)
 
 - 각 엔티티 Create, Read, Delete 관련 service, controller, dto, repository 메소드 작성
