@@ -51,7 +51,10 @@
 
 ![Generic badge](https://img.shields.io/badge/h2-1.4.200-blue.svg)
 
-<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&l용
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+
+![JPA](https://img.shields.io/badge/JPA-hibernate-orange)
+
 - 유저, 애완동물, 질병, 진단, 예약, 수첩, 게시글, 댓글, 동물병원 엔티티 구현 및 테이블 생성(Spring Data JPA를 활용)
 
 - 각 엔티티 Create, Read, Delete 관련 service, controller, dto, repository 메소드 작성
